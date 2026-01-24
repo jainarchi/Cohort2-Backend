@@ -121,24 +121,7 @@ A package is a reusable block of JavaScript code published on npm that can be in
 * Why should we not push node_modules?
 ---
 
-## 2.2 How to Use Packages
-
-### Steps
-
-1. Install the package
-2. Import it in your file
-
-Example:
-
-```js
-const express = require("express");
-```
-
-3. Use its functionality
-
----
-
-## 2.3 What Is a Server?
+## 2.2 What Is a Server?
 A **server is a program that listens for requests and sends responses**.
 
 Client asks:
@@ -174,9 +157,6 @@ A server is a software application that listens on a network port and handles in
 * Difference between client and server?
 * Can frontend act as a server?
 
----
-
-## 2.4 Create a Server Using Express
 
 ### Why Express?
 
@@ -187,60 +167,6 @@ Express:
 * Simplifies server creation
 * Handles routing
 * Handles middleware
-
----
-
-### Steps to Create Server
-
-1. **Initialize project**
-
-   ```bash
-   npm init -y
-   ```
-
-2. **Install Express**
-
-   ```bash
-   npm install express
-   ```
-
-3. **Create `index.js`**
-
-   ```js
-   const express = require("express");
-
-   const app = express();
-
-   app.get("/", (req, res) => {
-     res.send("Server is running");
-   });
-
-   app.listen(3000, () => {
-     console.log("Server running on port 3000");
-   });
-   ```
-
-4. **Run server**
-
-   ```bash
-   node index.js
-   ```
-
-5. Open browser:
-
-   ```
-   http://localhost:3000
-   ```
-
----
-
-### What Is Happening?
-
-* `app.get` → route
-* `/` → endpoint
-* `req` → request from client
-* `res` → response from server
-* `listen` → starts server
 
 ---
 

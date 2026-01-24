@@ -23,7 +23,7 @@ let notes = [
 
 
 
-app.post('/notes' , (req , res) =>{               // post api - create resource of data
+app.post('/notes' , (req , res) =>{               // post method - create new resource of data
     notes.push(req.body);
 
     res.send('note saved successfully') 
@@ -31,7 +31,7 @@ app.post('/notes' , (req , res) =>{               // post api - create resource 
 
 
 
-app.get('/notes' , (req , res) =>{                       // get api - send data
+app.get('/notes' , (req , res) =>{                       
     res.send(notes);
 })
 
