@@ -13,4 +13,8 @@ node-module - all i packages present inside this.
 
 Data send from frontend -
 - params : very small data
-- body : large data 
+- body : large data
+
+DB
+
+CLuster = storage + processor
