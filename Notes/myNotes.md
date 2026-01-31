@@ -37,3 +37,9 @@ schema - describe doc format in collection
 find() read all & always return arr of obj
 model ignore extra field req to save in db
 config()  - load variables
+
+
+
+// day - 8
+axios - used to call api
+cors policy implemented on browser
