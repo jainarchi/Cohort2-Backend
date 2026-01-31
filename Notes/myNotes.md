@@ -30,3 +30,10 @@ db create only after document insert
 
 
 CLUSTER -> DB -> Collections -> Document(BSON / Binary JSON format)
+
+// DB 
+schema - describe doc format in collection
+
+find() read all & always return arr of obj
+model ignore extra field req to save in db
+config()  - load variables
