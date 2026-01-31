@@ -7,9 +7,9 @@ require('dotenv').config();
 // post /notes
 
 app.post('/notes' , async (req , res) =>{
-     const {title , description} = req.body ;
+     const {title , description , age} = req.body ;
         const note = await notesModel.create({
-            title, description
+            title, description , age
         })
 
 
