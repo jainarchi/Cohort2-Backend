@@ -25,5 +25,5 @@ app.listen(3000 , () =>{
 
 
 
-// mongoose.connect()  - connect Server to DB
-// cluster/db   -  create if not present then connect
+// mongoose.connect()  - connect Server to Cluster
+// create /db  when first document insert

@@ -5,7 +5,7 @@ package-lock.json - contains all dependences ie our package depends on further p
 node-module - all i packages present inside this.
 
 
-// day - 2  
+ API
 - REST API - transfer data in JSON
 - partial update in note - patch api
 - delete - replace with null 
@@ -15,6 +15,18 @@ Data send from frontend -
 - params : very small data
 - body : large data
 
-DB
 
-CLuster = storage + processor
+# Database Servers
+MongoDB Atlas - Cloud
+- cluster = storage + processor
+- Add 2 layer of security 
+
+connect compass with cluster
+connect Server with Database 
+
+
+mongoose.connect( URI )  connect with db
+db create only after document insert 
+
+
+CLUSTER -> DB -> Collections -> Document(BSON / Binary JSON format)
