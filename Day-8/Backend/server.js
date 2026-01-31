@@ -7,6 +7,8 @@ const connectToDB = require('./config/db')
 
 
 
+
+
 connectToDB();
 
 app.listen(3000 , (req , res) =>{
