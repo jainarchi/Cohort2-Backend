@@ -9,7 +9,6 @@ app.use(cors());
 
 
 
-
 const notesModel = require("../models/notes.model");
 
 
@@ -32,7 +31,6 @@ app.post('/api/notes', async (req, res) => {
         })
 })
 
-
 // GET /api/notes  fetch all notes data
 
 app.get('/api/notes', async (req, res) => {
@@ -44,8 +42,6 @@ app.get('/api/notes', async (req, res) => {
         })
 
 })
-
-
 
 app.delete('/api/notes/:id', async (req, res) => {
     const id = req.params.id

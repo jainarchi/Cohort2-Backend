@@ -2,9 +2,6 @@ import { useState , useEffect } from "react"
 import axios from 'axios'
 import './app.css'
 
-
-
-
 const App = () => {
    const [notes, setNotes] = useState([]) 
 
@@ -17,8 +14,6 @@ const App = () => {
     })
     
   }, [])
-   
-
 
 
   return (

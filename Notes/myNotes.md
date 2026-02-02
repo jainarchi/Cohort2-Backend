@@ -42,4 +42,24 @@ config()  - load variables
 
 // day - 8
 axios - used to call api
+axios.method(api url , {if send any data})
 cors policy implemented on browser
+
+
+day - 9 
+# frontend-backend Integration
+- npm run build -> dist folder 
+- whole react code convert into 3 files 
+- then move into backend inside public folder 
+
+
+- app.get('*name' , callback) // wild card api 
+- send index.html file
+- problem - inside index.html call for JS and CSS but our server is not programmed for that result it will call wild card api - give index file 
+
+
+- use middleware express.static(/public)
+- if file exists inside public then it will send from this
+
+
+
