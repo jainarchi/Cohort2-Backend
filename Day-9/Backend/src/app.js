@@ -4,6 +4,9 @@ const app = express();
 app.use(express.json())
 const notesModel = require('../models/notes.model')
 
+const cors = require('cors')
+app.use(cors())
+
 
 
 app.post('/api/notes' , async (req , res) => {
@@ -39,7 +42,7 @@ app.patch('/api/notes/:id' , async (req , res) =>{
     await notesModel.findByIdAndUpdate(id , {description})
 
     res.status(200)
-    .josn({
+    .json({
         message: "node modifed"
     })
 })
