@@ -52,7 +52,7 @@ app.delete('/api/notes/:id' , async (req , res) =>{
     const id = req.params.id
 
     await notesModel.findByIdAndDelete(id);
-    res.status(204)
+    res.status(200)
     .json({
         message : "note deleted successfully"
     })
