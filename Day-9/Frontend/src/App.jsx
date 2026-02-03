@@ -83,10 +83,6 @@ const App = () => {
 
 
 
-
-
-
-
   const handleUpdate = (note) => {
           
     setForm({
@@ -112,9 +108,9 @@ const App = () => {
 
 
   return (
-    <div className="main">
+    <>
       <div className="form">
-        <h2>NOTES</h2>
+        <h2 className="heading">NOTES</h2>
 
         <form action="" onSubmit={handleSubmit}>
           <input
@@ -155,7 +151,7 @@ const App = () => {
           );
         })}
       </div>
-    </div>
+    </>
   );
 };
 

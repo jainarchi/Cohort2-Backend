@@ -16,13 +16,11 @@ body{
   font-family: system-ui, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.main{
-  height: 100%;
-  width: 100%;
-  display: flex;
-  padding: 1rem;
+.heading{
+  margin: auto;
+  background: rgb(32, 57, 66);
+  padding: 1rem 2rem;
 }
-
 
 .notes{
   height: 100%;
@@ -52,12 +50,13 @@ p{
 
 form{
   display: flex;
-  flex-direction: column;
   gap: 1rem;
+  padding: 2rem;
 }
 
 input , button{
-  padding: 0.2rem;
+  padding: 0.5rem;
+  
  
 }
 .btns{
