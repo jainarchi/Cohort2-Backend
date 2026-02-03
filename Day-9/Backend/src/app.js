@@ -1,12 +1,20 @@
 const express = require('express')
+const path = require('path')
+const notesModel = require('../models/notes.model')
+
 
 const app = express();
 app.use(express.json())
-const notesModel = require('../models/notes.model')
 
 const cors = require('cors')
 app.use(cors())
 
+
+/*
+*  index.html req for js and css file and these are present inside dist 
+    so res is send from here 
+*/
+app.use(express.static(path.join(__dirname , '..' , 'dist')))
 
 
 app.post('/api/notes' , async (req , res) => {
@@ -57,6 +65,18 @@ app.delete('/api/notes/:id' , async (req , res) =>{
         message : "note deleted successfully"
     })
 })
+
+
+
+
+
+
+app.get("*name" , (req , res) =>{
+    res.sendFile(path.join(__dirname , ".." , "dist" , "index.html") )
+})
+
+
+
 
 
 
