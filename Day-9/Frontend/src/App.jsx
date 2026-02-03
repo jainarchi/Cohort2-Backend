@@ -3,7 +3,7 @@ import axios from "axios";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
-  const [updatebtn, setUpdatebtn] = useState(false);
+  const [btn, setBtn] = useState("Create");
   const [noteId, setNoteId] = useState(null)
 
   const [form, setForm] = useState({
@@ -45,14 +45,15 @@ const App = () => {
     e.preventDefault();
 
 
-    if(updatebtn){
+    if(btn == "Update"){
       axios.patch('http://localhost:3000/api/notes/'+ noteId , {
         description : form.description
       })
       .then((res) =>{
         console.log(res.data.message);
         fetchNotes();
-        setUpdatebtn(false)
+        setBtn("Create")
+        setNoteId(null);
         form.description = ""
       })
     }
@@ -66,6 +67,8 @@ const App = () => {
       .then((res) => {
         fetchNotes();
         console.log(res.data.message);
+        form.title =""
+        form.description=""
       });
    }
   };
@@ -91,7 +94,7 @@ const App = () => {
     });
 
    setNoteId(note._id);
-
+   setBtn("Update")
   };
 
 
@@ -129,9 +132,8 @@ const App = () => {
             onChange={(e) => handleChange(e)}
           />
 
-          <button>Create</button>
-          <button onClick={()=>setUpdatebtn(true)}>Update</button>
-         
+          <button>{btn}</button>
+        
         </form>
        
       </div>
@@ -145,7 +147,7 @@ const App = () => {
 
               <div className="btns">
                 <button onClick={() => handleDelete(note._id)}>trash</button>
-                <button onClick={() => handleUpdate(note)}>update</button>
+                <button onClick={() => handleUpdate(note)}>Edit</button>
               </div>
             </div>
           );
