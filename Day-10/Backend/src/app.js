@@ -1,14 +1,15 @@
 const express = require('express')
+const notesModel = require('../models/notes.model')
 
 const app = express();
 app.use(express.json())
 
 
-const cors = require('cors')
-app.use(cors())
+// const cors = require('cors')
+// app.use(cors())
 
+app.use(express.static('./dist'))          // dist make publically available
 
-const notesModel = require('../models/notes.model')
 
 
 app.post('/api/notes' , async (req , res) =>{
