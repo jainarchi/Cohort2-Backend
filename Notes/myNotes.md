@@ -58,8 +58,12 @@ day - 9
 - problem - inside index.html call for JS and CSS but our server is not programmed for that result it will call wild card api - give index file 
 
 
-- use middleware express.static(/public)
-- if file exists inside public then it will send from this
+- use middleware express.static(./dist)
+- if file exists inside dist then it will send from this
+- express.static can make any folder publically available
+
+or move dist folder
+
 
 
 

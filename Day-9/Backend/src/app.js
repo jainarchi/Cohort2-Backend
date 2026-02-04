@@ -11,10 +11,16 @@ app.use(cors())
 
 
 /*
-*  index.html req for js and css file and these are present inside dist 
+*  index.html req for js and css file and these are present inside dist
     so res is send from here 
+
+    express.static  -> make folder publically available
+
+    app.use(express.static(path.join(__dirname , '..' , 'dist')))
 */
-app.use(express.static(path.join(__dirname , '..' , 'dist')))
+
+
+app.use(express.static('./dist'))
 
 
 app.post('/api/notes' , async (req , res) => {
