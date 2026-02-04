@@ -11,13 +11,13 @@ const App = () => {
   const [noteId, setNoteId] = useState(null);
 
   const fetchNotes = () => {
-    axios.get("http://localhost:3000/api/notes").then((res) => {
+    axios.get("https://cohort2-backend-lmxj.onrender.com/api/notes").then((res) => {
       setNotes(res.data.notes);
     });
   };
 
   const handleDelete = (noteId) => {
-    axios.delete("http://localhost:3000/api/notes/" + noteId).then((res) => {
+    axios.delete("https://cohort2-backend-lmxj.onrender.com/api/notes/" + noteId).then((res) => {
       console.log(res.data.message);
       fetchNotes();
     });
@@ -28,7 +28,7 @@ const App = () => {
 
     if (btn == "Update") {
       axios
-        .patch("http://localhost:3000/api/notes/" + noteId, {
+        .patch("https://cohort2-backend-lmxj.onrender.com/api/notes/" + noteId, {
           description: form.description,
         })
         .then((res) => {
@@ -39,7 +39,7 @@ const App = () => {
         });
     } else {
       axios
-        .post("http://localhost:3000/api/notes", {
+        .post("https://cohort2-backend-lmxj.onrender.com/api/notes", {
           title: form.title,
           description: form.description,
         })
