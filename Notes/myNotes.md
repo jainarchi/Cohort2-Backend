@@ -66,4 +66,15 @@ or move dist folder
 
 
 
+Day- 10 Integrations and Deployment
+
+Day- 11 
+# JWT 
+
+- every application have diff jwt secret key
+- cookie-parser middleware
+- Server have direct access of cookie storage
+- server store token in cookie storage only, not in db
+
+- not need to send token manually with each req, server read directly 
 
