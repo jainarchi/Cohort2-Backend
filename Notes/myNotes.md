@@ -76,5 +76,12 @@ Day- 11
 - Server have direct access of cookie storage
 - server store token in cookie storage only, not in db
 
-- not need to send token manually with each req, server read directly 
+- not need to send token manually with each req, server read directly
+
+
+# Hashing
+- one way process
+- convert plain text into well calculated hashed text
+- same inp - same output
+- crypto
 
