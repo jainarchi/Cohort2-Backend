@@ -45,4 +45,14 @@ authRoute.post('/register' ,async (req , res) =>{
 })
 
 
+authRoute.post('/test' , async(req , res) =>{
+    console.log(req.cookies)          // give all cookies
+
+    res.status(200)
+    .json({
+        cookies : req.cookies
+    })
+})
+
+
 module.exports = authRoute
