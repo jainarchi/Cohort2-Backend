@@ -41,13 +41,14 @@ config()  - load variables
 
 
 // day - 8
-axios - used to call api
-axios.method(api url , {if send any data})
-cors policy implemented on browser
+## Axios 
+- axios - used to call api
+- axios.method(api url , {if send any data})
+- cors policy implemented on browser
 
 
 day - 9 
-# frontend-backend Integration
+## frontend-backend Integration
 - npm run build -> dist folder 
 - whole react code convert into 3 files 
 - then move into backend inside public folder 
@@ -64,21 +65,46 @@ day - 9
 
 or move dist folder
 
-
+-----------------------------
 
 Day- 10 Integrations and Deployment
 
-Day- 11 
-# JWT 
 
-- every application have diff jwt secret key
-- cookie-parser middleware
-- Server have direct access of cookie storage
-- server store token in cookie storage only, not in db
+## Four Pillars of Auth
 
-- not need to send token manually with each req, server read directly
+- Authentication – verifies a user’s identity (by token)
+
+- Authorization – defines what privileges a user has
+
+- Validation – checks whether data is in the correct format
+
+- Verification – confirms that the information is correct and authentic
 
 
+----------------
+Day-11
+## JWT (JSON Web Token)
+
+- JSON Web Token is used to create tokens using .sign()
+- Every application has a different JWT secret key
+- JWT is commonly used for authentication and authorization
+
+## Cookie Parser
+
+- cookie-parser is a middleware
+- The server has direct access to cookie storage
+- The server stores the token in cookies (not in the database) using res.cookie()
+- No need to send the token manually with each request; the server reads it directly from cookies
+
+## Important Note
+
+#### Tokens are visible in the browser, so never store sensitive information in them
+
+#### Use only a user ID (or minimal data) when creating a token
+
+------------------------
+
+Day-12
 # Hashing
 - one way process
 - convert plain text into well calculated hashed text
