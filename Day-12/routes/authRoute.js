@@ -32,7 +32,11 @@ authRouter.post('/register' , async (req , res) =>{
    }, process.env.JWT_SECRET)
 
    
-   res.cookie('jwt_token' , token)
+   res.cookie('jwt_token' , token ,   
+    { 
+    httpOnly: true,  // Js access block   prevent XSS token theft   
+    sameSite: 'strict'              //decide Cookie cross-site request ke saath jayegi ya nahi         prevent CSRF attack 
+})
 
 
    res.status(201)
@@ -82,6 +86,30 @@ authRouter.post('/login' , async (req , res) =>{
    })
 })
 
+
+
+
+authRouter.get('/logout' , (req , res) =>{
+
+
+    if(! req.cookies?.jwt_token){
+      return res.status(404)
+        .json({
+            message : 'already logged out'
+        })
+    }
+
+    res.clearCookie('jwt_token')
+
+    res.status(200)
+    .json({
+        cookies : req.cookies,
+        message : 'successfully logged out'
+    })
+
+
+
+})
 
 
 module.exports = authRouter
