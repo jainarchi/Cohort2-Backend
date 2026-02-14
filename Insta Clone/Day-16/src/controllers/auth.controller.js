@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs')
 
 
 
-
 async function registerUser(req , res) {
     const{email , password , username , bio , profileImage} = req.body
 
