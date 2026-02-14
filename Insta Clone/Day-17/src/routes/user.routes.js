@@ -7,6 +7,8 @@ const authRouter = express.Router();
 // post /api/auth/register
 
 authRouter.post('/register' , authControllers.registerUser) 
+authRouter.post('/login' , authControllers.loginUser)
+
 
 
 

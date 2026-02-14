@@ -18,7 +18,7 @@ async function registerUser(req , res) {
      if(userExists){
         return res.status(409)
         .json({
-            message : (email === user.email ? 'email' : 'username') + 'already exists'
+            message : (email === userExists.email ? 'email' : 'username') + ' already exists'
         })
      }
 
@@ -36,6 +36,7 @@ async function registerUser(req , res) {
 
      res.cookie('token' , token , {httpOnly : true , samesite : true})
 
+
      res.status(201)
      .json({
         message : 'new user registered successfully ',
@@ -46,6 +47,49 @@ async function registerUser(req , res) {
 
 }
 
+
+async function loginUser(req , res){
+    const {email , username , password} = req.body
+
+    const user = await userModel.findOne({
+        $or : [
+            {username},
+            {email}
+        ]
+    })
+
+    if(!user){
+        return res.status(404)
+        .json({
+            message : 'user not found, Please sign up'
+        })
+    }
+
+    const isValidPassword = await bcryptjs.compare(password , user.password)
+
+    if(! isValidPassword){
+        return res.status(401)
+        .json({
+            message : 'Invalid password'
+        })
+    }
+
+
+    const token = jwt.sign({id : user._id} , process.env.JWT_SECRET , {expiresIn : '1d'})
+    res.cookie('token' , token , {httpOnly : true , samesite : true})
+
+
+    res.status(200)
+    .json({
+        message : 'user logged In successfully'
+    })
+
+}
+
+
+
+
 module.exports = {
-    registerUser
+    registerUser,
+    loginUser
 }
