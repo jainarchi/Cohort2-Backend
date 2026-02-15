@@ -9,6 +9,8 @@ const upload = multer({ storage: multer.memoryStorage() })
 // Post /api/post
 
 postRouter.post('/', upload.single('postImage'), postController.createPost )
+postRouter.get('/' , postController.getPosts)
+postRouter.get('/details/:postId' , postController.getPostDetails)
 
 
 

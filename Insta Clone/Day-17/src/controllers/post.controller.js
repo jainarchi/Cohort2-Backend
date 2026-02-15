@@ -11,7 +11,7 @@ const client = new ImageKit({
 });
 
 
-
+// POST  /api/post
 
 async function createPost(req, res) {
   const token = req.cookies.token;
@@ -55,7 +55,98 @@ async function createPost(req, res) {
 }
 
 
+// GET  /api/post
+
+async function getPosts(req , res){
+    const token = req.cookies.token 
+
+    if(!token){
+      return res.status(404)
+      .json({
+        message : 'token not found'
+      })
+    }
+
+    let decoded ;
+
+   try{
+    decoded = jwt.verify(token , process.env.JWT_SECRET)
+   }
+   catch(err){
+    return res.status(401)
+    .json({
+      message : 'Invalid token'
+    })
+   }
+
+   const posts = await postModel.find({
+    userId : decoded.id
+   })
+
+  res.status(200)
+  .json({
+    message : 'posts fetch successfully',
+    posts
+  })
+
+}
+
+
+// GET /api/post/details/:postId
+
+async function getPostDetails(req , res) {
+
+ const token = req.cookies.token
+
+ if(!token){
+  return res.status(404).json({message: 'token not found'})
+ }
+
+ let decoded ;
+
+ try{
+  decoded = jwt.verify(token , process.env.JWT_SECRET)
+ }
+ catch(err){
+  return res.status(401)
+  .json({
+    message: 'Invalid token'
+  })
+ }
+
+  const postId = req.params.postId
+
+  const post = await postModel.findById({_id: postId})
+
+  if(!post){
+    return res.status(404).json({
+      message : 'post not found'
+    })
+  }
+
+
+  const isAuthorized = post.userId.toString() === decoded.id
+  
+
+  if(!isAuthorized){
+    return res.status(403)
+    .json({
+      message : 'Forbidden Content'
+    })
+  }
+
+  res.status(200)
+  .json({
+    message: 'Details fetch successfully',
+    post
+  })
+
+}
+
+
 
 module.exports = {
   createPost,
+  getPosts,
+  getPostDetails
 };
