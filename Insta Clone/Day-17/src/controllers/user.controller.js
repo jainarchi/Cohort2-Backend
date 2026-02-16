@@ -48,6 +48,9 @@ async function registerUser(req , res) {
 }
 
 
+
+
+
 async function loginUser(req , res){
     const {email , username , password} = req.body
 

@@ -1,20 +1,19 @@
 const mongoose = require('mongoose')
 
 
-
 const postSchema = new mongoose.Schema({
     caption:{
         type: String,
-        default: ""
+        default: ''
     },
     postUrl:{
         type: String,
-        required: [true , 'postUrl is required to create a post']
+        required: [true , 'postUrl is required']
     },
-    userId:{
+    user:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
-        required : [true , 'userId is required to create a post']
+        ref: 'user',
+        required : [true , 'user is required to create a post']
     }
 
 })
