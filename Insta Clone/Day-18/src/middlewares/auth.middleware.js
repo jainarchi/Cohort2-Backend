@@ -6,7 +6,7 @@ async function identifyUser(req , res , next) {
     if(!token){
         return res.status(404)
         .json({
-            message : 'token not found, please login'
+            message : 'token not provided, please login'
         })
     }
 
