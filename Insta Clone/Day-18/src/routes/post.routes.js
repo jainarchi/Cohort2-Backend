@@ -19,4 +19,7 @@ postRouter.get('/' , identifyUser , postControllers.getPosts )
 //  GET /api/post/details/:id
 postRouter.get('/details/:id' , identifyUser , postControllers.getDetails)
 
+
+postRouter.post('/like/:id' , identifyUser , postControllers.likePostController)
+
 module.exports = postRouter

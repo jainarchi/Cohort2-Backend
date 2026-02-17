@@ -109,6 +109,21 @@ Day-12
 - one way process
 - convert plain text into well calculated hashed text
 - same inp - same output
-- crypto
+- crypto ( express in-built package )
+- md5 , sha256
+- bcryptjs , argon2
 
+-------------
 Day-13 Practice + cookie flags
+
+
+## Integration 
+### cors origin set on server but enforced by browser
+- every req process in server by def, give res
+- browser check allow access origin 
+- if allowed then allowed JS to read a response
+
+
+##  learning from Insta Clone 
+- .toString() always safe | campare Object Id and string Id
+- == do type corresion
