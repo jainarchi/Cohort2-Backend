@@ -6,20 +6,18 @@ const { toFile } = require("@imagekit/nodejs");
 
 const client = new ImageKit({
   privateKey: process.env.IMAGE_KIT_PRIVATE_KEY,
-});
+})
 
 
 
 async function createPost(req, res) {
-
+ 
   const file = await client.files.upload({
     file: await toFile(Buffer.from(req.file.buffer), "file"),
     fileName: 'Test',
     folder: "Insta_D18",
   });
 
-
-  console.log(file)
    
   const post = await postModel.create({
     user: req.user.id,
@@ -27,12 +25,12 @@ async function createPost(req, res) {
     postUrl : file.url
   })
   
-   res.status(201)
+  res.status(201)
    .json({
        message : 'post created successfully',
        file,
        caption : req.body.caption
-    })
+  })
 }
 
 
@@ -65,7 +63,7 @@ async function getDetails(req, res) {
 
   const validUser = req.user.id === post.user.toString();
 
-  
+
   if (!validUser) {
     return res.status(403).json({
       message: "Forbidden content",

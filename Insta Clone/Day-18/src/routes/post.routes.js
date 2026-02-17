@@ -10,7 +10,7 @@ const postRouter = express.Router()
 
 // POST /api/post/
 
-postRouter.post('/' , identifyUser , upload.single('imageUrl') ,  postControllers.createPost )
+postRouter.post('/' , identifyUser , upload.single('imageUrl'),  postControllers.createPost )
 
 // GET /api/post
 postRouter.get('/' , identifyUser , postControllers.getPosts )
