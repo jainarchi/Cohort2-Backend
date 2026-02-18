@@ -99,6 +99,7 @@ async function likePostController(req, res) {
       post: postId,
     });
 
+    
     res.status(201).json({
       message: "post liked",
     });
