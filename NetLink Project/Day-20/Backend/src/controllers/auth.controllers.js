@@ -87,7 +87,25 @@ async function loginUser(req, res) {
 }
 }
 
+
+
+
+async function getMeUser(req , res){
+  
+  const user = await userModel.findById(req.user.id)
+
+  res.status(200)
+  .json({
+    username : user.username,
+    email : user.email,
+    bio: user.bio,
+    profileImage : user.profileImage
+  })
+
+}
+
 module.exports = {
   registerUser,
   loginUser,
+  getMeUser
 };
