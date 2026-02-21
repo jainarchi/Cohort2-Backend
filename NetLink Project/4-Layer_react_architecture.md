@@ -1,6 +1,9 @@
-- UI Layer ( responsible for how to show to the user)
+- UI Layer 
+  - responsible for how to show to the user
+  - manage navigation 
 
-- Hooks (manage state and api)
+- Hooks 
+    - manage state and api
 
 
 - state ( Storage )
