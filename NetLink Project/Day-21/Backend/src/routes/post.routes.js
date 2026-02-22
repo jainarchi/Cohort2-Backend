@@ -37,6 +37,16 @@ postRouter.get('/:id' , identifyUser , postControllers.getPostDetails)
 
 postRouter.patch('/:id' , identifyUser , postControllers.editPost  )
 
+/*
+ POST /api/post/like/:id
+*/
+postRouter.post('/like/:id' , identifyUser , postControllers.likePost)
+
+/* 
+POST /api/post/unlike/:id
+*/
+postRouter.post('/unlike/:id' , identifyUser , postControllers.unlikePost)
+
 
 
 

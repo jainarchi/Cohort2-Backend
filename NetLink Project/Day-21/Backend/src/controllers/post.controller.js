@@ -1,4 +1,5 @@
 const postModel = require("../models/post.model");
+const likeModel = require('../models/like.model')
 const ImageKit = require("@imagekit/nodejs");
 const { toFile } = require("@imagekit/nodejs");
 
@@ -145,11 +146,73 @@ async function editPost(req , res) {
 }
 
 
+async function likePost (req , res) {
+
+    try{
+
+   const postId = req.params.id
+   const userId = req.user.id
+
+   await likeModel.create({
+    post : postId,
+    user : userId
+   })
+
+   res.status(201)
+   .json({
+    message : 'You liked this post'
+   })
+  }catch(err){
+
+    // duplicate key err collection
+     if(err.code === 11000){
+        return res.status(409).json({
+            message : "You already liked this post"
+        })
+     }
+
+     res.status(500).json({
+        message : "Internal server error."
+     })
+  }
+
+}
+
+
+
+
+async function unlikePost (req , res){       // Idempotent API
+   
+try{
+    await likeModel.findOneAndDelete({
+     post : req.params.id,
+     user : req.user.id
+   })
+
+   res.status(200).json({
+    message : 'Post successfully unliked.'
+   })
+
+}catch(err){
+    res.status(500)
+    .json({
+        message : 'Internal server error'
+    })
+}
+
+
+}
+
+
+
+
 
 module.exports = {
   createPost,
   getPost,
   deletePost,
   getPostDetails,
-  editPost
+  editPost,
+  likePost,
+  unlikePost
 };

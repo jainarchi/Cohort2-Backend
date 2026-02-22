@@ -14,7 +14,7 @@ const postSchema = new mongoose.Schema(
     caption: {
       type: String,
       default: "",
-    },
+    }
   },
   {
     timestamps: true,

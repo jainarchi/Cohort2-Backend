@@ -127,3 +127,21 @@ Day-13 Practice + cookie flags
 ##  learning from Insta Clone 
 - .toString() always safe | campare Object Id and string Id
 - == do type corresion
+
+## REMEMBER
+
+### Idompotent 
+- on multiple req server state not change 
+
+- eg like unlike Delete req - 
+    - if present then delete if not no change 
+    - for both ok status 
+    - no need to add 409 unnecessary err status
+
+- POST change state 
+
+
+###   duplicate key err from collection 
+ -  race condition
+ -  sol - add unique combniaton in coll Schema
+ -  if err form coll - handle in controller                    
