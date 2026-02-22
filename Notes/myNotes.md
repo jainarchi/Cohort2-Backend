@@ -128,10 +128,17 @@ Day-13 Practice + cookie flags
 - .toString() always safe | campare Object Id and string Id
 - == do type corresion
 
+
+
+----------------------------------------------
 ## REMEMBER
 
 ### Idompotent 
-- on multiple req server state not change 
+- on multiple req server state not change same as the result of once
+
+- An operation is idempotent if performing it multiple times produces the same result as performing it once. 
+
+- For example, DELETE is idempotent because deleting a resource multiple times still results in the resource not existing.
 
 - eg like unlike Delete req - 
     - if present then delete if not no change 
