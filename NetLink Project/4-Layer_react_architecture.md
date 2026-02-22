@@ -10,4 +10,5 @@
     - eg loading state, username , email , user
     
 
-- api Layer (contains logic to connect with backend - api call)
+- api Layer
+  - contains logic to connect with backend - api call

@@ -2,6 +2,9 @@ const userModel = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs");
 
+
+
+
 async function registerUser(req, res) {
   const { email, username, password, bio, profileImage } = req.body;
 
@@ -40,6 +43,8 @@ async function registerUser(req, res) {
     message: "user register successfully",
   });
 }
+
+
 
 
 
