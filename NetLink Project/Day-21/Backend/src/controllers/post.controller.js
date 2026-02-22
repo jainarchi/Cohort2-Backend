@@ -1,5 +1,5 @@
 const postModel = require("../models/post.model");
-const likeModel = require('../models/like.model')
+const likeModel = require("../models/like.model");
 const ImageKit = require("@imagekit/nodejs");
 const { toFile } = require("@imagekit/nodejs");
 
@@ -7,37 +7,30 @@ const client = new ImageKit({
   privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
 });
 
-
-
 async function createPost(req, res) {
-    
-   try {
-  const file = await client.files.upload({
-    file: await toFile(Buffer.from(req.file.buffer), "file"),
-    fileName: "fileName",
-    folder: "D-21",
-  });
+  try {
+    const file = await client.files.upload({
+      file: await toFile(Buffer.from(req.file.buffer), "file"),
+      fileName: "fileName",
+      folder: "D-21",
+    });
 
-  const post = await postModel.create({
-    user: req.user.id,
-    caption: req.body.caption,
-    postUrl: file.url,
-  });
+    const post = await postModel.create({
+      user: req.user.id,
+      caption: req.body.caption,
+      postUrl: file.url,
+    });
 
-  res.status(201).json({
-    message: "post created successfully",
-    post,
-  });
-}catch(err){
-    res.status(500)
-    .json({
-        message : 'Internal server error'
-    })
+    res.status(201).json({
+      message: "post created successfully",
+      post,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
 }
-}
-
-
-
 
 async function getPost(req, res) {
   try {
@@ -47,15 +40,12 @@ async function getPost(req, res) {
     return res.status(200).json({
       posts,
     });
-
   } catch (err) {
     res.status(500).json({
       message: "Internal server error",
     });
   }
 }
-
-
 
 
 async function getPostDetails(req, res) {
@@ -90,7 +80,6 @@ async function getPostDetails(req, res) {
 
 
 
-
 async function deletePost(req, res) {
   try {
     const postId = req.params.id;
@@ -118,91 +107,82 @@ async function deletePost(req, res) {
 
 
 
+async function editPost(req, res) {
+  const postId = req.params.id;
+  const caption = req.body.caption;
 
-async function editPost(req , res) {
-   const postId = req.params.id
-   const caption = req.body.caption
+  const post = await postModel.findOneAndUpdate(
+    {
+      _id: postId,
+      user: req.user.id,
+    },
+    {
+      caption,
+    },
+  );
 
-   const post = await postModel.findOneAndUpdate({
-    _id : postId,
-    user : req.user.id
-   } , {
-    caption
-   })
-
-   if(!post){
-    return res.status(404)
-    .json({
-        message : 'Post not found.'
-    })
-   }
-
-   res.status(200)
-   .json({
-    message : 'Caption Updated successfully'
-   })
-
-
-}
-
-
-async function likePost (req , res) {
-
-    try{
-
-   const postId = req.params.id
-   const userId = req.user.id
-
-   await likeModel.create({
-    post : postId,
-    user : userId
-   })
-
-   res.status(201)
-   .json({
-    message : 'You liked this post'
-   })
-  }catch(err){
-
-    // duplicate key err collection
-     if(err.code === 11000){
-        return res.status(409).json({
-            message : "You already liked this post"
-        })
-     }
-
-     res.status(500).json({
-        message : "Internal server error."
-     })
+  if (!post) {
+    return res.status(404).json({
+      message: "Post not found.",
+    });
   }
 
+  res.status(200).json({
+    message: "Caption Updated successfully",
+  });
 }
 
 
 
 
-async function unlikePost (req , res){       // Idempotent API
-   
-try{
+async function likePost(req, res) {
+  try {
+    const postId = req.params.id;
+    const userId = req.user.id;
+
+    await likeModel.create({
+      post: postId,
+      user: userId,
+    });
+
+    res.status(201).json({
+      message: "You liked this post",
+    });
+  } catch (err) {
+    // duplicate key err collection
+    if (err.code === 11000) {
+      return res.status(409).json({
+        message: "You already liked this post",
+      });
+    }
+
+    res.status(500).json({
+      message: "Internal server error.",
+    });
+  }
+}
+
+
+
+
+async function unlikePost(req, res) {
+  // Idempotent API
+
+  try {
     await likeModel.findOneAndDelete({
-     post : req.params.id,
-     user : req.user.id
-   })
+      post: req.params.id,
+      user: req.user.id,
+    });
 
-   res.status(200).json({
-    message : 'Post successfully unliked.'
-   })
-
-}catch(err){
-    res.status(500)
-    .json({
-        message : 'Internal server error'
-    })
+    res.status(200).json({
+      message: "Post successfully unliked.",
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
 }
-
-
-}
-
 
 
 
@@ -214,5 +194,5 @@ module.exports = {
   getPostDetails,
   editPost,
   likePost,
-  unlikePost
+  unlikePost,
 };
