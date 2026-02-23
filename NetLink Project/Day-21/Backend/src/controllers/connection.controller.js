@@ -263,8 +263,6 @@ async function removeConnection(req , res){
 }
 
 
-
-
 async function getAllConnections (req , res){
 
  try {
