@@ -1,6 +1,7 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
-const {authRouter, userRouter , requestRouter} = require('./routes/auth.routes') 
+const authRouter = require('./routes/auth.routes') 
+const {connectionRouter , connectionRequestRouter} = require('./routes/connection.routes')
 const postRouter = require('./routes/post.routes')
 
 
@@ -12,8 +13,8 @@ app.use(cookieParser())
 
 app.use('/api/auth' , authRouter)
 app.use('/api/post' , postRouter)
-app.use('/api/user' , userRouter)
-app.use('/api/request' , requestRouter)
+app.use('/api/connection' , connectionRouter)
+app.use('/api/connection/request' , connectionRequestRouter)
 
 
 
