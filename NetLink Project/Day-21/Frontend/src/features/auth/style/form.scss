@@ -1,0 +1,115 @@
+@mixin flex-col($gap: 0rem) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .formContainer {
+    background: whitesmoke;
+    @include flex-col(1rem);
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0px 2px 10px rgb(126, 210, 247);
+    width: 100%;
+    max-width: 380px;
+
+    .smallBlue{
+        color: blue;
+        font-size: 14px;
+        padding-left: 0.5rem ;
+        cursor: pointer;
+    }
+
+    p {
+      color: rgb(51, 48, 48);
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .head {
+      @include flex-col(0.5rem);
+      padding: 0.5rem;
+    //   background: pink;
+    }
+
+    form {
+      @include flex-col(1.6rem);
+      width: 100%;
+
+      div {
+        width: 100%;
+        h4 {
+          padding-bottom: 0.5rem;
+          font-weight: 600;
+        }
+
+        input {
+          padding-inline: 1rem;
+          padding-block: 0.5rem;
+          border-radius: 0.5rem;
+          border-style: none;
+          font-size: 16px;
+          width: 100%;
+          background: rgb(239, 235, 235);
+
+        }
+      }
+
+    
+    }
+
+    
+    section{
+     @include flex-col(1.5rem);
+    //  background: red;
+     width: 100%;
+     color: #5c5959eb;
+
+     .contWith {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 14px;
+
+      &::before,
+      &::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #acaaaaeb;
+      }
+
+      &::before {
+        margin-right: 10px;
+      }
+
+      &::after {
+        margin-left: 10px;
+      }
+    }
+
+      a {
+        text-decoration: none;
+        color: blue;
+      }
+    }
+
+
+
+
+
+
+
+
+  }
+}

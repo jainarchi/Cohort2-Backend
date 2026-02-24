@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs");
 
 
 async function registerUser(req, res) {
-  const { username, email, password, bio, profileImage } = req.body;
+  const { username, email, password, profileImage } = req.body;
 
   const userExists = await userModel.findOne({
     $or: [{ username }, { email }],
@@ -23,7 +23,6 @@ async function registerUser(req, res) {
   const user = await userModel.create({
     username,
     email,
-    bio,
     profileImage,
     password: hash,
   });
@@ -76,7 +75,6 @@ async function getMe(req, res) {
     message: "User details fetched successfully",
     username: user.username,
     email: user.email,
-    bio: user.bio,
     profileImage: user.profileImage,
   });
 }
