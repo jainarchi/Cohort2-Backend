@@ -205,7 +205,21 @@ async function unlikePost(req, res) {
 async function getFeed(req , res){
 
   try{
-  const allPosts = await postModel.find().populate('user')
+  const allPosts = await Promise.all(
+    (await postModel.find().populate('user').lean())
+    .map(async (post) => {
+
+      const isLiked = await likeModel.findOne({
+        user: req.user.id,
+        post: post._id
+      });
+
+
+      post.isLiked = !!isLiked;
+      
+      return post
+
+    }))
 
 
   res.status(200)
