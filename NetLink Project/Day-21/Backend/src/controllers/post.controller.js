@@ -9,6 +9,10 @@ const client = new ImageKit({
 
 async function createPost(req, res) {
   try {
+  console.log(req.file)
+  console.log(req.body.caption)
+
+
     const file = await client.files.upload({
       file: await toFile(Buffer.from(req.file.buffer), "file"),
       fileName: "fileName",
@@ -25,12 +29,16 @@ async function createPost(req, res) {
       message: "post created successfully",
       post,
     });
+
   } catch (err) {
     res.status(500).json({
       message: "Internal server error",
+      
     });
   }
 }
+
+
 
 async function getPost(req, res) {
   try {
@@ -46,6 +54,8 @@ async function getPost(req, res) {
     });
   }
 }
+
+
 
 
 async function getPostDetails(req, res) {
@@ -80,6 +90,8 @@ async function getPostDetails(req, res) {
 
 
 
+
+
 async function deletePost(req, res) {
   try {
     const postId = req.params.id;
@@ -104,6 +116,8 @@ async function deletePost(req, res) {
     });
   }
 }
+
+
 
 
 
@@ -187,6 +201,33 @@ async function unlikePost(req, res) {
 
 
 
+
+async function getFeed(req , res){
+
+  try{
+  const allPosts = await postModel.find().populate('user')
+
+
+  res.status(200)
+  .json({
+    message : 'All posts fetched successfully.',
+    allPosts
+  })
+
+  }catch(err){
+  res.status(500)
+  .json({
+    message : "Internal server error."
+  })
+ }
+
+
+}
+
+
+
+
+
 module.exports = {
   createPost,
   getPost,
@@ -195,4 +236,5 @@ module.exports = {
   editPost,
   likePost,
   unlikePost,
+  getFeed
 };

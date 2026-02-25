@@ -23,7 +23,7 @@ const Login = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault();
 
-        await handleLogin(form.username , form.password)
+        await handleLogin(form.usernameOrEmail , form.password)
 
         navigate('/')
     }

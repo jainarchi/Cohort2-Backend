@@ -4,7 +4,7 @@ const postSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      ref: 'user',
       required: [true, "User required to create a post"],
     },
     postUrl: {

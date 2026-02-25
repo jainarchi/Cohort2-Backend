@@ -23,7 +23,7 @@ export const useAuth = () =>{
 
   async function handleRegister(username , email , password) {
        setLoading(true)
-       console.log('hooks')
+
        const response = await register(username , email , password)
        setUser(response)
 
