@@ -91,7 +91,6 @@ async function getPostDetails(req, res) {
 
 
 
-
 async function deletePost(req, res) {
   try {
     const postId = req.params.id;

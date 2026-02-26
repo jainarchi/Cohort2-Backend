@@ -148,7 +148,38 @@ Day-13 Practice + cookie flags
 - POST change state 
 
 
+
+- mongodb return mongoose Object - can't add new property
+- convert it into normal js object using   .lean()
+ 
+
+
 ###   duplicate key err from collection 
  -  race condition
  -  sol - add unique combniaton in coll Schema
  -  if err form coll - handle in controller                    
+
+
+
+## Auth0 vs Manual Difference
+
+| Feature                  | Manual Google OAuth | Auth0      |
+| ------------------------ | ------------------- | ---------- |
+| JWT generate             | Tumhara server      | Auth0      |
+| Key manage               | Tum                 | Auth0      |
+| Multiple login providers | Hard                | Easy       |
+| Security handling        | Manual              | Built-in   |
+| Learning value           | High                | Fast setup |
+
+
+### flow
+
+Architecture Difference
+
+- on login btn redirect to google page then some details google send to backend backend create token 
+
+    - User → Google → Backend → JWT generate → Frontend
+
+-  Auth0 Flow: auth0 server generate token using private key and backend verify it using public key of auth0
+
+    - User → Auth0 → JWT generate → Frontend → Backend verify
