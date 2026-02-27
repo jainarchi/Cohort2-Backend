@@ -16,9 +16,9 @@ connectionRequestRouter.post('/:id' , identifyUser , connectionController.sentCo
 
 
 
-/* 
-   withdraw req 
-   PATCH api/connection/request/withdraw/:id  
+/**
+   @description withdraw req 
+   @route PATCH api/connection/request/withdraw/:id  
    :id - connectionId _id
 */
 connectionRequestRouter.delete('/withdraw/:id' , identifyUser , connectionController.withdrawRequest)
@@ -26,9 +26,9 @@ connectionRequestRouter.delete('/withdraw/:id' , identifyUser , connectionContro
 
 
 
-/* 
-   show all pending request
-   GET   api/connection/request/pending
+/**  
+   @description show all pending request
+   @route GET   api/connection/request/pending
    :id - connectionId _id
 */
 connectionRequestRouter.get('/pending' , identifyUser  , connectionController.getPendingConnectionReq)
@@ -36,8 +36,8 @@ connectionRequestRouter.get('/pending' , identifyUser  , connectionController.ge
 
 
 
-/*  
-   PATCH   api/connection/request/accept/:id  
+/**
+  @route PATCH   api/connection/request/accept/:id  
    :id - connectionId _id
 */
 connectionRequestRouter.patch('/accept/:id' , identifyUser , connectionController.acceptRequest )
@@ -49,9 +49,6 @@ connectionRequestRouter.patch('/accept/:id' , identifyUser , connectionControlle
    :id - connectionId _id
 */
 connectionRequestRouter.patch('/reject/:id' , identifyUser , connectionController.rejectRequest )
-
-
-
 
 
 
@@ -70,7 +67,6 @@ connectionRouter.delete('/remove/:id' , identifyUser , connectionController.remo
 */
 
 connectionRouter.get('/' , identifyUser , connectionController.getAllConnections)
-
 
 
 
