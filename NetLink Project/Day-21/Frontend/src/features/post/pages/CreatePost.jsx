@@ -19,6 +19,11 @@ const CreatePost = () => {
              <input type="file" name='mediaInput' placeholder='addFile'/>
 
             <label htmlFor='mediaInput' className="mediaLabel">
+
+                <div>
+                   <p>Drag and drop or click to browser</p>
+                    <button className=' button primaryButton'>Select Media</button>
+                </div>
             </label>
 
              <div className="caption">

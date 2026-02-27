@@ -41,8 +41,15 @@
             border: dashed;
             border-color: rgb(212, 205, 205);
             background: rgb(244, 249, 255);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
 
-
+           p{
+            font-size: 0.8rem;
+           }
+          
         }
         .caption{
             flex-grow: 1;
