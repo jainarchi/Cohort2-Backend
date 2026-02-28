@@ -1,4 +1,31 @@
-const Post = ({ post, user }) => {
+
+
+
+const Post = ({ post, user , handleLikePost , handleUnlikePost }) => {
+
+
+
+
+   const toggleLike = async (e , postId) =>{
+      e.target.classList.toggle('like')
+
+      if(e.target.classList.contains('like')){
+        await handleLikePost(postId)
+      }
+      else {
+       await handleUnlikePost(postId)
+      }
+
+   }
+
+
+
+
+
+
+
+
+
   return (
     <div className="post">
       <div className="upper">
@@ -19,8 +46,11 @@ const Post = ({ post, user }) => {
       <div className="bottom">
         <div className="iconCont">
           <div>
-            <button>
+            <button
+               onClick={(e) => toggleLike(e , post._id)}
+            >
               <svg
+                
                 className={post.isLiked ? "like" : ""}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -38,7 +68,7 @@ const Post = ({ post, user }) => {
                 <path d="M7.29117 20.8242L2 22L3.17581 16.7088C2.42544 15.3056 2 13.7025 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C10.2975 22 8.6944 21.5746 7.29117 20.8242ZM7.58075 18.711L8.23428 19.0605C9.38248 19.6745 10.6655 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 13.3345 4.32549 14.6175 4.93949 15.7657L5.28896 16.4192L4.63416 19.3658L7.58075 18.711Z"></path>
               </svg>
             </button>
-            <button>
+            {/* <button>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -46,7 +76,7 @@ const Post = ({ post, user }) => {
               >
                 <path d="M13 14H11C7.54202 14 4.53953 15.9502 3.03239 18.8107C3.01093 18.5433 3 18.2729 3 18C3 12.4772 7.47715 8 13 8V2.5L23.5 11L13 19.5V14ZM11 12H15V15.3078L20.3214 11L15 6.69224V10H13C10.5795 10 8.41011 11.0749 6.94312 12.7735C8.20873 12.2714 9.58041 12 11 12Z"></path>
               </svg>
-            </button>
+            </button> */}
           </div>
 
           <button>

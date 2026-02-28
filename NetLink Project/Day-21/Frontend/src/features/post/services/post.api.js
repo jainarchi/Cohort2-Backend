@@ -13,4 +13,29 @@ export async function getFeed() {
        return response.data
 } 
    
+export async function createPost(ImageFile , caption){
 
+    const formData = new FormData()
+
+    formData.append("postImage" , ImageFile )
+    formData.append("caption" , caption )
+    
+    const response = await api.post('/' , formData )
+    
+    return response.data
+
+}
+
+
+export async function likePost(postId) {
+    const res = await api.post('/like/' + postId )
+    console.log(res.data.message)
+
+}
+
+
+export async function unlikePost(postId) {
+   const res = await api.delete('/unlike/' + postId )   
+   console.log(res.data.message)
+
+}

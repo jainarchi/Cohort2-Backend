@@ -4,7 +4,7 @@ import Post from '../components/Post'
 import {usePost} from '../hook/usePost'
 
 const Feed = () => {
-    const {loading ,post , feed , handleGetFeed} = usePost()
+    const {loading ,post , feed , handleGetFeed , handleLikePost , handleUnlikePost} = usePost()
 
     useEffect(() => {
       handleGetFeed()
@@ -30,7 +30,13 @@ const Feed = () => {
        
        {
         feed.map((post) =>{
-          return  <Post key={post._id} post={post} user={post.user} />
+          return  <Post 
+          key={post._id} 
+          post={post} 
+          user={post.user} 
+          handleLikePost={handleLikePost}
+          handleUnlikePost={handleUnlikePost} 
+          />
         })
        }
 

@@ -72,7 +72,7 @@ postRouter.post('/like/:id' , identifyUser , postControllers.likePost)
 *  @description  
    @access private
 */
-postRouter.post('/unlike/:id' , identifyUser , postControllers.unlikePost)
+postRouter.delete('/unlike/:id' , identifyUser , postControllers.unlikePost)
 
 
 
