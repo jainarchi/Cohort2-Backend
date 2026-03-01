@@ -117,9 +117,6 @@ async function deletePost(req, res) {
 }
 
 
-
-
-
 async function editPost(req, res) {
   const postId = req.params.id;
   const caption = req.body.caption;

@@ -124,7 +124,6 @@ async function getPendingConnectionReq(req, res) {
 
 
     res.status(200).json({
-      message: "fetched all Pending request.",
       pendingRequests,
     });
 
@@ -133,6 +132,48 @@ async function getPendingConnectionReq(req, res) {
     res.status(500).json({
       message: "Internal server error",
     });
+  }
+}
+
+async function getSentPendingRequest(req , res) {
+  try{
+
+    const currentUser = req.user.id
+    
+    const allSentPending = await connectionModel.find({
+      status: "pending",
+      requestedBy : currentUser
+    }).populate("user1  user2")
+
+
+    const sentUsers = allSentPending.map((r) =>{
+        const receiver = (r.requestedBy.toString() === r.user1._id.toString())
+        ? r.user2 
+        : r.user1
+
+
+        return {
+          id : r._id,
+          receiver,
+          createdAt : r.createdAt
+        }
+    })
+
+
+
+    res.status(200).
+    json({
+      sentUsers
+    })
+
+
+
+
+  }catch(err){
+    res.status(500)
+    .json({
+      message : "Internal Server Error"
+    })
   }
 }
 
@@ -304,5 +345,6 @@ module.exports = {
     rejectRequest,
     withdrawRequest,
     removeConnection,
-    getAllConnections
+    getAllConnections,
+    getSentPendingRequest
 }
