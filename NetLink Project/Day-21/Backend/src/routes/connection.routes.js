@@ -29,11 +29,18 @@ connectionRequestRouter.delete('/withdraw/:id' , identifyUser , connectionContro
 /**  
    @description show all pending request
    @route GET   api/connection/request/pending
-   :id - connectionId _id
 */
 connectionRequestRouter.get('/pending' , identifyUser  , connectionController.getPendingConnectionReq)
 
 
+
+/**  
+   @description show all pending sent request
+   @route GET   api/connection/request/sent
+  
+*/
+
+connectionRequestRouter.get('/sent' , identifyUser , connectionController.getSentPendingRequest)
 
 
 /**

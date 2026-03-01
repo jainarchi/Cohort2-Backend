@@ -4,10 +4,8 @@
   gap: $gap;
 }
 
-.feedPage {
-  .postContainer {
-    margin: auto;
-    max-width: 380px;
+
+  .feedContainer {
     width: 100%;
     background: rgb(255, 255, 255);
     min-height: 100vh;
@@ -15,6 +13,12 @@
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+    height: 100vh;
+    overflow-y: auto;
+
+    scrollbar-width: none;       
+    -ms-overflow-style: none; 
+    
 
     .post {
       background: whitesmoke;
@@ -107,4 +111,4 @@
       }
     }
   }
-}
+

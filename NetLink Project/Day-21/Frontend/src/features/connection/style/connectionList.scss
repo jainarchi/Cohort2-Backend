@@ -1,0 +1,127 @@
+
+.ConnectionsList{
+    width: 100%;
+
+    .head{
+     display: flex;
+
+      h5{
+        color: rgb(158, 152, 152);
+        font-weight: 500;
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem;
+        
+      }
+
+      
+      
+      .clickBtn{
+          cursor: pointer;
+          text-align: center;
+          border: 1px solid rgb(221, 216, 216);
+          padding: 0.5rem;
+          width: 100%;
+          text-decoration: none;
+          color: rgb(158, 152, 152);
+
+         &.activeTab{
+          color: blue;
+          border-bottom: 1px solid  blue;
+         }
+      }
+
+    }
+
+
+    .cardCont{
+      width: 100%;
+    
+
+    .card , .inviteCard{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem;
+        border: 1px solid rgb(196, 195, 195);
+        background: rgb(255, 252, 252);
+
+      .left{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+          img{
+            height: 44px;
+            width: 44px;
+            border-radius: 50%;
+            border: 1px solid blue;
+            object-fit: cover;
+            object-position: center;
+
+           }
+
+           p{
+             color: rgb(59, 58, 58);
+             font-size: 0.9rem;
+            
+           }
+           span{
+            color: rgb(134, 133, 133);
+            font-size: 12px;
+           }
+
+      }
+
+      .BtnCont{
+        display: flex;
+        gap: 1rem;
+      }
+      
+      .btn , .acceptBtn , .ignoreBtn{
+        border-radius: 2rem;
+        padding: 0.6rem 1rem;
+        height: fit-content;
+        font-weight: 500;
+        font-size: 0.9rem;
+        border: none;
+        transition: 0.3s all ease-in-out;
+        border: 2px solid rgb(54, 54, 255);
+       
+
+        &:active{
+          transform: scale(0.9);
+        }
+      }
+
+      .btn , .acceptBtn{
+        background: rgb(48, 48, 253);
+        color: white;
+      }
+
+      .ignoreBtn{
+        background: white;
+      }
+
+      
+    }
+
+
+
+  
+      
+
+
+      
+     
+
+        // md with se phle display dir - col 
+
+    
+
+    
+
+  }
+
+
+}

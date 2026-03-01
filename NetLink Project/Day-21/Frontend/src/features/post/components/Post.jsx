@@ -1,6 +1,4 @@
 
-
-
 const Post = ({ post, user , handleLikePost , handleUnlikePost }) => {
 
 

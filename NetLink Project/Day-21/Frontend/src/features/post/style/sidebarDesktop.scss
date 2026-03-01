@@ -1,0 +1,33 @@
+.sidebar {
+  background: rgb(255, 255, 255);
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 240px;
+
+  h4 {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 0.4rem;
+   
+
+    &:hover {
+      background: rgba(231, 242, 252, 0.863);
+    }
+
+    &:active {
+      background: rgba(231, 242, 252, 0.863);
+    }
+
+    a {
+      width: 100%;
+      text-decoration: none;
+      color: rgb(14, 14, 14);
+      font-weight: 500;
+       display: flex;
+       align-items: center;
+       gap: 0.7rem;
+    }
+
+
+  }
+}

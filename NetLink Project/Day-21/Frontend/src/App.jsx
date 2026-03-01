@@ -3,6 +3,7 @@ import router from "./app.routes";
 import "../src/features/shared/global.scss";
 import { AuthProvider } from "./features/auth/auth.context";
 import { PostContextProvider } from "./features/post/postContext";
+import { ConnectionProvider } from "./features/connection/ConnectionContext";
 
 
 
@@ -11,8 +12,11 @@ const App = () => {
     <div>
       <AuthProvider>
         <PostContextProvider>
+          <ConnectionProvider>
 
           <RouterProvider router={router} />
+
+          </ConnectionProvider>
 
         </PostContextProvider>
       </AuthProvider>
