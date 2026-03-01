@@ -1,17 +1,17 @@
 
 
-const ConnectionCard = ({btn}) => {
+const ConnectionCard = ({ user , createdAt , btn}) => {
   return (
      <div className="card">
             <div className="left">
 
-                <img src="" alt="" />
+                <img src={user.profileImage} alt="" />
 
                  <div >
-                    <h4>Username</h4>
-                    <p>Full stack developer</p>
+                    <h4>{user.username}</h4>
+                    <p>Bio</p>
 
-                    <span>1 week ago</span>
+                    <span>{createdAt}</span>
                  </div>
 
             </div>

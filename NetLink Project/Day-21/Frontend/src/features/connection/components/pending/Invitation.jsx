@@ -3,9 +3,6 @@ import InvitationCard from "../cards/InvitationCard"
 import {useConnection} from '../../hook/useConnection'
 
 
-
-
-
 const Invitation = () => {
    const {loading , incomingReq , handleGetIncomingRequest } = useConnection()
    
@@ -29,18 +26,29 @@ const Invitation = () => {
   return (
      <div className="cardCont">
 
+
          {
-          incomingReq.map((r) =>{
+            incomingReq.length === 0 ? (
+               <>
+                 <p className="message">No Incoming request</p>
+               </>
+            ):(
+               
+               incomingReq.map((r) =>{
                 return (
                 <InvitationCard 
                  key={r._id} 
-                 requestedBy={r.requestedBy} 
+                 user={r.requestedBy} 
                  createdAt={r.createdAt} 
-                 
                  />
                 )
-          })
+               })
+            )
          }
+         
+      
+
+         
         
       </div>
   )

@@ -135,9 +135,11 @@ async function getPendingConnectionReq(req, res) {
   }
 }
 
+
+
 async function getSentPendingRequest(req , res) {
   try{
-
+    
     const currentUser = req.user.id
     
     const allSentPending = await connectionModel.find({
@@ -160,13 +162,10 @@ async function getSentPendingRequest(req , res) {
     })
 
 
-
     res.status(200).
     json({
       sentUsers
     })
-
-
 
 
   }catch(err){
@@ -309,13 +308,32 @@ async function getAllConnections (req , res){
  try {
   const currentUser = req.user.id
     
-  const connections = await connectionModel.find({
+  const connectionsObj = await connectionModel.find({
     status: "accepted",
     $or:[
       {user1 : currentUser},
       {user2 : currentUser}
     ]
+  }).populate("user1  user2")
+
+
+  const connections = connectionsObj.map((r) => {
+    const connectWith =(  r.user1._id.toString() === currentUser)
+    ? r.user2
+    : r.user1
+
+
+    return {
+      id: r._id,
+      connectWith,
+      createdAt: r.createdAt
+
+    }
+
   })
+
+
+
 
   res.status(200)
   .json({

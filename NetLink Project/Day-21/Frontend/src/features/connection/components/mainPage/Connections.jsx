@@ -1,11 +1,26 @@
 import '../../style/connectionList.scss'
 import ConnectionCard from '../cards/ConnectionCard'
-
+import { useConnection } from '../../hook/useConnection'
+import { useEffect } from 'react'
 
 
 const Connections = () => {
+
+ const {handleGetAllConnections , allConnections , loading} = useConnection() 
+
+  useEffect(() => {
+    handleGetAllConnections()
+  
+  }, [])
+  
+  if(loading || !allConnections){
+    return (<>
+       Loading...
+    </>
+  )}
+
+
   return (
-   
 
       <div className="ConnectionsList">
 
@@ -16,8 +31,27 @@ const Connections = () => {
 
 
         <div className="cardCont">
-         
-         <ConnectionCard btn="Remove"/>
+
+          { allConnections.length === 0 ?(
+            <>
+            <p className='message'>No connection yet. <br /> sent request, grow your connection.</p>
+            </>
+          ):(
+
+            allConnections.map((r) =>{
+              return (
+                   
+                <ConnectionCard   
+                 key={r.id}
+                 user={r.connectWith}
+                 createdAt={r.createdAt}
+                 btn="Remove"
+                 />
+              )
+            })
+          )
+        }
+        
         
        
        </div>

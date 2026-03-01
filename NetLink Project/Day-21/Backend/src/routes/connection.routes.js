@@ -51,8 +51,8 @@ connectionRequestRouter.patch('/accept/:id' , identifyUser , connectionControlle
 
 
 
-/*  
-   PATCH   api/connection/request/reject/:id   
+/**
+   @route PATCH   api/connection/request/reject/:id   
    :id - connectionId _id
 */
 connectionRequestRouter.patch('/reject/:id' , identifyUser , connectionController.rejectRequest )
