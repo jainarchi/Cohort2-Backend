@@ -10,6 +10,8 @@ import Pending from "./features/connection/components/mainPage/Pending";
 import Sent from "./features/connection/components/pending/Sent";
 import Invitation from "./features/connection/components/pending/Invitation";
 
+import ExploreConnections from "./features/connection/components/mainPage/ExploreConnections";
+
 
 
 const router = createBrowserRouter([
@@ -33,6 +35,14 @@ const router = createBrowserRouter([
           path: "feed",
           element: <Feed />
        },
+        {
+     path: "/explore",
+     element: <ExploreConnections/>
+  },
+  // {
+  //    path: "/profile",
+  //    element: <Profile />
+  // },
       {
         path: "connection",
         element: <Connections />,

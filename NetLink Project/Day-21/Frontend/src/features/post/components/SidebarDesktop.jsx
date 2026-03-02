@@ -8,12 +8,12 @@ const SidebarDesktop = () => {
 
         <div className="sidebar">
             
-                <h4><Link> <RiHome4Line />Home</Link></h4>
-                <h4><Link>Explore</Link></h4>
-                <h4><Link>Connections</Link></h4>
-                <h4><Link>Pending Req</Link></h4>
-                <h4><Link> <RiUserLine />Profile</Link></h4>
-                <h4><Link><RiStickyNoteAddLine />Create Post</Link></h4>
+                <h4><Link to="/feed"> <RiHome4Line />Home</Link></h4>
+                <h4><Link to="/explore" >Explore</Link></h4>
+                <h4><Link to="/connection">Connections</Link></h4>
+                <h4><Link to="/connection/pending/invitation"  >Pending Req</Link></h4>
+                <h4><Link to='/profile'> <RiUserLine />Profile</Link></h4>
+                <h4><Link  to='/create-post'  ><RiStickyNoteAddLine />Create Post</Link></h4>
             
         </div>
       
