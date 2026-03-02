@@ -14,7 +14,7 @@ const ExploreCard = () => {
         </div>
 
 
-        <button className='followBtn button primaryButton'>Follow</button>
+        <button className='connectBtn button primaryButton'>Connect</button>
     </div>
 
     

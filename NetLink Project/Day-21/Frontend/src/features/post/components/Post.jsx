@@ -3,7 +3,6 @@ const Post = ({ post, user , handleLikePost , handleUnlikePost }) => {
 
 
 
-
    const toggleLike = async (e , postId) =>{
       e.target.classList.toggle('like')
 

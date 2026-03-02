@@ -4,21 +4,23 @@ import "../src/features/shared/global.scss";
 import { AuthProvider } from "./features/auth/auth.context";
 import { PostContextProvider } from "./features/post/postContext";
 import { ConnectionProvider } from "./features/connection/ConnectionContext";
-
-
+import { ProfileProvider } from "./features/profile/profileContext";
 
 const App = () => {
   return (
     <div>
       <AuthProvider>
-        <PostContextProvider>
-          <ConnectionProvider>
+        <ProfileProvider>
+          
+          <PostContextProvider>
+            <ConnectionProvider>
 
-          <RouterProvider router={router} />
+              <RouterProvider router={router} />
 
-          </ConnectionProvider>
+            </ConnectionProvider>
+          </PostContextProvider>
 
-        </PostContextProvider>
+        </ProfileProvider>
       </AuthProvider>
     </div>
   );

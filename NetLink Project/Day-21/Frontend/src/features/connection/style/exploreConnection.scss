@@ -25,9 +25,9 @@
         }
 
         p{
-            color: rgb(109, 107, 107);
+            color: rgb(141, 138, 138);
             font-size: 14px;
-            margin-top: 0.6rem;
+            margin-block: 0.6rem;
         }
     }
 
@@ -42,7 +42,7 @@
         padding: 1rem;
 
         .exploreCard{
-            @include flex-col(1rem);
+            @include flex-col(1.4rem);
             align-items: center;
             padding : 1.4rem;
             flex-shrink: 0;
@@ -68,14 +68,16 @@
                 font-weight: 500;
                }
                p{
-                font-size: 14px;
+                font-size: 16px;
+                
                }
             }
 
 
             
-            .followBtn{
+            .connectBtn{
                padding-block:0.5rem ;
+               font-weight: 500;
             }
             
 
