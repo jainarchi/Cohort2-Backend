@@ -43,12 +43,22 @@ async function createPost(req, res) {
 async function getPost(req, res) {
   try {
     const id = req.user.id;
-    const posts = await postModel.find({ user: id });
+    const posts = await  Promise.all((await postModel.find({ user: id }).populate("user").lean())
+    .map( async (post) =>{
+         const isLiked = await likeModel.findOne({
+          user : id,
+          post : post._id
+         })
+
+         post.isLiked = !!isLiked
+         return post
+    }))
 
     return res.status(200).json({
       posts,
     });
   } catch (err) {
+    console.log(err)
     res.status(500).json({
       message: "Internal server error",
     });

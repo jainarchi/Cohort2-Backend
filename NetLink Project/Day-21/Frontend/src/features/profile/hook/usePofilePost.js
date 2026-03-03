@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ProfileContext } from "../profileContext";
 import { getPosts , getPostDetails , editPost } from "../services/profilePost.api";
 
-const useProfilePost = () =>{
+export const useProfilePost = () =>{
    const {loading , setLoading , user , setUserPosts , userPosts , setPostDetails , postDetails} = useContext(ProfileContext)
 
 
@@ -11,6 +11,7 @@ const useProfilePost = () =>{
      setLoading(true)
      const data = await getPosts()
      setUserPosts(data)
+     console.log(data)
 
      setLoading(false) 
    }
@@ -20,6 +21,7 @@ const useProfilePost = () =>{
     setLoading(true)
     const data = await getPostDetails(postId)
     setPostDetails(data)
+    console.log(data)
 
     setLoading(false)
    }
@@ -27,6 +29,7 @@ const useProfilePost = () =>{
    const handleEditPost = async (postId) =>{
     setLoading(true)
     const data = await editPost(postId)
+    console.log(data)
     setLoading(false)
 
    }
@@ -34,6 +37,12 @@ const useProfilePost = () =>{
 
 
     return{
+        handleEditPost,
+        handleGetPostDetails,
+        handleGetPosts,
+        loading,
+        user,
+        userPosts
 
     }
 }

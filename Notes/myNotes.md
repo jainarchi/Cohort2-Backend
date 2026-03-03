@@ -183,3 +183,7 @@ Architecture Difference
 -  Auth0 Flow: auth0 server generate token using private key and backend verify it using public key of auth0
 
     - User → Auth0 → JWT generate → Frontend → Backend verify
+
+
+
+    

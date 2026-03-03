@@ -1,6 +1,25 @@
 import { RiBarChartLine, RiChat1Line, RiThumbUpLine } from "@remixicon/react";
 
-const WorkCard = () => {
+const WorkCard = ({user , userPost , handleUnlikePost , handleLikePost}) => {
+
+  const toggleLike = async (e , postId) =>{
+    e.target.classList.toggle('like')
+
+    if(e.target.classList.contains("like")){
+       await handleUnlikePost(postId)
+    }
+    else{
+        await handleLikePost(postId)
+    }
+  }
+
+
+
+
+
+
+
+
   return (
     <div className="post">
       <div className="upper">
@@ -15,15 +34,15 @@ const WorkCard = () => {
       </div>
 
       <div className="postImgCont">
-        <img src={post.postUrl} alt="postImg" />
+        <img src={userPost.postUrl} alt="postImg" />
       </div>
 
       <div className="bottom">
         <div className="iconCont">
           <div>
             <button
-              onClick={(e) => toggleLike(e, post._id)}
-              className={post.isLiked ? "like" : ""}
+              onClick={(e) => toggleLike(e, userPost._id)}
+              className={userPost.isLiked ? "like" : ""}
             >
               <RiThumbUpLine />
             </button>
@@ -38,7 +57,7 @@ const WorkCard = () => {
         </div>
 
         <div>
-          <p>{post.caption}</p>
+          <p>{userPost.caption}</p>
         </div>
 
         <p>Created At</p>

@@ -17,12 +17,6 @@ const Post = ({ post, user , handleLikePost , handleUnlikePost }) => {
 
 
 
-
-
-
-
-
-
   return (
     <div className="post">
       <div className="upper">
