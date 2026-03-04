@@ -184,6 +184,10 @@ Architecture Difference
 
     - User → Auth0 → JWT generate → Frontend → Backend verify
 
+-----
 
+Day-25  | Moodify 
+## Token BlackListing
 
-    
+### why it needed?
+### Blacklisted token add in Redis not in Mongodb but why ?

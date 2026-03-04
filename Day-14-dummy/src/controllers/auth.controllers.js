@@ -35,7 +35,7 @@ async function login(req, res) {
   const user = await userModel.findOne({ email });
 
   if (!user) {
-    return res.status(404).json({
+    return res.status(404).json({ 
       message: "User not found",
     });
   }
@@ -43,7 +43,7 @@ async function login(req, res) {
   const hash = crypto.createHash("sha256").update(password).digest("hex");
 
   if (hash !== user.password) {
-    return res.status(401).json({
+    return res.status(400).json({
       message: "Invalid Password",
     });
   }
