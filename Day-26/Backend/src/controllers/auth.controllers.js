@@ -1,6 +1,6 @@
 const userModel = require("../models/user.model");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+
 
 
 
@@ -21,12 +21,12 @@ async function register(req, res) {
     })
   }
 
-  const hash = await bcrypt.hash(password, 10);
+//   const hash = await bcrypt.hash(password, 10);
 
   const user = await userModel.create({
     email,
     username,
-    password: hash,
+    password,
   });
 
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
@@ -63,10 +63,12 @@ async function login(req, res) {
     });
   }
 
-  const isCorrectPassword = await bcrypt.compare(password, user.password);
+//   const isCorrectPassword = await bcrypt.compare(password, user.password);
+
+ const isMatch = await user.comparePassword(password);
 
 
-  if (!isCorrectPassword) {
+  if (! isMatch) {
     return res.status(400).json({
       message: "Invalid Credentials",
     });

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const bcrypt = require('bcryptjs')
 
 const userSchema = mongoose.Schema({
     username : {
@@ -20,13 +20,27 @@ const userSchema = mongoose.Schema({
     }
 })
 
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+
+    this.password = await bcrypt.hash(this.password, 10);
+   
+});
+
+
+userSchema.methods.comparePassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+
 
 const userModel = mongoose.model('user' , userSchema);
 
 module.exports = userModel
 
 
-// userSchema.pre("save" , function(next) { })
-// userSchema.post("save" , function(next) { })
 
 
+ // value asign / reaign - modify  
+ // isModified used to  
+ // prevent double hash password on update other field because login not work if password not match.
