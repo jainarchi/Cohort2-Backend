@@ -1,5 +1,6 @@
 const userModel = require("../models/user.model");
 const jwt = require("jsonwebtoken");
+const blacklistModel = require('../models/blacklist.model')
 
 
 
@@ -63,10 +64,7 @@ async function login(req, res) {
     });
   }
 
-//   const isCorrectPassword = await bcrypt.compare(password, user.password);
-
  const isMatch = await user.comparePassword(password);
-
 
   if (! isMatch) {
     return res.status(400).json({
@@ -74,14 +72,10 @@ async function login(req, res) {
     });
   }
 
-
-
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "1d",
   });
   res.cookie("token", token);
-
-
 
 
   res.status(200).json({
@@ -94,13 +88,56 @@ async function login(req, res) {
 
 
 
+async function getMe(req , res) {
+   const user = await userModel.findById(req.user.id)
+
+   res.status(200)
+   .json({
+    message : 'user data fetch successfully',
+    user
+   })
+}
+
+
+
+async function logout(req , res) {
+  const token = req.cookies.token
+
+  await blacklistModel.create({
+    token
+  })
+
+  res.clearCookie(token)
+
+  res.status(200)
+  .json({
+    message : "Logout successfully"
+  })
+}
+
+
+
+
+
+
+
+
+
+
 module.exports = {
   register,
   login,
+  getMe,
+  logout
 };
 
 
-// why we use "Invalid Credentials" instead of "User not found"
+
+
+
+
+
+// why we use 400 "Invalid Credentials" instead of "User not found"  in Login
 
 //  To prevent hackers from knowing which users exist
 //  To prevent user enumeration
