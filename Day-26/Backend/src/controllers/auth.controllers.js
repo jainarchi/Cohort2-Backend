@@ -86,8 +86,6 @@ async function login(req, res) {
 
 
 
-
-
 async function getMe(req , res) {
    const user = await userModel.findById(req.user.id)
 
@@ -106,6 +104,7 @@ async function logout(req , res) {
   await blacklistModel.create({
     token
   })
+
 
   res.clearCookie(token)
 
