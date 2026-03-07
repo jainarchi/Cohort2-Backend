@@ -191,3 +191,8 @@ Day-25  | Moodify
 
 ### why it needed?
 ### Blacklisted token add in Redis not in Mongodb but why ?
+
+
+// Day - 30 |  err handling , validation
+- Express Validator 
+- err handling by middleware
