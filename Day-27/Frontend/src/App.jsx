@@ -3,7 +3,7 @@ import { RouterProvider } from 'react-router-dom'
 import {router} from './appRouter'
 import "./features/shared/style/global.scss"
 import "./features/shared/style/button.scss"
-import { AuthProvider } from './features/auth/authContext'
+import { AuthProvider } from './features/auth/context/authContext'
 
 const App = () => {
   return (

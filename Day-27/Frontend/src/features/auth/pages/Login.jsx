@@ -1,11 +1,15 @@
 import { useState } from "react"
 import FormGroup from "../components/FormGroup"
-import { Link } from "react-router-dom"
+import { Link , useNavigate} from "react-router-dom"
 import "../style/authform.scss"
+import { useAuth } from "../hook/useAuth"
 
 
 
 const Login = () => {
+  const navigate = useNavigate()
+  const {loading , handleLogin} = useAuth()
+
 
   const [form, setForm] = useState({
     username :"",
@@ -13,16 +17,33 @@ const Login = () => {
     password :""
   })
 
-   const handleSubmit = () =>{
+   const handleSubmit = async (e) =>{
+    e.preventDefault()
+
+    await handleLogin({
+      username : form.username ,
+      email : form.email,
+      password : form.password
+    })
+
+
+    navigate('/')
 
    }
 
 
    const handleChange = (e) =>{
       setForm({...form , [e.target.name] : e.target.value})
-      console.log(e.target.value)
    }
 
+
+   if(loading){
+     return (
+      <main>
+        <h2>loading...</h2>
+      </main>
+     )
+   }
 
   return (
     <main>
@@ -61,7 +82,6 @@ const Login = () => {
            <button className="button">Login</button>
 
         </form>
-
 
         <p className="continueWith">OR LOGN IN WITH</p>
 

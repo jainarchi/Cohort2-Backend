@@ -186,7 +186,7 @@ Architecture Difference
 
 -----
 
-Day-25  | Moodify 
+Day: 25-27  | Moodify 
 ## Token BlackListing
 
 ### why it needed?

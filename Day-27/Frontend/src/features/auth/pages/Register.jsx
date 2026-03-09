@@ -2,10 +2,15 @@ import { useState } from "react"
 import FormGroup from "../components/FormGroup"
 import { Link } from "react-router-dom"
 import "../style/authform.scss"
+import {useAuth} from '../hook/useAuth'
+import { useNavigate } from "react-router-dom"
 
 
 
 const Register = () => {
+
+  const{loading , handleRegister} = useAuth()
+  const navigate = useNavigate()
 
   const [form, setForm] = useState({
     username :"",
@@ -13,16 +18,33 @@ const Register = () => {
     password :""
   })
 
-   const handleSubmit = () =>{
+
+   const handleSubmit = async (e) =>{
+    e.preventDefault()
+
+    await handleRegister({
+     username : form.username,
+     email: form.email,
+     password: form.password
+    })
+
+    navigate('/')
 
    }
 
 
    const handleChange = (e) =>{
       setForm({...form , [e.target.name] : e.target.value})
-      console.log(e.target.value)
    }
 
+
+   if(loading){
+    return (
+      <main>
+        <h2>loading...</h2>
+      </main>
+    )
+   }
 
   return (
     <main>

@@ -25,7 +25,9 @@ async function register(req , res ){
         username ,
         email,
         password
-    })
+    });
+
+    user.password = undefined
  
     const token = jwt.sign({id : user._id} , process.env.JWT_SECRET , {expiresIn: '1d'})
 
@@ -77,6 +79,8 @@ async function login(req , res) {
         httpOnly : true
     })
 
+    user.password = undefined
+   
     res.status(200)
     .json({
         message : "User logged in successfully",
