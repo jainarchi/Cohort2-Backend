@@ -3,7 +3,6 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
 
-
 const app = express()
 app.use(cors({
     origin: 'http://localhost:5173',
@@ -17,6 +16,7 @@ app.use(cookieParser())
 
 const authRouter = require('./routes/auth.routes')
 const songRouter = require('./routes/song.routes')
+
 
 app.use('/api/auth' , authRouter)
 app.use('/api/songs' , songRouter)

@@ -16,13 +16,23 @@ const songSchema = new mongoose.Schema({
         type: String,
         required : [true , 'image url is required']
     },
-    catagory:{
+    artist:{
+        type: String,
+        requried: [true , 'artist is required']
+    },
+    album:{
+        type : String,
+        requried : [true , 'album is required']
+    },
+    mood:{
         type : String,
         enum:{
-            values: ['sad' , 'happy' , 'surprise'],
+            values: ['sad' , 'happy' , 'surprised'],
             message : "this is enum"
         }
     }
+},{
+    timestamps : true
 })
 
 const songModel = mongoose.model('songs' , songSchema )

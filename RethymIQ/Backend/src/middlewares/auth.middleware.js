@@ -20,7 +20,6 @@ const authUser = async (req , res , next) =>{
             message : "Invaild token."
         })
     }
-
    
 
     try{
