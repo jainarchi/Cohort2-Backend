@@ -79,11 +79,11 @@ async function getAllSongs(req, res) {
 
 
 async function latestSongs(req, res) {
-  const latestfive = await songModel.find().sort({ createdAt: -1 }).limit(5);
+  const latestSongs = await songModel.find().sort({ createdAt: -1 }).limit(5);
 
   res.status(200).json({
     message: "latest songs fetched successfully",
-    latestfive,
+    latestSongs,
   });
 }
 

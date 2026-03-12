@@ -16,6 +16,14 @@
       margin-block: 1rem 1.5rem;
       color: rgb(202, 214, 223);
     }
+
+    .detectExp-Btn{
+      display: flex;
+      gap: 0.2rem;
+      align-items: center;
+     
+      
+    }
   }
 
   .content {
@@ -24,7 +32,7 @@
     .selectionBar {
       display: flex;
       gap: 1rem;
-      padding-bottom: 0.5rem;
+      padding-block: 1rem;
 
       .choice {
         text-decoration: none;
@@ -53,7 +61,9 @@
 
 
     .outlet-container{
-      background: rgb(27, 77, 91);
+      // background: red;
+      // padding: 0.5rem;
+     
      
      
     }

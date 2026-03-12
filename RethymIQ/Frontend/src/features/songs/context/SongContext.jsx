@@ -9,15 +9,17 @@ export const SongContextProvider = ({children}) =>{
     const [loading, setLoading] = useState(false)
     const [favoriteSongs, setFavoriteSongs] = useState(null)
     const [latestSongs, setLatestSongs] = useState(null)
-    const [recentSongs , setRecentSongs] = useState(null)
+    const [recentPlay , setRecentPlay] = useState(null)
+    const [moodSongs, setMoodSongs] = useState(null)
 
 
     return(
         <SongContext.Provider
-         value={{songs , setSongs , loading , setLoading , favoriteSongs , setFavoriteSongs , latestSongs , setLatestSongs , recentSongs , setRecentSongs}} 
+         value={{songs , setSongs , loading , setLoading , favoriteSongs , setFavoriteSongs , latestSongs , setLatestSongs , recentPlay , setRecentPlay , moodSongs, setMoodSongs}} 
         >
 
             {children}
+            
         </SongContext.Provider>
     )
 }

@@ -33,7 +33,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink to="/latest-songs" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-              <RiMusic2Line size={20} /> <span>Latest Songs</span>
+              <RiMusic2Line size={20} /> <span>What’s New</span>
             </NavLink>
           </li>
           <li>
@@ -43,7 +43,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink to="/mood" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-              <RiSparkling2Line size={20} /> <span>Mood Detect</span>
+              <RiSparkling2Line size={20} /> <span>Expression Detect</span>
             </NavLink>
           </li>
           <li>

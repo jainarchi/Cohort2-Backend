@@ -1,6 +1,7 @@
 import router from './AppRouter'
 import { RouterProvider } from 'react-router-dom'
 import { AuthProvider } from './features/auth/context/AuthContext'
+import { SongContextProvider } from './features/songs/context/SongContext'
 import './style/global.scss'
 
 const App = () => {
@@ -8,8 +9,11 @@ const App = () => {
     <div>
     
     <AuthProvider>
+      <SongContextProvider>
 
-      <RouterProvider router={router} />
+         <RouterProvider router={router} />
+
+      </SongContextProvider>
 
     </AuthProvider>
       
