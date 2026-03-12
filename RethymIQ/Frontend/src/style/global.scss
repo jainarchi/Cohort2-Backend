@@ -1,0 +1,15 @@
+@use './button.scss';
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html , body , #root{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 100%;
+    color: whitesmoke;
+    background: linear-gradient(130deg, #0c1b20 0%, #1f3a3f 100%);
+}

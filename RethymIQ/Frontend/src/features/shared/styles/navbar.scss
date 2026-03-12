@@ -1,0 +1,20 @@
+nav{
+    display: flex;
+    justify-content: space-between;
+    height: 7vh;
+    // background-color: red;
+    align-items: center;
+    padding-inline: 1rem;
+    .name{
+      color: rgb(21, 187, 224);
+    }
+
+    .navright{
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+
+
+
+}

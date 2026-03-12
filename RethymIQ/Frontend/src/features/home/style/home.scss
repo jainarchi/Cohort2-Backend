@@ -1,0 +1,61 @@
+.home-page {
+  min-height: 100%;
+
+  .home-card {
+    padding: 1rem;
+    background: #133640;
+    border-radius: 0.6rem;
+
+    h1 {
+      font-weight: 600;
+      span {
+        color: rgb(0, 221, 255);
+      }
+    }
+    p {
+      margin-block: 1rem 1.5rem;
+      color: rgb(202, 214, 223);
+    }
+  }
+
+  .content {
+    min-height: 100%;
+
+    .selectionBar {
+      display: flex;
+      gap: 1rem;
+      padding-bottom: 0.5rem;
+
+      .choice {
+        text-decoration: none;
+        padding: 8px 12px;
+        font-weight: 400;
+        transition: all 0.3s ease;
+        border-bottom: 2px solid transparent;
+        color: rgb(155, 155, 155);
+
+        &:hover {
+          color: white;
+          border-bottom: 2px solid white;
+        }
+
+        &.active {
+          color: #00e5ff; // Your preferred blue
+          border-bottom: 2px solid #03c2e8;
+
+          &:hover {
+            color: #00e5ff;
+            border-bottom: 2px solid #00d5ff;
+          }
+        }
+      }
+    }
+
+
+    .outlet-container{
+      background: rgb(27, 77, 91);
+     
+     
+    }
+  }
+}

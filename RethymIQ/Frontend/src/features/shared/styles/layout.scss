@@ -1,0 +1,175 @@
+// Responsive layout: sidebar on left (desktop), bottom (mobile)
+
+// Rhythm IQ Brand Colors
+$bg-sidebar: #050a0e; // Deep dark background
+$cyan-accent: #00f2ff; // Primary brand color
+$active-pill: rgba(0, 242, 255, 0.1); // Soft glow for active link
+$text-gray: #b3b3b3; // Muted text
+$divider-color: rgba(255, 255, 255, 0.05);
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  order: 1;
+
+  .outlet {
+    height: 93vh;
+    overflow-y: auto;
+    padding: 1rem;
+  }
+}
+
+
+
+
+
+.sidebar {
+  background-color: $bg-sidebar;
+  color: white;
+  z-index: 99;
+  transition: all 0.3s ease;
+  background: linear-gradient( rgb(36, 35, 35) , rgb(5, 53, 58) ,rgba(41, 41, 41, 0.989));
+}
+
+ // MOBILE VIEW 
+  @media (max-width: 767px) {
+
+    .sidebar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    border-top: 1px solid $divider-color;
+
+    .logo-container,
+    .divider,
+    .auth-nav,
+    span {
+      display: none; // Hide logo, labels, and extra links on mobile
+    }
+
+    .nav-menu {
+      height: 100%;
+
+      .primary-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 1rem;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        width: 100%;
+        max-width: 500px;
+        margin: auto;
+
+        .nav-link {
+          color: $text-gray;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px;
+
+          &.active {
+            color: $cyan-accent;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+
+
+
+
+
+
+// DESKTOP VIEW 
+@media (min-width: 768px) {
+  .app-container {
+    flex-direction: row;
+  }
+
+  .sidebar {
+    width: 260px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    order: -1;
+    flex-shrink: 0;
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem;
+
+      h2 {
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+    }
+
+    .nav-menu {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space;
+      width: 100%;
+      padding: 1rem;
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+
+        .nav-link {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          padding: 12px 16px;
+          color: $text-gray;
+          text-decoration: none;
+          font-size: 0.95rem;
+          font-weight: 500;
+          border-radius: 1rem;
+          transition: 0.2s ease-in-out;
+
+          &:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.03);
+          }
+
+          &.active {
+            color: rgb(0, 251, 255);
+            background: rgba(2, 212, 249, 0.183);
+          }
+        }
+      }
+
+      .logout-btn {
+        cursor: pointer;
+        &:hover {
+          color: #ff4d4d; // Subtle red highlight for logout
+        }
+      }
+    }
+
+    .main-content {
+      order: 2;
+    }
+  }
+}
