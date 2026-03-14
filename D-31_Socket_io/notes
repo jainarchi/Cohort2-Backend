@@ -1,0 +1,16 @@
+socket io is complelety diff package 
+not work with express directly 
+express is also built on the top of http
+
+
+- app (express server)   connect with    io (socket io server)   by  httpServer 
+
+io - server
+socket - single user
+
+on - event listen
+emit - event fire
+
+
+
+ext - Echo API 

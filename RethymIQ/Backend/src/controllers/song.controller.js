@@ -9,19 +9,33 @@ async function uploadSong(req, res) {
   const tags = nodeId3.read(fileBuffer);
   const imageBuffer = tags.image.imageBuffer;
 
-  const songUrl = await storageService({
-    buffer: fileBuffer,
-    filename: tags.title + ".mp3",
-    folder: "cohort2/RhythmIQ/songs",
-  });
+  // const songUrl = await storageService({
+  //   buffer: fileBuffer,
+  //   filename: tags.title + ".mp3",
+  //   folder: "cohort2/RhythmIQ/songs",
+  // });
 
-  const posterUrl = await storageService({
-    buffer: imageBuffer,
-    filename: tags.title + ".jpeg",
-    folder: "cohort2/RhythmIQ/posters",
-  });
+  // const posterUrl = await storageService({
+  //   buffer: imageBuffer,
+  //   filename: tags.title + ".jpeg",
+  //   folder: "cohort2/RhythmIQ/posters",
+  // });
 
-  console.log(posterUrl);
+
+const [songUrl, posterUrl] = await Promise.all([
+    storageService({
+      buffer: fileBuffer,
+      filename: `${tags.title}.mp3`,
+      folder: "cohort2/RhythmIQ/songs",
+    }),
+    storageService({
+      buffer: imageBuffer,
+      filename: `${tags.title}.jpeg`,
+      folder: "cohort2/RhythmIQ/posters",
+    }),
+  ])
+
+  
 
   const newSong = await songModel.create({
     songUrl: songUrl.url,
