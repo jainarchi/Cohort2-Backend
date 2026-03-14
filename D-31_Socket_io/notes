@@ -14,3 +14,46 @@ emit - event fire
 
 
 ext - Echo API 
+
+
+
+how clients communicate in real time.
+
+I started with `socket.emit` to send messages to one client
+Then I used `io.emit` to send messages to all clients
+this sends messages back to the sender too
+
+
+here `socket.broadcast.emit`come
+It sends messages to everyone except the sender.
+This is perfect for real-time chat systems.
+
+
+Rooms let me group clients and send messages to specific groups.
+It felt like creating mini chat groups inside the server.
+
+
+While practicing, a question came to my mind:
+How does the server know which user is in which room?
+And if multiple servers are running,
+how do they share this information efficiently?
+
+
+This is where **adapters** come in
+Adapters handle message routing and room management
+The default in-memory adapter works fine for one server
+But in multi-server setups, it cannot share room data
+
+
+That’s why **Redis adapter** is needed
+Redis acts as a shared memory for all servers.
+It keeps track of rooms and which sockets belong where.
+This ensures messages reach the right clients,
+even if they are connected to different servers.
+
+
+I practiced acknowledgements to confirm message delivery.
+And built small apps to apply everything I learned.
+
+
+
