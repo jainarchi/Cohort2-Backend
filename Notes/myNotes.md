@@ -193,7 +193,7 @@ Day: 25-27  | Moodify
 ### Blacklisted token add in Redis not in Mongodb but why ?
 
 
-// Day - 30 |  err handling , validation
+// Day - 30 |  err handling , validation layer
 - Express Validator 
 - err handling by middleware
 
