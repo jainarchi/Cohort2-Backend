@@ -1,6 +1,12 @@
 import userModel from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import { sendEmail } from "../services/mail.service.js";
+import {
+  ApiError,
+  createConflictError,
+  createNotFoundError,
+  createUnauthorizedError,
+} from "../utils/errorHandler.js";
 
 
 
@@ -77,11 +83,12 @@ async function register(req, res) {
   });
 
   if (userAlreadyExists) {
-    return res.status(409).json({
-      message: "User already exists",
-      success: false,
-      err: "user already exists",
-    });
+    throw new ApiError(409, "User already exists", [
+      {
+        field: userAlreadyExists.username === username ? "username" : "email",
+        message: `${userAlreadyExists.username === username ? "Username" : "Email"} already exists`,
+      },
+    ]);
   }
 
   const user = await userModel.create({
@@ -91,8 +98,7 @@ async function register(req, res) {
   });
 
   // link send for verifitcation
-  await sendVerificationEmail(username , email)
- 
+  await sendVerificationEmail(username, email);
 
   res.status(201).json({
     message:
@@ -113,18 +119,30 @@ async function register(req, res) {
  * @desc resend verification link on email 
  */
 
-async function resendVerificationEmail(req , res) {
-   const {username , email} =  req.body
+async function resendVerificationEmail(req, res) {
+  const { username, email } = req.body;
 
-   await sendVerificationEmail(username , email)
+  const user = await userModel.findOne({ email });
 
+  if (!user) {
+    throw createNotFoundError("User with this email");
+  }
 
-   res.status(200)
-   .json({
-      message : "verification email resend successfully",
-      success : true
-   })
+  if (user.verified) {
+    throw new ApiError(400, "Email is already verified", [
+      {
+        field: "email",
+        message: "This email address is already verified",
+      },
+    ]);
+  }
 
+  await sendVerificationEmail(username, email);
+
+  res.status(200).json({
+    message: "Verification email resent successfully",
+    success: true,
+  });
 }
 
 
@@ -140,10 +158,12 @@ async function verifyEmail(req, res) {
   const { token } = req.query;
 
   if (!token) {
-    return res.status(400).json({
-      message: "token not found",
-      success: false,
-    });
+    throw new ApiError(400, "Verification token not found", [
+      {
+        field: "token",
+        message: "Token is required",
+      },
+    ]);
   }
 
   let decoded = null;
@@ -151,30 +171,26 @@ async function verifyEmail(req, res) {
   try {
     decoded = jwt.verify(token, process.env.JWT_SECRET);
   } catch (err) {
-   return res.status(400).json({
-      message: "Invalid token",
-      success: false,
-      err: err.message,
-    });
+    throw new ApiError(401, "Invalid or expired token", [
+      {
+        field: "token",
+        message: err.message,
+      },
+    ]);
   }
 
   const user = await userModel.findOne({
     email: decoded.email,
-  })
+  });
 
   if (!user) {
-  return res.status(404).json({
-    message: "User not found",
-    success: false,
-  });
-}
-
+    throw createNotFoundError("User");
+  }
 
   user.verified = true;
   await user.save();
 
   // show page for email successfully verified
-
   const html = `
   <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
     <h1 style="color: #4CAF50;">Email Verified Successfully!</h1>
@@ -198,58 +214,41 @@ async function verifyEmail(req, res) {
  */
 
 
-async function login(req , res) {
-    const {email , password} = req.body
-    const user = await userModel.findOne({ email }).select('+password')
+async function login(req, res) {
+  const { email, password } = req.body;
+  const user = await userModel.findOne({ email }).select("+password");
 
-    if(!user){
-      return res.status(400)
-      .json({
-        message : 'Invalid Credential',
-        success : false,
-        err : "User not found"
-      })
-    }
+  if (!user) {
+    throw createUnauthorizedError("Invalid email or password");
+  }
 
-    const isValidPassword = await user.comparePassword(password)
+  const isValidPassword = await user.comparePassword(password);
 
-    if( !isValidPassword ){
-      return res.status(400)
-      .json({
-          message : "Invalid Credential",
-          success : false,
-          err: "User not found"
-      })
-    }
+  if (!isValidPassword) {
+    throw createUnauthorizedError("Invalid credential");
+  }
 
+  if (!user.verified) {
+    throw new ApiError(403, "Please verify your email before logging", [
+      {
+        field: "email",
+        message: "Email not verified",
+      },
+    ]);
+  }
 
-    if( ! user.verified){
-      return res.status(400)
-      .json({
-       message: "Please verify your email before logging.",
-       success : false,
-       err : 'Email not verified'
-      })
-    }
+  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+    expiresIn: "7d",
+  });
 
+  res.cookie("token", token);
+  user.password = undefined;
 
-    const token = jwt.sign(
-      {id : user.id},
-      process.env.JWT_SECRET,
-      {expireIn: '7d'}
-    )
-
-
-    res.cookie('token' , token)
-    user.password = undefined
-
-   res.status(200)
-   .json({
-    message : 'Logged In Successfully',
-    success: true ,
-    user
-   })
-
+  res.status(200).json({
+    message: "Logged In Successfully",
+    success: true,
+    user,
+  });
 }
 
 
@@ -263,29 +262,22 @@ async function login(req , res) {
 
 
 
-async function forgetPassword(req , res) {
-    const {email} = req.body
+async function forgetPassword(req, res) {
+  const { email } = req.body;
 
-    const user = await userModel.findOne({email})
+  const user = await userModel.findOne({ email });
 
-    if(!user){
-      res.status(400)
-      .json({
-        message : "Invalid Credential",
-        success : false,
-        err : "Invalid credential"
-      })
-    }
+  if (!user) {
+    throw createNotFoundError("User with this email");
+  }
 
-  //  sending email to reset password if user is registed
-   await sendResetPasswordEmail(user.username , user.email)
+  // sending email to reset password if user is registed
+  await sendResetPasswordEmail(user.username, user.email);
 
-
-   res.status(200)
-   .json({
-     message : "email is sent to resent your password",
-     success : true
-   })
+  res.status(200).json({
+    message: "Password reset email sent successfully",
+    success: true,
+  });
 }
 
 
@@ -298,47 +290,41 @@ async function forgetPassword(req , res) {
  * @query {token}
  */
 
-async function resetPassword(req , res) {
-     const {token} = req.query
-     const {newPassword} = req.body
+async function resetPassword(req, res) {
+  const { token } = req.query;
+  const { newPassword } = req.body;
 
-     if(! token){
-      return res.status(400)
-      .json({
-        message : "Unauthorized",
-        status: false,
-        err : "token not provided"
-      })
-     }
+  if (!token) {
+    throw createUnauthorizedError("Reset token not provided");
+  }
 
+  let decoded = null;
+  try {
+    decoded = jwt.verify(token, process.env.JWT_SECRET);
+  } catch (err) {
+    throw new ApiError(401, "Invalid or expired token", [
+      {
+        field: "token",
+        message: err.message,
+      },
+    ]);
+  }
 
-    let decoded = null
-     try{
-        decoded = jwt.verify(token , process.env.JWT_SECRET)
+  const user = await userModel.findOne({
+    email: decoded.email,
+  });
 
-     }
-     catch(err){
-      return res.status(400)
-      .json({
-        message : "Invalid token",
-        status: false,
-        err : "Invalid token"
-      })
-     }
+  if (!user) {
+    throw createNotFoundError("User");
+  }
 
-     const user = await userModel.findOne({
-        email: decoded.email
-    })
+  user.password = newPassword;
+  await user.save();
 
-
-    user.password = newPassword
-    await user.save()     
-
-    res.status(200).json({
-      message : "password reset successfully",
-      status: true,
-    })
-    
+  res.status(200).json({
+    message: "Password reset successfully",
+    success: true,
+  });
 }
 
 
@@ -351,21 +337,21 @@ async function resetPassword(req , res) {
  * @access private
  */
 
+async function getMe(req, res) {
+  const userId = req.user.id;
 
- async function getMe(req , res) {
-   const userId = req.user.id
+  const user = await userModel.findById(userId);
 
-   const user = await userModel.findOneById(userId)
+  if (!user) {
+    throw createNotFoundError("User");
+  }
 
-
-   res.status(200)
-   .json({
-    message : 'details fetched successfully',
-    success : true ,
-    user
-   })
-  
- }
+  res.status(200).json({
+    message: "User details fetched successfully",
+    success: true,
+    user,
+  });
+}
 
 
 

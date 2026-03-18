@@ -1,7 +1,14 @@
 import { Router } from "express";
 import authControllers from "../controllers/auth.controllers.js";
 import { authUser } from "../middleware/auth.middleware.js";
-
+import {
+  registerValidation,
+  loginValidation,
+  resendVerificationValidation,
+  forgetPasswordValidation,
+  resetPasswordValidation,
+} from "../validators/auth.validator.js";
+import { asyncHandler } from "../utils/errorHandler.js";
 
 const router = Router()
 
@@ -12,7 +19,10 @@ const router = Router()
  * @access public
  * @body { username , email , password }
  */
-router.post('/register' , authControllers.register)
+router.post("/register", 
+    registerValidation,
+  asyncHandler(authControllers.register)
+)
 
 
 
@@ -23,9 +33,11 @@ router.post('/register' , authControllers.register)
  * @access public
  * @body {username , email}
  */
-
-
-router.post('/resend-verification' , authControllers.resendVerificationEmail)
+router.post(
+  "/resend-verification",
+  resendVerificationValidation,
+  asyncHandler(authControllers.resendVerificationEmail)
+)
 
 
 
@@ -35,9 +47,11 @@ router.post('/resend-verification' , authControllers.resendVerificationEmail)
  * @access public
  * @body { email , password }
  */
-
-
-router.post('/login' , authControllers.login)
+router.post(
+  "/login",
+  loginValidation,
+  asyncHandler(authControllers.login)
+)
 
 
 
@@ -47,7 +61,11 @@ router.post('/login' , authControllers.login)
  * @desc Send password reset email to user's registered email
  * @access Public
  */
-router.post('/forget-password', authControllers.forgetPassword);
+router.post(
+  "/forget-password",
+  forgetPasswordValidation,
+  asyncHandler(authControllers.forgetPassword)
+);
 
 
 
@@ -58,10 +76,11 @@ router.post('/forget-password', authControllers.forgetPassword);
  * @desc give details of current logged In user
  * @access private
  */
-
-
-
-router.get('/get-me' , authUser ,  authControllers.getMe)
+router.get(
+  "/get-me",
+  authUser,
+  asyncHandler(authControllers.getMe)
+)
 
 
 
@@ -72,9 +91,11 @@ router.get('/get-me' , authUser ,  authControllers.getMe)
  * @access Public
  * @query {token}
  */
-router.post('/reset-password', authControllers.resetPassword);
-
-
+router.post(
+  "/reset-password",
+  resetPasswordValidation,
+  asyncHandler(authControllers.resetPassword)
+);
 
 
 /**
@@ -83,8 +104,10 @@ router.post('/reset-password', authControllers.resetPassword);
  * @access public
  * @query { token }
  */
-
-router.get('/verify-email' , authControllers.verifyEmail)
+router.get(
+  "/verify-email",
+  asyncHandler(authControllers.verifyEmail)
+)
 
 
 

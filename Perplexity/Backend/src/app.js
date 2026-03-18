@@ -1,6 +1,7 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import authRouter from './routes/auth.routes.js'
+import { errorHandler } from './utils/errorHandler.js'
 
 
 
@@ -14,6 +15,11 @@ app.use(cookieParser())
 app.use('/api/auth' , authRouter)
 
 
+
+
+
+
+app.use(errorHandler)
 
 
 
