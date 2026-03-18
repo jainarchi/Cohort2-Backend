@@ -10,6 +10,6 @@ const PORT = process.env.PORT
 
 connectToDB()
 
-app.listen(PORT ,() =>{
+app.listen(PORT , () =>{
     console.log('server listen on PORT ' , PORT)
 })

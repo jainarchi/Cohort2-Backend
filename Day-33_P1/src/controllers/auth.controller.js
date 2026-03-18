@@ -129,7 +129,7 @@ async function login(req , res){
     })
   }
 
-  const isValidPassword = await user.comparePassword(password , user.password)
+  const isValidPassword = await user.comparePassword(password)
 
   
   if(! isValidPassword){
@@ -165,7 +165,7 @@ async function login(req , res){
 
   res.status(200)
   .json({
-    message : 'Logged successfully',
+    message : 'Logged In successfully',
     success : true ,
     user
   })
@@ -178,7 +178,7 @@ async function login(req , res){
 /**
  * @route /api/auth/get-me
  * @desc get current loggedIn user detail
- * @access public
+ * @access private
  */
 
 
