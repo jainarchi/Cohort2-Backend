@@ -7,8 +7,6 @@ import { tavily } from "@tavily/core";
 import {sendEmail} from './services/mail.service.js'
 import * as z from "zod" 
 
-
-
 const model = new ChatMistralAI({
     model: "mistral-small-latest"
 });
@@ -19,8 +17,6 @@ const tvly = tavily({
 })
 
 
-
-
 const rl = readline.createInterface({
   input: stdin,
   output: stdout
@@ -28,15 +24,12 @@ const rl = readline.createInterface({
 
 
 
-
-
-// provide tool name and desp for ai understanding
-
 const emailTool = tool(
     sendEmail,
   {
     name: "emailTool",                 
-    description: "tool is used to send an email",
+    description: "tool is used to send an email in structured format",
+
     schema: z.object({
         to: z.string().describe("The recipient's email address"),
         html: z.string().describe("The HTML content of the email"),
@@ -64,8 +57,6 @@ const searchTool = tool(
 );
 
 
-
-
 const agent = createAgent({
     model,
     tools:[emailTool , searchTool]
@@ -77,15 +68,21 @@ const messages = []
 
 while(true) {
 
-    const userInput = await rl.question('[You] : ')
+    const userInput = await rl.question('\x1b[32m[You]\x1b[0m : ')
 
     messages.push(new HumanMessage(userInput))
 
-    const response = await agent.invoke({messages})    // agent take an obj
+    const response = await agent.invoke({messages})    
 
     messages.push(response.messages[ response.messages.length - 1 ])
+console.log(
+    `\n\x1b[34m[AI]\x1b[0m 💬 : \x1b[37m${response.messages[response.messages.length - 1].content}\x1b[0m\n`
+);
+
+  
+
+}
 
 
-    console.log(`\x1b[34m[AI]\x1b[0m : ${response.messages[ response.messages.length - 1 ].content}`)
 
-} 
+// provide tool name and desp for ai understanding
