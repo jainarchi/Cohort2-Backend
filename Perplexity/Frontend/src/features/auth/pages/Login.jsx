@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link, Navigate } from 'react-router-dom'
 import FormInput from '../components/formInput'
 import '../style/auth.scss'
 import { useAuth } from '../hook/useAuth'
+import { useSelector } from 'react-redux'
 
 const Login = () => {
   const navigate = useNavigate()
   const {handleLogin} = useAuth()
-  
+  const {user, loading} = useSelector(state => state.auth)
 
+
+  
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -16,8 +19,8 @@ const Login = () => {
 
 
   const handleChange = (e) => {
-    setFormData(prevState => ({
-      ...prevState,
+    setFormData(prev => ({
+      ...prev,
       [e.target.name]: e.target.value
     }))
   }
@@ -35,10 +38,14 @@ const Login = () => {
     await handleLogin(payload)
     navigate('/')
 
-
     // handle err and access
- 
   }
+
+
+  if(!loading && user){
+    return <Navigate to='/' replace />
+  }
+
 
   return (
     <div className="auth-container">

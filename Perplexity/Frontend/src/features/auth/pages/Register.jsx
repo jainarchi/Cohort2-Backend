@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link, Navigate } from 'react-router-dom'
 import FormInput from '../components/formInput'
 import '../style/auth.scss'
+import { useSelector } from 'react-redux'
+import { useAuth } from '../hook/useAuth'
+
+
 
 const Register = () => {
   const navigate = useNavigate()
+  const {handleRegister} = useAuth()
+  const {user ,loading} = useSelector(state => state.auth)
 
   const [formData, setFormData] = useState({
     username: '',
@@ -24,14 +30,27 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    const payload ={
+      email : formData.email,
+      username : formData.username,
+      password : formData.password
+    }
 
-  
+    await handleRegister(payload)
+    navigate('/')
+
+    
+    // handle err and access
+
+
   }
 
 
+  if(!loading && user){
+    return <Navigate to='/' replace />
+  }
 
 
-  
 
   return (
     <div className="auth-container">
