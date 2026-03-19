@@ -102,13 +102,8 @@ async function register(req, res) {
 
   res.status(201).json({
     message:
-      "user register successfully. please verify your account to access features.",
+      "Register successfully. please verify your account to by clicking link send it to your email.",
     success: true,
-    user: {
-      id: user._id,
-      email: email,
-      username: username,
-    },
   });
 }
 
@@ -116,11 +111,11 @@ async function register(req, res) {
 
 /**
  * @route POST api/auth/resend-verification
- * @desc resend verification link on email 
+ * @desc resend verification link on email at the time of register or at login if account not verified
  */
 
 async function resendVerificationEmail(req, res) {
-  const { username, email } = req.body;
+  const { email } = req.body;
 
   const user = await userModel.findOne({ email });
 
@@ -137,7 +132,7 @@ async function resendVerificationEmail(req, res) {
     ]);
   }
 
-  await sendVerificationEmail(username, email);
+  await sendVerificationEmail(user.username, email);
 
   res.status(200).json({
     message: "Verification email resent successfully",
@@ -150,7 +145,8 @@ async function resendVerificationEmail(req, res) {
 
 /**
  * @route GET  api/auth/verify-email
- * @desc verify token then update user verfied status to true
+ * @desc this controller call when user click on verification link 
+ * verify token then set user verfied status to true
  * show button go to login
  * @access public
  */
@@ -256,11 +252,9 @@ async function login(req, res) {
 
 /**
  * @route POST api/auth/forget-password
- * @desc send email to reset password when user forget password
+ * @desc send email to reset password when user forget password at the time of login
  * @access public
  */
-
-
 
 async function forgetPassword(req, res) {
   const { email } = req.body;
@@ -268,16 +262,16 @@ async function forgetPassword(req, res) {
   const user = await userModel.findOne({ email });
 
   if (!user) {
-    throw createNotFoundError("User with this email");
+    throw createNotFoundError("User with this email")
   }
 
-  // sending email to reset password if user is registed
-  await sendResetPasswordEmail(user.username, user.email);
+  // sending email to reset password
+  await sendResetPasswordEmail(user.username, user.email)
 
   res.status(200).json({
     message: "Password reset email sent successfully",
     success: true,
-  });
+  })
 }
 
 
@@ -307,12 +301,14 @@ async function resetPassword(req, res) {
         field: "token",
         message: err.message,
       },
-    ]);
+    ])
   }
 
   const user = await userModel.findOne({
     email: decoded.email,
-  });
+  })
+
+   
 
   if (!user) {
     throw createNotFoundError("User");

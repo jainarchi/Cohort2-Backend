@@ -31,7 +31,7 @@ router.post("/register",
  * @route POST /api/auth/resend-verification
  * @desc resend a verification email to the user's email address with a link to verify their account.
  * @access public
- * @body {username , email}
+ * @body { email }
  */
 router.post(
   "/resend-verification",
