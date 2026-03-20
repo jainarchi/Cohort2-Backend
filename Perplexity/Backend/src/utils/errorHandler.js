@@ -13,17 +13,16 @@ export class ApiError extends Error {
   }
 }
 
+
 /**
  * Global error handling middleware
  * Catches all errors and returns a consistent response format
- *
- * Usage: app.use(errorHandler) - should be the last middleware
  */
 export const errorHandler = (err, req, res, next) => {
-  // Default error values
   let statusCode = err.statusCode || 500;
   let message = err.message || "Internal Server Error";
   let errors = err.errors || [];
+
 
   // Handle Mongoose validation errors
   if (err.name === "ValidationError") {
@@ -48,7 +47,7 @@ export const errorHandler = (err, req, res, next) => {
     ];
   }
 
-  // Handle JWT errors
+
   if (err.name === "JsonWebTokenError") {
     statusCode = 401;
     message = "Invalid token";
@@ -127,25 +126,18 @@ export const tryCatchWrapper = (fn) => {
 };
 
 
-/**
- * Validation error helper
- * Creates a standardized validation error
- */
+
 export const createValidationError = (errors) => {
   return new ApiError(400, "Validation failed", errors);
 };
 
-/**
- * Not found error helper
- * Creates a standardized 404 error
- */
+
 export const createNotFoundError = (resource) => {
   return new ApiError(404, `${resource} not found`);
 };
 
 /**
  * Unauthorized error helper
- * Creates a standardized 401 error
  */
 export const createUnauthorizedError = (message = "Unauthorized access") => {
   return new ApiError(401, message);
@@ -153,7 +145,6 @@ export const createUnauthorizedError = (message = "Unauthorized access") => {
 
 /**
  * Forbidden error helper
- * Creates a standardized 403 error
  */
 export const createForbiddenError = (message = "Forbidden") => {
   return new ApiError(403, message);
@@ -161,7 +152,6 @@ export const createForbiddenError = (message = "Forbidden") => {
 
 /**
  * Conflict error helper
- * Creates a standardized 409 error
  */
 export const createConflictError = (resource) => {
   return new ApiError(409, `${resource} already exists`);

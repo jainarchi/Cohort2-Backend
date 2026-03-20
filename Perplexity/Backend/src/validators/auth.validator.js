@@ -75,11 +75,6 @@ export const loginValidation = [
  * Validates: username, email
 */
 export const resendVerificationValidation = [
-  // body("username")
-  //   .trim()
-  //   .notEmpty()
-  //   .withMessage("Username is required"),
-
   body("email")
     .trim()
     .notEmpty()

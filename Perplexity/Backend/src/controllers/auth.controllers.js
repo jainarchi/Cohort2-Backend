@@ -64,7 +64,7 @@ async function sendResetPasswordEmail(username, email) {
       <p>This link will expire in 15 minutes.</p>
       <p>If you did not request this, please ignore this email.</p>
 
-      <p>Perplexity Team</p>
+      <p>Infra AI Team</p>
     `
   });
 }
@@ -201,7 +201,6 @@ async function verifyEmail(req, res) {
 }
 
 
-
 /**
  * @route /api/auth/login
  * @desc user logged in our account
@@ -249,7 +248,6 @@ async function login(req, res) {
 
 
 
-
 /**
  * @route POST api/auth/forget-password
  * @desc send email to reset password when user forget password at the time of login
@@ -273,7 +271,6 @@ async function forgetPassword(req, res) {
     success: true,
   })
 }
-
 
 
 
