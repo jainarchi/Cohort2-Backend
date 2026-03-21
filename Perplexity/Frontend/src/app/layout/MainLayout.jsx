@@ -2,20 +2,21 @@ import React from 'react'
 import Navbar from '../../features/shared/components/Navbar.jsx'
 import Sidebar from '../../features/shared/components/Sidebar.jsx'
 import Dashboard from '../../features/chat/pages/Dashboard.jsx'
-
+import '../style/MainLayout.scss'
 
 
 const MainLayout = () => {
   return (
-    <div MainLayout>
-   <Sidebar />
+    <div className='mainLayout'>
+     <Sidebar />
 
 
    <div className='right'>
-
     <Navbar />
 
-    <div className="maincontent">
+
+
+    <div className="mainContent">
 
        <Dashboard />
 
@@ -23,7 +24,7 @@ const MainLayout = () => {
     
     
     
-    </div>      
+     </div>      
     </div>
   )
 }

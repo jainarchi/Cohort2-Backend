@@ -8,18 +8,16 @@ const sidebar = () => {
     <div className='sidebar'>
 
         <div>
-            <div className="logo ">
-               <h3 className='flex'> 
-                < RiMenuLine  size={'1.2rem'} className='icon' /> 
-                Infra AI  
-                </h3>
-            </div>
-
             <div className='options'>
-            <ul>
-              <Link className='flex'><RiEditBoxLine size={'1rem'} className='icon'/>New chat</Link>
-              <Link className='flex'><RiFlashlightLine size={'1rem'}  className='icon'/>Explore</Link>
-            </ul>
+                <div className='menu-div'>
+                    < RiMenuLine  size={'1.2rem'} className='hamburger' />
+                </div>
+                
+              <Link className='flex'><RiEditBoxLine size={'1.1rem'} className='icon'/>New chat</Link>
+
+              <Link className='flex'><RiFlashlightLine size={'1.1rem'}  className='icon'/>Explore</Link>
+
+           
             </div>
 
             <div className="allChats">

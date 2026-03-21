@@ -1,12 +1,12 @@
 // Variables for consistency
-$bg-dark: #121212;
+$bg-dark: #1b1b1b;
 $bg-surface: #1e1e1e;
 $aqua-blue: #00ffd4; // That "Aqua Green mixed with Blue" look
 $text-dim: #b3b3b3;
 $transition: all 0.3s ease;
 
 .sidebar {
-  width: 260px;
+  width: 280px;
   height: 100vh;
   background-color: $bg-dark;
   color: white;
@@ -15,21 +15,10 @@ $transition: all 0.3s ease;
   justify-content: space-between; 
   border-right: 1px solid rgba($aqua-blue, 0.1);
   transition: $transition;
+  border-right: 2px solid #054241;
 
-
-  .logo {
-    padding: 0.8rem 1.2rem;
-    // border: 1px solid red;
-    h3 {
-      color: $aqua-blue;
-      font-size: 1.2rem;
-      letter-spacing: 1px;
-     
-    }
-  }
 
   .options, .allChats {
-    // border: 1px solid blue;
     padding: 0.6rem;
       
     ul {
@@ -37,11 +26,11 @@ $transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
       gap: 0.2rem;
+      }
 
-      li , a {
+      li , a , .menu-div{
         padding: 0.2rem 0.8rem;
-        border-radius: 8px;
-        // border: 1px solid gray;
+        border-radius: 0.5rem;
         cursor: pointer;
         color: $text-dim;
         transition: $transition;
@@ -50,17 +39,18 @@ $transition: all 0.3s ease;
           background-color: rgba($aqua-blue, 0.1);
           color: $aqua-blue;
         }
-      }
-
-      
+       
     }
   }
 
   .options{
-    li{
+    a{
         font-size: 0.98rem;
+        padding-block: 0.4rem;
     }
   }
+
+
 
   .allChats {
     overflow-y: auto;
@@ -74,7 +64,7 @@ $transition: all 0.3s ease;
     }
 
     li {
-      font-size: 0.88rem;
+      font-size: 0.94rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -83,19 +73,15 @@ $transition: all 0.3s ease;
     .chat-title{
       justify-content: space-between;
 
-    
-
     }
-
-    
 
   }
 
   .profileInfo {
     padding: 0.5rem 1rem;
-    margin: 0.8rem;
+    margin: 1rem;
     background-color: $bg-surface;
-    border-radius: 10px;
+    border-radius: 2rem;
     border: 1px solid rgba($aqua-blue, 0.2);
     color: $aqua-blue;
     font-weight: 600;

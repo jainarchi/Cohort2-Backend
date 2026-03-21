@@ -1,0 +1,43 @@
+.dashboard{
+    max-width: 660px;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    border:1px solid #0f534c;
+    position: relative;
+
+
+    .input-box{
+        position: absolute;
+        display: flex;
+        justify-content: space-between;
+        bottom: 1rem;
+        width: 100%;
+        padding: 0.5rem;
+        border-radius:4rem;
+        background: rgb(49, 49, 49);
+        overflow: hidden;
+        
+
+        .input{
+            padding: 0.1rem 1rem;
+            width: 90%;
+            font-size: 1rem;
+            background: transparent;
+            border: none;
+            color: whitesmoke; 
+        }
+
+        .sendIcon{
+            padding-inline: 0.5rem;
+            padding-block: 0.4rem 0.2rem;
+            border-radius: 50%;
+            background: rgb(32, 32, 32);
+            color: aquamarine;
+            
+
+        }
+
+    }
+
+}
