@@ -5,13 +5,13 @@ import { HumanMessage , AIMessage , SystemMessage } from "langchain";
 
 
 const geminiModel = new ChatGoogleGenerativeAI({
-  model: "gemini-2.5-flash-lite",
+  model: "gemini-flash-latest",
   apiKey: process.env.GOOGLE_GEMINI_KEY
 })
 
 
 const mistralModel =  new ChatMistralAI({
-    model:"mistral-large-latest",
+    model:"mistral-small-latest",
     apiKey: process.env.MISTRAL_API_KEY
 })
 

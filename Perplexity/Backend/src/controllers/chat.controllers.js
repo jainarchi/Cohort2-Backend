@@ -2,50 +2,176 @@ import chatModel from "../models/chat.model.js";
 import messageModel from "../models/message.model.js";
 import { generateResponse, generateTitle } from "../services/ai.service.js";
 
+/**
+ * @route /api/chats/message
+ * @desc create new user & ai message
+ * create new chat with title
+ */
+
 async function messageController(req, res) {
   const { message, chatId } = req.body;
-  let title = null , chat = null
+
+  let title = null,
+    chat = null;
 
   if (!chatId) {
     title = await generateTitle(message);
     chat = await chatModel.create({
       user: req.user.id,
-      title
-    })
+      title,
+    });
   }
-
 
   const userMessage = await messageModel.create({
     chat: chatId || chat._id,
     content: message,
     role: "user",
-  })
+  });
 
- 
-  const allMessages = await messageModel.find({chat : chatId || chat._id})
-  console.log(allMessages)
+  const allMessages = await messageModel.find({ chat: chatId || chat._id });
+  console.log(allMessages);
 
   const result = await generateResponse(allMessages);
-
 
   const aiMessage = await messageModel.create({
     chat: chatId || chat._id,
     content: result,
     role: "ai",
-  })
-
+  });
 
   res.status(201).json({
     title,
     userMessage,
     aiMessage,
+  });
+}
+
+/**
+ * @desc fetch all chat
+ * @route /api/chats/
+ */
+
+async function getChats(req, res) {
+  const chats = await chatModel.find({ user: req.user.id });
+
+  res.status(200).json({
+    chats,
+    message: "all chats fetched successfully",
+  });
+}
+
+
+
+/**
+ * @desc fetch all messages of the specific chat
+ * @route /api/chats/:chatId/messages
+ */
+
+async function getMessages(req, res) {
+  const { chatId } = req.params;
+
+  const chat = await chatModel.findOne({
+    _id: chatId,
+    user: req.user.id,
+  });
+
+  if (!chat) {
+    return res.status(400).json({
+      message: "chat not found",
+      success: false,
+      err : 'chat not found'
+    });
+  }
+
+  const messages = await messageModel.find({ chat: chatId });
+
+  res.status(200).json({
+    message: "all messages fetch successfully",
+    messages,
+    success: true,
+  });
+}
+
+
+
+
+/**
+ * @desc delete chat and its associated messages
+ * @route DELETE /api/chats/:chatId
+ */
+
+async function deleteChat(req, res) {
+  const { chatId } = req.params;
+  
+  const chat = await chatModel.findOneAndDelete({
+    _id : chatId,
+    user : req.user.id
   })
+
+  if(!chat ){
+    return res.status(400)
+    .json({
+      message : 'chat not found',
+      success: false,
+      err : 'chat not found'
+    })
+  }
+
+  await messageModel.deleteMany({chat : chatId})
+
+
+  res.status(200).json({
+    message : 'chat deleted successfully ',
+    success : true
+  })
+
+}
+
+
+
+
+/**
+ * @route PATCH /api/chats/:chatId/edit-title
+ * @desc edit chat title
+ */
+
+async function editChatTitle(req , res) {
+  const { chatId } = req.params;
+  const { newTitle } = req.body;
+
+  const chat = await chatModel.findOneAndUpdate(
+    {
+      _id: chatId,
+      user: req.user.id,
+    },
+    {
+      title: newTitle,
+    },
+  );
+
+  if (!chat) {
+    return res.status(400).json({
+      message: "chat not found",
+      success: false,
+      err : 'chat not found'
+    });
+  }
+
+  res.status(200).json({
+    message: "chat title updated successfully",
+    success: true,
+    chat,
+  });
 }
 
 
 
 
 
-export default {
+export {
   messageController,
+  getChats,
+  getMessages,
+  deleteChat,
+  editChatTitle
 };
