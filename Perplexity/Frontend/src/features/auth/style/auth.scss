@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0e4a4e 0%, #161919 50%, #04322d 100%);
+  background: linear-gradient(135deg, #0c3d41, #1a1c1c);
   padding: $spacing-lg;
   position: relative;
   overflow: hidden;
@@ -136,14 +136,6 @@
     opacity: 0.7;
     cursor: not-allowed;
   }
-
-  &:hover:not(:disabled) {
-    transform: translateY(-1px);
-  }
-
-  &:active:not(:disabled) {
-    transform: translateY(0);
-  }
 }
 
 .btn-primary {
@@ -152,26 +144,25 @@
   box-shadow: 0 10px 25px rgba(0, 168, 157, 0.4);
 
 
-  &:hover:not(:disabled) {
-    box-shadow: 0 15px 35px rgba(0, 168, 157, 0.6);
-    background: linear-gradient(135deg, #06d6a0 0%, #00a89d 100%);
-  }
+  // &:hover:not(:disabled) {
+  //   box-shadow: 0 15px 35px rgba(0, 168, 157, 0.6);
+  //   background: linear-gradient(135deg, #06d6a0 0%, #00a89d 100%);
+  // }
 
-  &:focus {
-    outline: 2px solid $primary-color;
-    outline-offset: 2px;
+  &:active {
+    transition: 2s all ease-in-out;
+    transform: scale(0.7);
   }
 }
 
 .auth-footer {
   border-top: 1px solid rgba(0, 168, 157, 0.2);
-  padding-top: $spacing-lg;
+  padding-top: $spacing-sm;
   text-align: center;
 
   .auth-footer-text {
     font-size: $font-sm;
     color: #9db8b5;
-    margin: 0;
 
     .auth-link {
       color: #06d6a0;

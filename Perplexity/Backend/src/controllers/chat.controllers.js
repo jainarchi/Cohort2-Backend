@@ -8,7 +8,7 @@ import { generateResponse, generateTitle } from "../services/ai.service.js";
  * create new chat with title
  */
 
-async function messageController(req, res) {
+async function sendMessage(req, res) {
   const { message, chatId } = req.body;
 
   let title = null,
@@ -169,7 +169,7 @@ async function editChatTitle(req , res) {
 
 
 export {
-  messageController,
+  sendMessage,
   getChats,
   getMessages,
   deleteChat,
