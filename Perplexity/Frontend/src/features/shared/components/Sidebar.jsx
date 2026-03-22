@@ -1,9 +1,42 @@
-import React from 'react'
+import React , {useEffect} from 'react'
 import '../style/sidebar.scss'
 import { Link } from 'react-router-dom'
 import { RiMenuLine , RiEditBoxLine ,RiFlashlightLine, RiMore2Line} from "@remixicon/react";
+import { useSelector} from 'react-redux';
+import {useChat} from '../../../features/chat/hook/useChat.js'
 
-const sidebar = () => {
+
+
+
+const Sidebar = () => {
+   const {handleGetChats , handleOpenChat} = useChat()
+   const chats = useSelector(state => state.chat.chats)
+
+   useEffect(() => {
+      handleGetChats()
+    
+   }, [])
+
+
+
+   const openChat = (chatId) =>{
+    handleOpenChat(chatId , chats)
+   }
+
+
+
+
+   if( !chats){
+    return (
+        <div>
+            loading...
+        </div>
+    )
+   }
+
+
+
+
   return (
     <div className='sidebar'>
 
@@ -16,21 +49,27 @@ const sidebar = () => {
               <Link className='flex'><RiEditBoxLine size={'1.1rem'} className='icon'/>New chat</Link>
 
               <Link className='flex'><RiFlashlightLine size={'1.1rem'}  className='icon'/>Explore</Link>
-
            
             </div>
 
             <div className="allChats">
                 <h5>Chats</h5>
-                <ul>
-                    <li className='flex chat-title'>wha is llm  <RiMore2Line size={'1rem'} className='icon'/></li>
-                    <li>explain</li>
-                    <li>err handling</li>
-                    <li>something Lorem ipsum dolor
+                
+                
+                   {Object.values(chats).map((chat , index) => (
 
-                    </li>
-                </ul>
+                    <button 
+                      className='flex chat-title'
+                      onClick={() => openChat(chat.id)}
+                      key={index}
+                    >
+                        {chat.title}
+                        
+                    
+                        <RiMore2Line size={'1rem'} className='icon'/>
+                    </ button>
 
+                   ))}
             </div>
 
 
@@ -45,4 +84,4 @@ const sidebar = () => {
   )
 }
 
-export default sidebar
+export default Sidebar

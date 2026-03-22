@@ -41,7 +41,7 @@ async function sendMessage(req, res) {
 
   res.status(201).json({
     title,
-    userMessage,
+    chat,
     aiMessage,
   });
 }

@@ -1,12 +1,13 @@
 // Variables for consistency
-$bg-dark: #1b1b1b;
+$bg-dark: #101010;
 $bg-surface: #1e1e1e;
 $aqua-blue: #00ffd4; // That "Aqua Green mixed with Blue" look
 $text-dim: #b3b3b3;
 $transition: all 0.3s ease;
 
 .sidebar {
-  width: 280px;
+  max-width: 280px;
+  width: 100%;
   height: 100vh;
   background-color: $bg-dark;
   color: white;
@@ -20,16 +21,8 @@ $transition: all 0.3s ease;
 
   .options, .allChats {
     padding: 0.6rem;
-      
-    ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-      }
 
-      li , a , .menu-div{
-        padding: 0.2rem 0.8rem;
+      button , a , .menu-div{
         border-radius: 0.5rem;
         cursor: pointer;
         color: $text-dim;
@@ -44,9 +37,9 @@ $transition: all 0.3s ease;
   }
 
   .options{
-    a{
+    a  ,  .menu-div{
         font-size: 0.98rem;
-        padding-block: 0.4rem;
+        padding: 0.4rem 0.8rem;
     }
   }
 
@@ -54,7 +47,7 @@ $transition: all 0.3s ease;
 
   .allChats {
     overflow-y: auto;
-
+  
     h5{
         border-top: 1px solid rgba(255, 255, 255, 0.169);
         font-weight: 500;
@@ -63,18 +56,22 @@ $transition: all 0.3s ease;
         
     }
 
-    li {
+    button {
+      width: 100%;
       font-size: 0.94rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      border: none;
+      background: none;
+      font-size: 0.90rem;
+      padding-block: 0.5rem;
+      padding-inline: 0.2rem;
       
     }
     .chat-title{
       justify-content: space-between;
-
     }
-
   }
 
   .profileInfo {

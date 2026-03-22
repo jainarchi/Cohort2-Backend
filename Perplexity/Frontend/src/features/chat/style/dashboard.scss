@@ -1,43 +1,114 @@
-.dashboard{
-    max-width: 660px;
-    margin: auto;
+.dashboard {
+  max-width: 680px;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+
+
+  .dashboard-footer{
+    position: absolute;
     width: 100%;
-    height: 100%;
-    border:1px solid #0f534c;
-    position: relative;
+    max-width: 680px;
+    bottom: 0rem;
+    padding-block:1rem 2rem;
+    background: #262827;
 
 
-    .input-box{
-        position: absolute;
-        display: flex;
-        justify-content: space-between;
-        bottom: 1rem;
-        width: 100%;
-        padding: 0.5rem;
-        border-radius:4rem;
-        background: rgb(49, 49, 49);
-        overflow: hidden;
-        
 
-        .input{
-            padding: 0.1rem 1rem;
-            width: 90%;
-            font-size: 1rem;
-            background: transparent;
-            border: none;
-            color: whitesmoke; 
-        }
+  .input-box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 4rem;
+    background: rgb(24, 24, 24);
+    overflow: hidden;
 
-        .sendIcon{
-            padding-inline: 0.5rem;
-            padding-block: 0.4rem 0.2rem;
-            border-radius: 50%;
-            background: rgb(32, 32, 32);
-            color: aquamarine;
-            
-
-        }
-
+    .input {
+      padding: 0.1rem 1rem;
+      width: 90%;
+      font-size: 1rem;
+      background: transparent;
+      border: none;
+      color: whitesmoke;
     }
 
+    .sendIcon {
+      padding-inline: 0.6rem;
+      padding-block: 0.6rem 0.5rem;
+      border-radius: 50%;
+      background: #303231;
+      color: aquamarine;
+      border: none;
+    }
+  }
+}
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 8px;
+    padding-bottom: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .message {
+    padding: 10px 14px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1.5;
+   
+
+    &.user {
+      margin-left: auto;
+      background: rgba(255, 255, 255, 0.12);
+      border-bottom-right-radius: 4px;
+      max-width: 82%;
+    }
+
+    &.assistant {
+      margin-right: auto;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 94%;
+    }
+  }
+
+  /* Markdown styles */
+  .md-paragraph {
+    margin-bottom: 8px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .md-list {
+    margin-bottom: 8px;
+    padding-left: 20px;
+    list-style-type: disc;
+  }
+
+  .md-olist {
+    margin-bottom: 8px;
+    padding-left: 20px;
+    list-style-type: decimal;
+  }
+
+  .md-code {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+
+  .md-pre {
+    margin-bottom: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 12px;
+    border-radius: 12px;
+    overflow-x: auto;
+  }
 }
