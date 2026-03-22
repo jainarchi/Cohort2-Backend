@@ -50,7 +50,8 @@ export const useChat = () => {
         })
       )
 
-      dispatch(setCurrentChatId({chat : chatId || chat._id }))
+      dispatch(setCurrentChatId(chatId || chat._id ))
+       dispatch(setLoading(false));
     
     
     
@@ -59,6 +60,7 @@ export const useChat = () => {
 
 
     const handleGetChats = async () =>{
+
         dispatch(setLoading(true))
         const data = await getChats()
         const {chats} = data

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect , useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useChat } from '../hook/useChat'
 import '../style/dashboard.scss'
@@ -15,12 +15,12 @@ const Dashboard = () => {
 
   const chats = useSelector(state => state.chat.chats)
   const currentChatId = useSelector(state => state.chat.currentChatId)
-
+  const lastMessageRef = useRef(null)
 
 
   useEffect(() => {
     chat.initializationSocketConnection()
-    
+        
   }, [])
 
 
@@ -40,7 +40,16 @@ const Dashboard = () => {
    setchatInput('')
 
   }
- 
+
+
+useEffect(() => {
+  if (lastMessageRef.current) {
+    lastMessageRef.current.focus()
+    lastMessageRef.current.scrollIntoView({ behavior: 'smooth' })
+  }
+}, [chats[currentChatId]?.messages])
+
+
 
 
 
@@ -48,11 +57,18 @@ const Dashboard = () => {
   <div className='dashboard'>
 
   <div className="messages">
+   { console.log(chats[currentChatId])}
 
-  {chats[currentChatId]?.messages.map((message) => (
+  {chats[currentChatId]?.messages.map((message , index , arr) => {
+
+     const isLast = index === arr.length - 1
+
+    return(
     
     <div
-      key={message.id}
+      key={message.id || index}
+      ref={isLast ? lastMessageRef : null}
+      tabIndex={-1}
       className={`message ${message.role === 'user' ? 'user' : 'assistant'}`}
     >
       {message.role === 'user' ? (
@@ -72,7 +88,12 @@ const Dashboard = () => {
         </ReactMarkdown>
       )}
     </div>
-  ))}
+  )})}
+
+
+
+
+
 </div>
 
 

@@ -14,7 +14,7 @@ const Navbar = () => {
      
         <h3>Infra AI</h3>
 
-        <p>{chats[chatId]?.title || "New Chat"}</p>
+        <p>{chats[chatId]?.title}</p>
       
     </nav>
   )
