@@ -119,7 +119,7 @@ async function deleteChat(req, res) {
 
   await messageModel.deleteMany({chat : chatId})
 
-
+  console.log('delte chat')
   res.status(200).json({
     message : 'chat deleted successfully ',
     success : true
