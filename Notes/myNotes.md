@@ -197,5 +197,16 @@ Day: 25-27  | Moodify
 - Express Validator 
 - err handling by middleware
 
+
+
+### GEN AI
+
 - Tavily AI search engine
-- Tool 
+- Tool
+- Agents
+
+- max work = max token = max cost
+- only give user's query relavent content to LLM for process
+
+- RAG
+- vector DB | store emabadding
