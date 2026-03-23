@@ -6,72 +6,98 @@ $text-dim: #b3b3b3;
 $transition: all 0.3s ease;
 
 .sidebar {
-  max-width: 280px;
+  max-width: 260px;
   width: 100%;
   height: 100vh;
   background-color: $bg-dark;
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
+  justify-content: space-between;
   border-right: 1px solid rgba($aqua-blue, 0.1);
   transition: $transition;
   border-right: 2px solid #054241;
+  position: relative;
 
-
-  .options, .allChats {
+  .options,
+  .allChats {
     padding: 0.6rem;
 
-      button , a , .menu-div{
-        border-radius: 0.5rem;
-        cursor: pointer;
-        color: $text-dim;
-        transition: $transition;
+    button,
+    a,
+    .menu-div {
+      border-radius: 0.5rem;
+      cursor: pointer;
+      color: $text-dim;
+      transition: $transition;
 
-        &:hover {
-          background-color: rgba($aqua-blue, 0.1);
-          color: $aqua-blue;
-        }
-       
+      &:hover {
+        background-color: rgba($aqua-blue, 0.1);
+        color: $aqua-blue;
+      }
     }
   }
 
-  .options{
-    a  ,  .menu-div{
-        font-size: 0.98rem;
-        padding: 0.4rem 0.8rem;
+  .options {
+    a,
+    .menu-div {
+      font-size: 0.98rem;
+      padding: 0.4rem 0.8rem;
     }
   }
-
-
 
   .allChats {
     overflow-y: auto;
-  
-    h5{
-        border-top: 1px solid rgba(255, 255, 255, 0.169);
-        font-weight: 500;
-        color: $aqua-blue;
-        padding: 0.6rem;
-        
+
+    h5 {
+      border-top: 1px solid rgba(255, 255, 255, 0.169);
+      font-weight: 500;
+      color: $aqua-blue;
+      padding: 0.6rem;
     }
 
-    button {
+    .chat-title {
       width: 100%;
       font-size: 0.94rem;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       border: none;
       background: none;
-      font-size: 0.90rem;
+      font-size: 0.9rem;
       padding-block: 0.5rem;
       padding-inline: 0.2rem;
-      
-    }
-    .chat-title{
+
+      .title {
+        max-width: 90%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+    
+        .chat-option {
+          display: none;
+          position: absolute;
+          background: #222;
+          color: rgb(133, 133, 133);
+          border-radius: 8px;
+          padding: 6px;
+
+          div{
+            padding: 0.2rem;
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+          }
+        }
+
+        .chat-option.show {
+          display: block;
+        }
+      }
+    
+    .chat-title {
       justify-content: space-between;
     }
+
   }
 
   .profileInfo {
@@ -83,13 +109,8 @@ $transition: all 0.3s ease;
     color: $aqua-blue;
     font-weight: 600;
     cursor: pointer;
-
   }
 
-
-  
   @media (max-width: 768px) {
-
-  
   }
 }

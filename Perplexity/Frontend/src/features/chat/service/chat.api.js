@@ -31,14 +31,12 @@ export async function getMessages({chatId}) {
 export async function deleteChat({chatId}) {
     const response = await api.delete(`/api/chats/${chatId}`)
     return response.data
-    //msg
     
 }
 
 export async function editChatTitle({chatId , newTitle}) {
     const response = await api.patch(`/api/chats/${chatId}/edit-title` , { newTitle})
     return response.data
-    // msg
     
 }
 

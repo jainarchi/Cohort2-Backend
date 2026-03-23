@@ -13,7 +13,8 @@ import {
   setError,
   createNewChat,
   addNewMessage,
-  addMessages
+  addMessages,
+  delete_Chat
 } from "../chat.slice";
 import { useDispatch } from "react-redux";
 
@@ -113,7 +114,18 @@ export const useChat = () => {
 
 
 
+    const handleDeleteChat = async (chatId) => {
+      const data = await deleteChat({chatId})
+      console.log(data.message)
+      dispatch(delete_Chat(chatId))
+      
+      
+    }
 
+    const handleEditTitle = async (chatId , newTitle) =>{
+      const data  = await editChatTitle({chatId , newTitle})
+      console.log(data.message)
+    }
 
 
 
@@ -122,6 +134,8 @@ export const useChat = () => {
     initializationSocketConnection,
     handleSendMessage,
     handleGetChats,
-    handleOpenChat
+    handleOpenChat,
+    handleDeleteChat,
+    handleEditTitle
   }
 }

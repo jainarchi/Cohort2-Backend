@@ -197,4 +197,5 @@ Day: 25-27  | Moodify
 - Express Validator 
 - err handling by middleware
 
-
+- Tavily AI search engine
+- Tool 

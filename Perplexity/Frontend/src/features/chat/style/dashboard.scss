@@ -191,7 +191,8 @@ a {
   }
 }
 
-/* Tables (GFM support) */
+
+
 table {
   border-collapse: collapse;
   margin: 10px 0;
@@ -208,7 +209,6 @@ th {
   background: #2a2a2a;
 }
 
-/* Fix for focus outline (if using focus) */
 .message:focus {
   outline: none;
   box-shadow: none;
