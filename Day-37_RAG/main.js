@@ -4,6 +4,16 @@
  import fs from 'fs'
  import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
  import { MistralAIEmbeddings } from "@langchain/mistralai";
+ import { Pinecone } from '@pinecone-database/pinecone';
+
+
+
+ const pc = new Pinecone({
+  apiKey:process.env.PINECONE_API_KEY
+ })
+ const index = pc.index('cohort-rag');
+
+
 
 
 
@@ -14,26 +24,26 @@
 
 
  
- const buffer = fs.readFileSync('./Wrapper_class_reader.pdf')
+//  const buffer = fs.readFileSync('./Wrapper_class_reader.pdf')
 
- const parser = new PDFParse({
-    data : buffer 
- })
+//  const parser = new PDFParse({
+//     data : buffer 
+//  })
 
- const data = await parser.getText()
+//  const data = await parser.getText()
 //  console.log(data) 
 
 
 
 
 
- const splitter = new RecursiveCharacterTextSplitter({
-     chunkSize: 500, 
-     chunkOverlap: 0 
+//  const splitter = new RecursiveCharacterTextSplitter({
+//      chunkSize: 500, 
+//      chunkOverlap: 0 
     
- })
- const chunks = await splitter.splitText(data.text)
- console.log(chunks , chunks.length)
+//  })
+//  const chunks = await splitter.splitText(data.text)
+//  console.log(chunks , chunks.length)
 
 
 
@@ -41,18 +51,46 @@
 //  const docs = await embeddings.embedDocuments(chunks)
 
  
-const docs = await Promise.all(chunks.map( async (chunk) =>{
+// const docs = await Promise.all(chunks.map( async (chunk) =>{
 
-    const embadding = await embeddings.embedQuery(chunk)
-    return {
-        text : chunk,
-        embadding
-    }
-}))
-
-
-console.log(docs)
+//     const embadding = await embeddings.embedQuery(chunk)
+//     return {
+//         text : chunk,
+//         embadding
+//     }
+// }))
 
 
+// console.log(docs)
 
 
+
+
+
+
+// const result = await index.upsert({
+
+//     records : docs.map((doc , i) =>({
+//         id : `doc-${i}`,
+//         values : doc.embadding,
+//         metadata : {
+//             text : doc.text
+//         }
+//     }))
+// })
+
+
+
+const queryEmbadding = await embeddings.embedQuery('explain the method of buffer reader')
+
+
+const queryResponse = await index.query({
+    vector: queryEmbadding,
+    topK: 2,
+    // includeValues: true,
+    includeMetadata: true,
+});
+
+
+
+console.log(JSON.stringify(queryResponse))
