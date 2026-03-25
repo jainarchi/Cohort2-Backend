@@ -107,19 +107,24 @@ const Sidebar = () => {
                 {console.log(titleChatId)}
               
                 <input
+                  className="editTitleInput"
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   autoFocus
                   onClick={(e) => e.stopPropagation()}
                   onBlur={() => {
+                    if(chat.title != title){
                     renameTitle(chat.id, title)
+                  }
                     setTitleChatId(null)
                     setTitle('')
                   }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
+                      if(chat.title != title){
                       renameTitle(chat.id, title)
+                      }
                       setTitleChatId(null)
                       setTitle('')
                     }
@@ -144,9 +149,11 @@ const Sidebar = () => {
 
                 <div
                   className={`chat-option ${showOptions === chat.id ? "show" : ""}`}
+                   onClick={(e) => e.stopPropagation()} 
                 >
                   <div
                     onClick={(e) => {
+                      console.log('rename clicked' , chat.id , chat.title)
                       e.stopPropagation()
                       setTitleChatId(chat.id)
                       setTitle(chat.title)

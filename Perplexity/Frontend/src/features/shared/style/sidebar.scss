@@ -72,6 +72,16 @@ $transition: all 0.3s ease;
         overflow: hidden;
         text-overflow: ellipsis;
         // background: rgb(103, 103, 103);
+
+        .editTitleInput{
+          background: transparent;
+          color: whitesmoke;
+
+          &:focus{
+            border: none;
+            outline: none;
+          }
+        }
       }
 
       .dot-icon{
