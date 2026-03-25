@@ -1,4 +1,4 @@
-import React, { useEffect , useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../style/sidebar.scss";
 import { Link } from "react-router-dom";
 import {
@@ -9,35 +9,60 @@ import {
   RiPencilLine,
   RiDeleteBin7Line,
 } from "@remixicon/react";
+
 import { useSelector } from "react-redux";
 import { useChat } from "../../../features/chat/hook/useChat.js";
 
 const Sidebar = () => {
-  const [activeChat, setActiveChat] = useState(null)
-  const { handleGetChats, handleOpenChat , handleDeleteChat , handleEditTitle } = useChat();
+  const menuRef = useRef(null)
+  const [showOptions, setShowOptions] = useState(null);
+
+  const [title, setTitle] = useState('');
+  const [titleChatId, setTitleChatId] = useState(null);
+
+  const {
+    handleGetChats,
+    handleOpenChat,
+    handleDeleteChat,
+    handleEditTitle,
+    handleNewChat,
+  } = useChat();
   const chats = useSelector((state) => state.chat.chats);
 
   useEffect(() => {
     handleGetChats();
+  }, [])
+
+
+   useEffect(() => {
+    // if dropdown open and click outside
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setShowOptions(null)
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
 
-//    const editTitle = (chatId , newTitle) =>{
-//     console.log(chatId , newTitle)
+  const renameTitle = async (chatId, newTitle) => {
+   await handleEditTitle(chatId , newTitle)
+  };
 
-//    }
+  const deleteChat = async (chatId) => {
+    console.log(chatId);
 
-   const deleteChat = async (chatId) =>{
-    console.log(chatId)
-
-    try{
-    await handleDeleteChat(chatId)
-   }catch(err){
-    console.log('err occur ' , err)
-   }
-   }
-
-
+    try {
+      await handleDeleteChat(chatId);
+    } catch (err) {
+      console.log("err occur ", err);
+    }
+  };
 
   const openChat = (chatId) => {
     handleOpenChat(chatId, chats);
@@ -55,7 +80,7 @@ const Sidebar = () => {
             <RiMenuLine size={"1.2rem"} className="hamburger" />
           </div>
 
-          <Link className="flex">
+          <Link className="flex" onClick={handleNewChat}>
             <RiEditBoxLine size={"1.1rem"} className="icon" />
             New chat
           </Link>
@@ -70,36 +95,93 @@ const Sidebar = () => {
           <h5>Chats</h5>
 
           {Object.values(chats).map((chat, index) => (
-            <button
+            <div
               className="flex chat-title"
               onClick={() => openChat(chat.id)}
               key={index}
             >
-              <span className="title">{chat.title}</span>
+             
+              <span className="title">
+               {titleChatId === chat.id ? (
+                <>
+                {console.log(titleChatId)}
+              
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  autoFocus
+                  onClick={(e) => e.stopPropagation()}
+                  onBlur={() => {
+                    renameTitle(chat.id, title)
+                    setTitleChatId(null)
+                    setTitle('')
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      renameTitle(chat.id, title)
+                      setTitleChatId(null)
+                      setTitle('')
+                    }
+                  }}
+                />
 
-              <div>
+                </>
+              ) :
+              chat.title  
+            }
+            </span>
+
+              <div ref={menuRef} className="dot-icon">
                 <RiMore2Line
                   size={"1rem"}
                   className="icon"
                   onClick={(e) => {
                     e.stopPropagation();
-                    setActiveChat(activeChat === chat.id ? null : chat.id);
+                    setShowOptions(showOptions === chat.id ? null : chat.id);
                   }}
                 />
 
                 <div
-                  className={`chat-option ${activeChat === chat.id ? "show" : ""}`}
+                  className={`chat-option ${showOptions === chat.id ? "show" : ""}`}
                 >
-                  <div>
-                    <RiPencilLine size={"18px"} /> edit
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setTitleChatId(chat.id)
+                      setTitle(chat.title)
+                    }}
+                  >
+                    <RiPencilLine size={"18px"} /> rename
                   </div>
-                  <div onClick={() =>deleteChat(chat.id)}>
+
+                  <div onClick={() => deleteChat(chat.id)}>
                     <RiDeleteBin7Line size={"18px"} /> delete
                   </div>
                 </div>
               </div>
-            </button>
+
+
+
+
+            </div>
           ))}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
       </div>
 

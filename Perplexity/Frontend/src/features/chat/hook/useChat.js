@@ -14,7 +14,8 @@ import {
   createNewChat,
   addNewMessage,
   addMessages,
-  delete_Chat
+  delete_Chat,
+  updateChatTitle
 } from "../chat.slice";
 import { useDispatch } from "react-redux";
 
@@ -68,6 +69,7 @@ export const useChat = () => {
         
 
         dispatch(setChats(chats.reduce((acc , chat) =>{
+          
             acc[chat._id] = {
 
                 id : chat._id,
@@ -76,7 +78,10 @@ export const useChat = () => {
                 lastUpdated : chat.updatedAt
 
             }
+
+             console.log(acc)
             return acc
+            
            
 
           }, {})
@@ -124,8 +129,23 @@ export const useChat = () => {
 
     const handleEditTitle = async (chatId , newTitle) =>{
       const data  = await editChatTitle({chatId , newTitle})
+      dispatch(updateChatTitle({chatId , newTitle}))
       console.log(data.message)
     }
+
+   
+
+    const handleNewChat = () =>{
+      dispatch(setCurrentChatId(null))
+
+    }
+
+
+
+
+
+
+
 
 
 
@@ -136,6 +156,7 @@ export const useChat = () => {
     handleGetChats,
     handleOpenChat,
     handleDeleteChat,
-    handleEditTitle
+    handleEditTitle,
+    handleNewChat
   }
 }

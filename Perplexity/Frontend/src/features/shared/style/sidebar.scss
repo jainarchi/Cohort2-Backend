@@ -23,7 +23,7 @@ $transition: all 0.3s ease;
   .allChats {
     padding: 0.6rem;
 
-    button,
+    .chat-title,
     a,
     .menu-div {
       border-radius: 0.5rem;
@@ -65,14 +65,16 @@ $transition: all 0.3s ease;
       font-size: 0.9rem;
       padding-block: 0.5rem;
       padding-inline: 0.2rem;
+      justify-content: space-between;
 
       .title {
         max-width: 90%;
         overflow: hidden;
         text-overflow: ellipsis;
+        // background: rgb(103, 103, 103);
       }
 
-    
+      .dot-icon{
         .chat-option {
           display: none;
           position: absolute;
@@ -86,17 +88,21 @@ $transition: all 0.3s ease;
             display: flex;
             gap: 0.6rem;
             align-items: center;
+
+             &:hover{
+            color: #00cfad;
           }
+          }
+
+         
         }
 
         .chat-option.show {
           display: block;
         }
       }
-    
-    .chat-title {
-      justify-content: space-between;
-    }
+
+   }
 
   }
 
@@ -111,6 +117,10 @@ $transition: all 0.3s ease;
     cursor: pointer;
   }
 
+
+
+
+  
   @media (max-width: 768px) {
   }
 }

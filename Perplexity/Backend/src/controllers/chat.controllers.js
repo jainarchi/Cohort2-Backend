@@ -147,6 +147,9 @@ async function editChatTitle(req , res) {
     {
       title: newTitle,
     },
+    {
+      new: true,
+    }
   );
 
   if (!chat) {

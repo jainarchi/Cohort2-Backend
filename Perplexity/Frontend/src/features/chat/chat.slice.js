@@ -36,6 +36,11 @@ const chatSlice = createSlice({
       state.chats = action.payload;
     },
 
+    updateChatTitle: (state , action) =>{
+      const {chatId ,newTitle} = action.payload
+      state.chats[chatId].title = newTitle
+    },
+
     setCurrentChatId: (state, action) => {
       state.currentChatId = action.payload;
     },
@@ -68,7 +73,8 @@ export const {
   createNewChat,
   addNewMessage,
   addMessages,
-  delete_Chat
+  delete_Chat,
+  updateChatTitle
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

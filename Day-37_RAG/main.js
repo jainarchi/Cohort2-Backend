@@ -1,4 +1,3 @@
- 
  import "dotenv/config"
  import { PDFParse } from 'pdf-parse';
  import fs from 'fs'
@@ -65,7 +64,7 @@
 
 
 
-
+// insert embadding into Vector DB 
 
 
 // const result = await index.upsert({
@@ -80,17 +79,18 @@
 // })
 
 
+// user query
+
 
 const queryEmbadding = await embeddings.embedQuery('explain the method of buffer reader')
 
 
-const queryResponse = await index.query({
+const result = await index.query({
     vector: queryEmbadding,
     topK: 2,
-    // includeValues: true,
     includeMetadata: true,
 });
 
 
 
-console.log(JSON.stringify(queryResponse))
+console.log(JSON.stringify(result))
