@@ -14,6 +14,7 @@ import "../style/sidebar.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useChat } from "../../../features/chat/hook/useChat.js";
+import { useAuth } from "../../../features/auth/hook/useAuth.js"
 
 const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const [showOptions, setShowOptions] = useState(null);
@@ -29,7 +30,9 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     handleDeleteChat,
     handleEditTitle,
     handleNewChat,
-  } = useChat();
+  } = useChat()
+
+  const {handleLogout} = useAuth()
 
   useEffect(() => {
     handleGetChats();
@@ -67,8 +70,9 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     }
   }
 
-  const handleLogout = () => {
-    // logout logic
+  const logoutUser = async () => {
+    console.log("logout user called")
+    await handleLogout()
   };
 
   if (!chats) return <div>loading...</div>;
@@ -108,7 +112,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
               <div
                 className="flex chat-title"
                 onClick={() => openChat(chat.id)}
-                key={chat.id} // ✅ better key
+                key={chat.id}
               >
                 <span className="title">
                   {titleChatId === chat.id ? (
@@ -192,7 +196,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             {user?.username} {/* ✅ safe access */}
           </div>
 
-          <div className="profileInfo" onClick={handleLogout}>
+          <div className="profileInfo" onClick={logoutUser}>
             <div className="logout-icon">
               <RiLogoutCircleRLine size={"18px"} />
             </div>
@@ -200,6 +204,9 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           </div>
         </div>
       </div>
+
+
+
 
       {/* desktop mini sidebar */}
 
@@ -233,7 +240,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             <RiUser3Line size={"1.36rem"} />
           </div>
 
-          <div className="logout-icon" onClick={handleLogout}>
+          <div className="logout-icon" onClick={logoutUser}>
             <RiLogoutCircleRLine size={"1.36rem"} />
           </div>
         </div>

@@ -62,4 +62,7 @@ export async function resetPassword({newPassword}) {
 
 
 
-// logout
+export async function logout(){
+    const response = await api.post('/logout')
+    return response.data
+}

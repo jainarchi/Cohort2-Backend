@@ -1,9 +1,11 @@
 import "dotenv/config"
 import jwt from 'jsonwebtoken'
+import redis from "../config/cache.js"
+import { success } from "zod"
 
 
 
-export const authUser = (req , res , next) =>{
+export const authUser = async (req , res , next) =>{
     const token = req.cookies.token
 
     if(!token){
@@ -13,6 +15,18 @@ export const authUser = (req , res , next) =>{
             success : false,
             err : "Token not found",
         
+        })
+    }
+
+
+    const isTokenBlacklisted = await redis.get(token)
+
+    if(isTokenBlacklisted){
+        return res.status(400)
+        .json({
+            message : "Invalid token",
+            success : false,
+            err: "Invalid token"
         })
     }
 

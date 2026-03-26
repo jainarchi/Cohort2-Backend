@@ -111,5 +111,9 @@ router.get(
 
 
 
+router.post('/logout' , authUser ,  authControllers.logout)
+
+
+
 
 export default router

@@ -1,5 +1,5 @@
 import "dotenv/config"
-import Redis from "redis.io";
+import Redis from "ioredis";
 
 
 const redis = Redis.createClient({
@@ -8,8 +8,6 @@ const redis = Redis.createClient({
     password : process.env.REDIS_PASSWORD
 
 })
-
-
 
 
 redis.on('connect' , () => console.log("redis connected"))

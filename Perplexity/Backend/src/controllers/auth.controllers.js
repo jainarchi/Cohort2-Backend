@@ -7,6 +7,7 @@ import {
   createNotFoundError,
   createUnauthorizedError,
 } from "../utils/errorHandler.js";
+import redis from '../config/cache.js'
 
 
 
@@ -347,6 +348,20 @@ async function getMe(req, res) {
 }
 
 
+async function logout(req ,res) {
+
+ const token = req.cookies.token
+
+  await redis.set(token, "blacklisted" , "EX", 60 * 60 * 24 * 7)
+
+  res.status(200)
+  .json({
+    message : 'successfully logout',
+    success : true 
+  })
+
+}
+
 
 
 
@@ -361,5 +376,6 @@ export default {
   verifyEmail,
   resendVerificationEmail,
   forgetPassword,
-  resetPassword
+  resetPassword,
+  logout
 };

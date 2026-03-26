@@ -52,14 +52,11 @@ const Dashboard = () => {
       <div className="messages">
         {console.log(chats[currentChatId])}
 
-
-
         {currentChatId === null ? (
           <>
-            <h1 className="mainHeading">What is in your <br /> Mind Today ?</h1>
+            <h1 className="mainHeading">What can I help you today ?</h1>
           </>
-        ) :
-        
+        ) :  
         (
           chats[currentChatId]?.messages.map((message, index, arr) => {
             const isLast = index === arr.length - 1;
