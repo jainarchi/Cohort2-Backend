@@ -3,7 +3,8 @@
   margin: auto;
   width: 100%;
   height: 100%;
-  padding: 1rem;
+  padding: 0.5rem;
+
  
 
 
@@ -14,6 +15,7 @@
     bottom: 0rem;
     padding-block:1rem 2rem;
     background: #2b2d2c;
+    padding-inline: 0.5rem;
 
 
 
@@ -56,14 +58,12 @@
   .messages {
     flex: 1;
     overflow-y: auto;
-    padding-right: 0.6rem;
     padding-bottom: 10rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-height: 100%;
     gap: 12px;
-    // background: #000;
 
 
     .mainHeading {
@@ -241,4 +241,14 @@ th {
 
 
 
+}
+
+
+
+@media (max-width: 768px){
+  .dashboard{
+    .dashboard-footer{
+      padding-bottom: 1rem;
+    }
+  }
 }

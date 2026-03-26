@@ -102,9 +102,9 @@ const Dashboard = () => {
           })
         )}
 
-
-
       </div>
+
+
 
       <div className="dashboard-footer">
         <form className="input-box" onSubmit={handleSubmitMessage}>
