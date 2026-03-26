@@ -56,5 +56,8 @@ export async function resetPassword({newPassword}) {
 
     const response = await api.post(`/reset-password?token=${token}`, {newPassword} )
     return response.data
-    // msg 
+    
 }
+
+
+// logout

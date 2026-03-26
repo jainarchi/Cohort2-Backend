@@ -111,7 +111,7 @@ const Dashboard = () => {
           <input
             type="text"
             className="input"
-            placeholder="Ask que"
+            placeholder="Ask anything"
             value={chatInput}
             onChange={(e) => setchatInput(e.target.value)}
           />

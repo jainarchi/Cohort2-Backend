@@ -11,6 +11,7 @@ const Navbar = () => {
 
   return (
     <nav className='navbar'>
+       
      
         <h3>Infra AI</h3>
 

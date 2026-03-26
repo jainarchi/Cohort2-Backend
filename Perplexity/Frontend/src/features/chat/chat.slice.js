@@ -14,12 +14,17 @@ const chatSlice = createSlice({
     createNewChat: (state, action) => {
       const { chatId, title } = action.payload;
 
-      state.chats[chatId] = {
+      state.chats = {
+        [chatId] :{
         id: chatId,
         title,
         messages: [],
-        lastUpdated: new Date().toISOString(),
-      };
+        lastUpdated: new Date().toISOString()
+      },
+
+      ...state.chats
+
+      }
     },
 
     addNewMessage: (state, action) => {

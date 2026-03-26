@@ -52,7 +52,7 @@ async function sendMessage(req, res) {
  */
 
 async function getChats(req, res) {
-  const chats = await chatModel.find({ user: req.user.id });
+  const chats = await chatModel.find({ user: req.user.id }).sort({createdAt : -1 })
 
   res.status(200).json({
     chats,
