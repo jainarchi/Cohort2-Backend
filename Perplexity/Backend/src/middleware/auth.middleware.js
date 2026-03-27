@@ -1,8 +1,6 @@
 import "dotenv/config"
 import jwt from 'jsonwebtoken'
 import redis from "../config/cache.js"
-import { success } from "zod"
-
 
 
 export const authUser = async (req , res , next) =>{

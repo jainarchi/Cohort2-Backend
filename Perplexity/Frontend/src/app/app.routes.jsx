@@ -1,9 +1,11 @@
 import {createBrowserRouter, Navigate} from 'react-router-dom'
 import Login from '../features/auth/pages/Login'
 import Register from '../features/auth/pages/Register'
-import Dashboard from '../features/chat/pages/Dashboard'
 import Protected from '../features/auth/components/Protected'
 import MainLayout from './layout/MainLayout'
+import Dashboard from '../features/chat/pages/Dashboard'
+import Explore from '../features/chat/pages/Explore'
+
 
 
 export const router = createBrowserRouter([
@@ -17,13 +19,25 @@ export const router = createBrowserRouter([
       element: <Register />
    },
    {
-      path: "/",
-      element: <Protected>
-         <MainLayout />
+    path: "/",
+    element: (
+      <Protected>
+        <MainLayout />
       </Protected>
+    ),
+    children: [
+      {
+        index: true, 
+        element: <Dashboard />,
+      },
+      {
+         path: "/explore",
+         element: <Explore />
+      }
+   ]
    },
    {
-      path: "/dashboard",
+      path: "*",
       element: < Navigate  to='/' replace/>
    }
   

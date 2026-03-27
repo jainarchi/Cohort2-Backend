@@ -1,0 +1,114 @@
+$bg-black: #080808;
+$card-bg: #121212;
+$neon-cyan: #00f2ff;
+$border-color: rgba(255, 255, 255, 0.06);
+
+.explore-container {
+  padding: 60px;
+  background-color: $bg-black;
+  color: #ffffff;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+
+  .main-title {
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+    font-weight: 600;
+  }
+
+  .top-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+
+  .top-card {
+    background: $card-bg;
+    padding: 28px;
+    border-radius: 12px;
+    border: 1px solid $border-color;
+    transition: all 0.25s ease;
+
+    &:hover {
+      border-color: rgba($neon-cyan, 0.3);
+      background: #181818;
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      
+      .icon-neon { color: $neon-cyan; }
+      
+      .save-btn {
+        cursor: pointer;
+        color: #333;
+        display: flex;
+        align-items: center;
+        &:hover { color: #666; }
+      }
+    }
+
+    h3 { font-size: 1rem; font-weight: 500; }
+  }
+
+  .module-section {
+    margin-bottom: 45px;
+
+    .module-label {
+      font-size: 0.7rem;
+      color: $neon-cyan;
+      letter-spacing: 2.5px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .module-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .module-pill {
+      background: $card-bg;
+      border: 1px solid $border-color;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s;
+
+      &:hover {
+        background: #202020;
+        border-color: #444;
+      }
+
+      .pill-heart-icon { color: #2a2a2a; }
+
+      &.saved {
+        border-color: rgba($neon-cyan, 0.2);
+        background: rgba($neon-cyan, 0.03);
+        color: $neon-cyan;
+        
+        .remove-icon {
+          color: #555;
+          &:hover { color: #ff3e3e; }
+        }
+      }
+    }
+  }
+
+  .saved-section {
+    border-bottom: 1px solid $border-color;
+    padding-bottom: 35px;
+    margin-bottom: 40px;
+  }
+}

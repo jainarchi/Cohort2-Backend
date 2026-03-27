@@ -350,7 +350,8 @@ async function getMe(req, res) {
 
 async function logout(req ,res) {
 
- const token = req.cookies.token
+  const token = req.cookies.token
+  res.clearCookie("token")
 
   await redis.set(token, "blacklisted" , "EX", 60 * 60 * 24 * 7)
 

@@ -1,8 +1,8 @@
 import {useState} from 'react'
 import Navbar from '../../features/shared/components/Navbar.jsx'
 import Sidebar from '../../features/shared/components/Sidebar.jsx'
-import Dashboard from '../../features/chat/pages/Dashboard.jsx'
 import '../style/MainLayout.scss'
+import { Outlet } from 'react-router-dom'
 
 
 const MainLayout = () => {
@@ -23,7 +23,7 @@ const MainLayout = () => {
 
     <div className="mainContent">
 
-       <Dashboard />
+      <Outlet />
 
     </div>
     

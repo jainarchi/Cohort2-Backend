@@ -11,7 +11,7 @@ import {
 } from "@remixicon/react";
 
 import "../style/sidebar.scss";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useChat } from "../../../features/chat/hook/useChat.js";
 import { useAuth } from "../../../features/auth/hook/useAuth.js"
@@ -20,6 +20,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const [showOptions, setShowOptions] = useState(null);
   const [title, setTitle] = useState("");
   const [titleChatId, setTitleChatId] = useState(null);
+  const navigate = useNavigate()
 
   const user = useSelector((state) => state.auth.user);
   const chats = useSelector((state) => state.chat.chats);
@@ -65,6 +66,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
 
   const openChat = (chatId) => {
     handleOpenChat(chatId, chats)
+    navigate('/')
     if(window.innerWidth < 768){
        setIsSidebarOpen(!isSidebarOpen)
     }
@@ -76,6 +78,9 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   };
 
   if (!chats) return <div>loading...</div>;
+
+
+
 
   return (
     <>
@@ -94,12 +99,12 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
               />
             </div>
 
-            <Link className="flex" onClick={handleNewChat}>
+            <Link to='/' className="flex" onClick={handleNewChat}>
               <RiEditBoxLine size={"1.1rem"} className="icon" />
               New chat
             </Link>
 
-            <Link className="flex">
+            <Link className="flex" to='/explore'>
               <RiFlashlightLine size={"1.1rem"} className="icon" />
               Explore
             </Link>
@@ -193,7 +198,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             <div className="profile-icon">
               <RiUser3Line size={"18px"} />
             </div>
-            {user?.username} {/* ✅ safe access */}
+            {user?.username}
           </div>
 
           <div className="profileInfo" onClick={logoutUser}>
@@ -226,12 +231,12 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             />
           </div>
 
-          <Link onClick={handleNewChat}>
+          <Link onClick={handleNewChat} to="/">
             <RiEditBoxLine size={"1.36rem"} className="icon" />
           </Link>
 
-          <Link >
-            <RiFlashlightLine size={"1.36rem"} className="icon" />
+          <Link to="/explore" >
+            <RiFlashlightLine size={"1.36rem"} className="icon"  />
           </Link>
         </div>
 
