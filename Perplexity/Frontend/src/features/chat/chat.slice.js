@@ -6,6 +6,7 @@ const chatSlice = createSlice({
   initialState: {
     chats: {},
     currentChatId: null,
+    selectPrompt: null,
     isLoading: false,
     error: null,
   },
@@ -26,6 +27,15 @@ const chatSlice = createSlice({
 
       }
     },
+
+    setSelectPrompt:(state , action) =>{
+      state.selectPrompt = action.payload;
+    },
+    
+    clearSelectPrompt:(state)=>{
+      state.selectPrompt = null
+    },
+
 
     addNewMessage: (state, action) => {
       const { chatId, content, role } = action.payload;
@@ -79,7 +89,9 @@ export const {
   addNewMessage,
   addMessages,
   delete_Chat,
-  updateChatTitle
+  updateChatTitle,
+  setSelectPrompt,
+  clearSelectPrompt
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

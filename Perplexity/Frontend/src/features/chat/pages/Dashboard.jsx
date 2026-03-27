@@ -2,12 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useChat } from "../hook/useChat";
 import "../style/dashboard.scss";
-import { RiArrowUpLine } from "@remixicon/react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import InputBar from "../components/InputBar";
 
 const Dashboard = () => {
-  const [chatInput, setchatInput] = useState("");
   const chat = useChat();
 
   const chats = useSelector((state) => state.chat.chats);
@@ -18,21 +17,8 @@ const Dashboard = () => {
     chat.initializationSocketConnection();
   }, []);
 
-  const handleSubmitMessage = (e) => {
-    e.preventDefault();
 
-    const trimmedMessage = chatInput.trim();
-    if (!trimmedMessage) {
-      return;
-    }
 
-    chat.handleSendMessage({
-      message: trimmedMessage,
-      chatId: currentChatId,
-    });
-
-    setchatInput("");
-  };
 
   useEffect(() => {
     if (lastMessageRef.current) {
@@ -44,8 +30,8 @@ const Dashboard = () => {
 
 
 
-
   return (
+    <>
     <div className="dashboard">
 
 
@@ -102,23 +88,14 @@ const Dashboard = () => {
       </div>
 
 
-
-      <div className="dashboard-footer">
-        <form className="input-box" onSubmit={handleSubmitMessage}>
-          <input
-            type="text"
-            className="input"
-            placeholder="Ask anything"
-            value={chatInput}
-            onChange={(e) => setchatInput(e.target.value)}
-          />
-
-          <button className="sendIcon" disabled={!chatInput.trim()}>
-            <RiArrowUpLine size={"1.5rem"} />
-          </button>
-        </form>
-      </div>
+     
+     
     </div>
+
+     <InputBar />
+
+
+    </>
   );
 };
 

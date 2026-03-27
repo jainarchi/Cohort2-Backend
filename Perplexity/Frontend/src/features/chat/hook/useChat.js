@@ -5,6 +5,9 @@ import {
   getMessages,
   deleteChat,
   editChatTitle,
+  savePrompt,
+  getSavedPrompts,
+  deleteSavedPrompt
 } from "../service/chat.api";
 import {
   setChats,
@@ -15,7 +18,9 @@ import {
   addNewMessage,
   addMessages,
   delete_Chat,
-  updateChatTitle
+  updateChatTitle,
+  setSelectPrompt,
+  clearSelectPrompt
 } from "../chat.slice";
 import { useDispatch } from "react-redux";
 
@@ -141,9 +146,38 @@ export const useChat = () => {
     }
 
 
+    const handleSelectPrompt = (prompt , withChat) =>{
+      
+      dispatch(setSelectPrompt(prompt))
+
+      if(withChat=== 'new'){
+        dispatch(setCurrentChatId(null))
+      }
 
 
+    }
 
+    const handleClearSelectPrompt = () => {
+      dispatch(clearSelectPrompt())
+      console.log('clear ')
+    }
+
+    const handleSavePrompt = async (prompt) =>{
+       const data = await savePrompt({prompt})
+       console.log(data.message)
+    }
+
+
+    const handleGetSavedPrompts = async () =>{
+      const data = await getSavedPrompts()
+      console.log(data.message)
+      console.log(data.savedPrompts)
+    }
+
+    const handleDeleteSavedPrompt = async (promptId) => {
+      const data = await deleteSavedPrompt({promptId})
+      console.log(data.message)
+    }
 
 
 
@@ -157,6 +191,11 @@ export const useChat = () => {
     handleOpenChat,
     handleDeleteChat,
     handleEditTitle,
-    handleNewChat
+    handleNewChat,
+    handleSelectPrompt,
+    handleClearSelectPrompt,
+    handleSavePrompt,
+    handleGetSavedPrompts,
+    handleDeleteSavedPrompt
   }
 }

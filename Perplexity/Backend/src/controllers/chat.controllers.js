@@ -1,5 +1,6 @@
 import chatModel from "../models/chat.model.js";
 import messageModel from "../models/message.model.js";
+import savePromptModel from "../models/savePrompt.js";
 import { generateResponse, generateTitle } from "../services/ai.service.js";
 
 /**
@@ -168,7 +169,69 @@ async function editChatTitle(req , res) {
 }
 
 
+async function savePrompt(req , res){
+  // add validation for this
 
+  const {title , description} = req.body
+  const user = req.user.id
+  
+  const savedPrompt = await savePromptModel.create({
+    user,
+    title ,
+    description
+    
+  })
+
+
+  res.status(201).json({
+    message : 'prompt saved successfully',
+    success : true,
+    savedPrompt
+  })
+}
+
+
+async function getSavedPrompt(req , res){
+
+  const savedPrompts = await savePromptModel.find({
+    user : req.user.id 
+  })
+
+  res.status(200).json({
+    message : 'all saved prompts fetched successfully',
+    success : true,
+    savedPrompts
+  })
+  
+
+}
+
+
+export async function deletePrompt(req , res) {
+   const {promptId} = req.params
+
+   console.log(promptId , req.user.id)
+
+   const deletedPrompt = await savePromptModel.findOneAndDelete({
+    _id : promptId,
+    user : req.user.id
+   })
+
+
+   if( !deletedPrompt){
+    return res.status(400)
+    .json({
+      message : 'prompt not found',
+      success : false,
+      err : 'prompt not found'
+    })
+   }
+
+    res.status(200).json({
+      message : 'prompt deleted successfully',
+      success : true
+    })
+}
 
 
 export {
@@ -176,5 +239,7 @@ export {
   getChats,
   getMessages,
   deleteChat,
-  editChatTitle
+  editChatTitle,
+  savePrompt,
+  getSavedPrompt
 };

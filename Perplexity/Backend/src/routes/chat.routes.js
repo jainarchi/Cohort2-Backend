@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authUser } from "../middleware/auth.middleware.js";
-import {sendMessage , getChats , getMessages, editChatTitle , deleteChat} from '../controllers/chat.controllers.js'
+import {sendMessage , getChats , getMessages, editChatTitle , deleteChat , savePrompt , getSavedPrompt , deletePrompt} from '../controllers/chat.controllers.js'
 
 
 const router = Router()
@@ -43,7 +43,7 @@ router.delete('/:chatId', authUser , deleteChat)
 
 
 /** 
- * @route PATCH /pai/chats/:chatId/edit-title
+ * @route PATCH /api/chats/:chatId/edit-title
  * @desc edit chat title
  * @access private
 */
@@ -51,6 +51,30 @@ router.patch('/:chatId/edit-title' , authUser , editChatTitle )
 
 
 
+/**
+ * @route POST /api/chats/save-prompt
+ * @desc save prompt to database
+ * @access private
+*/
+
+router.post('/save-prompt' , authUser , savePrompt)
+
+
+/**
+ * @route GET /api/chats/saved-prompt
+ * @desc get all saved prompt
+ * @access private
+ */
+
+router.get('/saved-prompt' , authUser , getSavedPrompt)
+
+/**
+ * @route DELETE /api/chats/delete-prompt/:pomptId
+ * @desc delete saved prompt
+ * @access private
+ */
+
+router.delete('/delete-prompt/:promptId' ,authUser , deletePrompt)
 
 
 export default router
