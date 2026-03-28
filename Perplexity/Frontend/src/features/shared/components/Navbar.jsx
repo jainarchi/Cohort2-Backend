@@ -1,16 +1,20 @@
 import {RiMenuLine} from '@remixicon/react'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom';
+import '../style/navbar.scss'
 
 
 const Navbar = ({isSidebarOpen , setIsSidebarOpen}) => {
+   const location = useLocation()
 
   const chats = useSelector(state => state.chat.chats)
   const chatId = useSelector(state => state.chat.currentChatId)
 
- const displayTitle = location.pathname === '/explore' 
-    ? '' 
-    : (chats[chatId]?.title || '');
+
+  const displayTitle = location.pathname === '/' 
+    ? (chats[chatId]?.title || 'New Chat') 
+    : '';
+
 
 
   return (
@@ -26,7 +30,7 @@ const Navbar = ({isSidebarOpen , setIsSidebarOpen}) => {
         </span>
        
      
-            <h3>Infra AI</h3>
+            <h3>InfraCore AI</h3>
 
         </div>
 

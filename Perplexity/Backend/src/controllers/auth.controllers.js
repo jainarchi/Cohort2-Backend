@@ -24,15 +24,15 @@ async function sendVerificationEmail(username , email) {
 
   await sendEmail({
     to: email,
-    subject: "Welcome to Perplexity",
+    subject: "Welcome to InfraCore AI",
     html: `
         <p>Hi ${username},</p>
-        <p>Thanks for registering at <strong>Perplexity</strong>. We're excited to have you on board!</p>
+        <p>Thanks for registering at <strong>InfraCore AI</strong>. We're excited to have you on board!</p>
         <p>Please verify your email address by clicking the link below:</p>
         <a href="http://localhost:3000/api/auth/verify-email?token=${token}">Verify Email</a>
         <p>If you did not create an account, please ignore this email.</p>
         <p>Best regards,</p>
-        <p>The Perplexity Team</p>
+        <p>The InfraCore AI Team</p>
         `,
   });
     
@@ -65,7 +65,7 @@ async function sendResetPasswordEmail(username, email) {
       <p>This link will expire in 15 minutes.</p>
       <p>If you did not request this, please ignore this email.</p>
 
-      <p>Infra AI Team</p>
+      <p>InfraCore AI Team</p>
     `
   });
 }
