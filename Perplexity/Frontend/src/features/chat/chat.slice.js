@@ -6,10 +6,11 @@ const chatSlice = createSlice({
   initialState: {
     chats: {},
     currentChatId: null,
-    selectPrompt: null,
     isLoading: false,
     error: null,
+
   },
+
 
   reducers: {
     createNewChat: (state, action) => {
@@ -28,15 +29,7 @@ const chatSlice = createSlice({
       }
     },
 
-    setSelectPrompt:(state , action) =>{
-      state.selectPrompt = action.payload;
-    },
     
-    clearSelectPrompt:(state)=>{
-      state.selectPrompt = null
-    },
-
-
     addNewMessage: (state, action) => {
       const { chatId, content, role } = action.payload;
       state.chats[chatId].messages.push({ content, role });
@@ -90,8 +83,8 @@ export const {
   addMessages,
   delete_Chat,
   updateChatTitle,
-  setSelectPrompt,
-  clearSelectPrompt
+
+
 } = chatSlice.actions;
 
 export default chatSlice.reducer;
@@ -120,3 +113,19 @@ export default chatSlice.reducer;
 //         lastUpdated: "2024-06-20T12:34:56Z",
 //     }
 // }
+
+
+/*
+  savedPrompt = [
+   {
+    id:
+    title:
+    description:
+   
+  }
+  
+  ]
+
+
+
+*/

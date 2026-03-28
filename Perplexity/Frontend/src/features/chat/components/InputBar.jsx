@@ -18,10 +18,10 @@ import "../style/inputBar.scss"
     const [showInputOptions, setShowInputOptions] = useState(false);
     
   useEffect(() => {
-    if (selectPrompt) {
-      setchatInput(selectPrompt)        // Input fill
-      handleClearSelectPrompt()         //clear Redux state & chatInput free to modify
-    }
+    // if (selectPrompt) {
+    //   setchatInput(selectPrompt)        // Input fill
+    //   handleClearSelectPrompt()         //clear Redux state & chatInput free to modify
+    // }
   }, [selectPrompt, handleClearSelectPrompt]);
 
 
@@ -54,7 +54,7 @@ import "../style/inputBar.scss"
         // btn disable 
         
         if(chatInput.trim().length > 0){
-          handleSavePrompt(chatInput)
+          // handleSavePrompt(chatInput)
         }
 
         setShowInputOptions(false)

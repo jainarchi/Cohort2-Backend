@@ -40,7 +40,7 @@ export async function editChatTitle({chatId , newTitle}) {
     
 }
 
-export async function savePrompt({prompt}) {
+export async function saveOnePrompt({prompt}) {
     const response = await api.post('/api/chats/save-prompt' , {
        description: prompt
     })
@@ -55,7 +55,7 @@ export async function getSavedPrompts(){
 }
 
 
-export async function deleteSavedPrompt({promptId}){
+export async function deleteOneSavedPrompt({promptId}){
     const response = await api.delete(`/api/charts/delete-prompt/${promptId}`)
     return response.data
 }

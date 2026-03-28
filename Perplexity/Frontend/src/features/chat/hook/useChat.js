@@ -5,9 +5,10 @@ import {
   getMessages,
   deleteChat,
   editChatTitle,
-  savePrompt,
+  
+  saveOnePrompt,
   getSavedPrompts,
-  deleteSavedPrompt
+  deleteOneSavedPrompt
 } from "../service/chat.api";
 import {
   setChats,
@@ -19,8 +20,14 @@ import {
   addMessages,
   delete_Chat,
   updateChatTitle,
+
   setSelectPrompt,
-  clearSelectPrompt
+  clearSelectPrompt,
+
+  setSavedPrompts,
+  deleteSavedPrompt,
+ addOneSavedPrompt
+
 } from "../chat.slice";
 import { useDispatch } from "react-redux";
 
@@ -145,6 +152,7 @@ export const useChat = () => {
 
     }
 
+    // save one prompt to state and fill in input 
 
     const handleSelectPrompt = (prompt , withChat) =>{
       
@@ -162,21 +170,56 @@ export const useChat = () => {
       console.log('clear ')
     }
 
+
+
+    //  save one prompt to db
+
     const handleSavePrompt = async (prompt) =>{
-       const data = await savePrompt({prompt})
-       console.log(data.message)
+
+      try{
+        const data = await saveOnePrompt({
+           "description" :  prompt
+          })
+
+          const newprompt = data.savedPrompt
+
+          dispatch(addOneSavedPrompt({
+            id: newprompt._id,
+            title : newprompt.title,
+            description : newprompt.description
+
+          }))
+
+      }catch(err){
+        console.log( "saved failed" , err)
+
+      } 
     }
 
+    // get all saved prompt from db and dispatch set Saved Prompt
 
     const handleGetSavedPrompts = async () =>{
       const data = await getSavedPrompts()
+      dispatch(setSavedPrompts(data.savedPrompts))
       console.log(data.message)
       console.log(data.savedPrompts)
     }
 
+
+
+
+  // delete one prompt from db and optimised UI instant feedback
+
     const handleDeleteSavedPrompt = async (promptId) => {
-      const data = await deleteSavedPrompt({promptId})
+     try{
+      dispatch(deleteSavedPrompt({promptId}))
+      const data = await deleteOneSavedPrompt({promptId})
       console.log(data.message)
+     }
+     catch(err){
+      console.log("delete failed" , err.message)
+      handleGetSavedPrompts()
+     }
     }
 
 
