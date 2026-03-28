@@ -1,7 +1,7 @@
 // Variables for consistency
 $bg-dark: #101010;
 $bg-surface: #1e1e1e;
-$aqua-blue: #02d8b5; 
+$aqua-blue: #02d8b5;
 $text-dim: #b3b3b3;
 // $transition: all 0.3s ease;
 
@@ -12,110 +12,137 @@ $text-dim: #b3b3b3;
 }
 
 .sidebar {
-  max-width: 260px;
-  width: 100%;
+  width: 260px;
   height: 100vh;
   background-color: $bg-dark;
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   border-right: 2px solid #054241;
   transition: transform 0.3s ease;
   z-index: 99;
+  position: relative;
 
-  .options,
-  .allChats {
-    padding: 0.6rem;
+  .top {
+    min-height: 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 
-    .chat-title,
-    a,
-    .menu-div {
-      border-radius: 0.5rem;
-      cursor: pointer;
-      color: $text-dim;
-      // transition: $transition;
-
-      &:hover {
-        background-color: rgba($aqua-blue, 0.1);
-        color: $aqua-blue;
-      }
-    }
-  }
-
-  .options {
-    a,
-    .menu-div {
-      font-size: 0.98rem;
-      padding: 0.4rem 0.8rem;
-    }
-  }
-  .hamburger {
-    left: 1rem;
-    cursor: pointer;
-  }
-
-  .allChats {
-    overflow-y: auto;
-
-    h5 {
-      border-top: 1px solid rgba(255, 255, 255, 0.169);
-      font-weight: 500;
-      color: $aqua-blue;
+    .options,
+    .allChats {
       padding: 0.6rem;
-    }
 
-    .chat-title {
-      width: 100%;
-      font-size: 0.94rem;
-      white-space: nowrap;
-      border: none;
-      background: none;
-      font-size: 0.9rem;
-      padding-block: 0.5rem;
-      padding-inline: 0.2rem;
-      justify-content: space-between;
+      .chat-title,
+      a,
+      .menu-div {
+        border-radius: 0.5rem;
+        cursor: pointer;
+        color: $text-dim;
 
-      .title {
-        max-width: 90%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        // background: rgb(103, 103, 103);
-
-        .editTitleInput {
-          background: transparent;
-          color: whitesmoke;
-
-          &:focus {
-            border: none;
-            outline: none;
-          }
+        &:hover {
+          background-color: rgba($aqua-blue, 0.1);
+          color: $aqua-blue;
         }
       }
+    }
 
-      .dot-icon {
-        .chat-option {
-          display: none;
-          position: absolute;
-          background: #222;
-          color: rgb(133, 133, 133);
-          border-radius: 8px;
-          padding: 6px;
+    .options {
+      a,
+      .menu-div {
+        font-size: 0.98rem;
+        padding: 0.4rem 0.8rem;
+      }
+    }
+    .hamburger {
+      left: 1rem;
+      cursor: pointer;
+    }
 
-          div {
-            padding: 0.2rem;
-            display: flex;
-            gap: 0.6rem;
-            align-items: center;
+    .allChats {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
 
-            &:hover {
-              color: #00cfad;
+      h5 {
+        border-top: 1px solid rgba(255, 255, 255, 0.169);
+        font-weight: 500;
+        color: $aqua-blue;
+        padding: 0.6rem;
+      }
+
+      .chat-titles {
+        overflow-y: auto;
+
+        .chat-title {
+          width: 100%;
+          font-size: 0.94rem;
+          white-space: nowrap;
+          border: none;
+          background: none;
+          font-size: 0.9rem;
+          padding-block: 0.5rem;
+          padding-inline: 0.2rem;
+          justify-content: space-between;
+
+          .title {
+            max-width: 90%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            .editTitleInput {
+              background: transparent;
+              color: whitesmoke;
+
+              &:focus {
+                border: none;
+                outline: none;
+              }
+            }
+          }
+
+          .dot-icon {
+            .chat-option {
+              display: none;
+              position: absolute;
+              background: #222;
+              color: rgb(133, 133, 133);
+              border-radius: 8px;
+              padding: 6px;
+              z-index: 99;
+
+
+              div {
+                padding: 0.2rem;
+                display: flex;
+                gap: 0.6rem;
+                align-items: center;
+
+                &:hover {
+                  color: #00cfad;
+                }
+              }
+            }
+
+            .chat-option.show {
+              display: block;
             }
           }
         }
 
-        .chat-option.show {
-          display: block;
+        &.chat-titles::-webkit-scrollbar {
+          width: 3px;
+        }
+
+        &.chat-titles::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        &.chat-titles::-webkit-scrollbar-thumb {
+          background-color: rgb(69, 69, 69);
+          border-radius: 10px;
         }
       }
     }
@@ -123,6 +150,7 @@ $text-dim: #b3b3b3;
 
   .sidebar-footer {
     padding: 0.5rem;
+    flex-shrink: 0;
 
     .profileInfo {
       padding: 0.3rem 0.5rem;
@@ -133,11 +161,8 @@ $text-dim: #b3b3b3;
       align-items: center;
       gap: 0.5rem;
     }
-
   }
 }
-
-
 
 // desktop  sidebar close view
 
@@ -158,22 +183,20 @@ $text-dim: #b3b3b3;
     flex-direction: column;
     gap: 0.7rem;
     padding: 0.5rem;
-
   }
-    .options {
-      padding-top: 1.2rem;
-    }
+  .options {
+    padding-top: 1.2rem;
+  }
 
-    a , .hamburger{
-      color: $aqua-blue;
+  a,
+  .hamburger {
+    color: $aqua-blue;
 
-      &:hover{
-        color: rgb(185, 185, 185);
-      }
+    &:hover {
+      color: rgb(185, 185, 185);
     }
+  }
 }
-
-
 
 .profile-icon {
   border: 1px solid gray;
@@ -192,35 +215,22 @@ $text-dim: #b3b3b3;
   color: $aqua-blue;
 }
 
-
-
-
-
 @media (min-width: 768px) {
-
   .desptop-sidebar-close-view {
     display: flex;
-
   }
 
-  .static{
+  .static {
     position: static;
     // background: red;
   }
-
-
-
-
 }
 
-
-@media (max-width: 768px){
-  
-  .sidebar{
+@media (max-width: 768px) {
+  .sidebar {
     position: fixed;
     top: 0rem;
     left: 0rem;
     z-index: 99;
-
   }
 }

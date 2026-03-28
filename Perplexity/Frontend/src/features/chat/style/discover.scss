@@ -1,9 +1,9 @@
 $bg-black: #080808;
 $card-bg: #121212;
-$neon-cyan: #00ebc8;
+$neon-cyan: #00ccad;
 $text-white: #ffffff;
 $text-dim: #c7c7c7;
-$text-dim2: #929292;
+$text-dim2: #aaa8a8;
 $border-color: rgba(255, 255, 255, 0.05);
 
 .discover-container {
@@ -16,8 +16,8 @@ $border-color: rgba(255, 255, 255, 0.05);
   font-family: "Inter", sans-serif;
 
   .heading {
-    letter-spacing: 2px;
-    font-weight: 400;
+    letter-spacing: 1.5px;
+    font-weight: 600;
     color: $neon-cyan;
     padding-bottom: 0.5rem;
   }

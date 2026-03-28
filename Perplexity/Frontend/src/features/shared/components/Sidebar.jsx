@@ -86,7 +86,8 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     <>
 
       <div className={` ${isSidebarOpen ? "sidebar" : "main-sidebar-close"}`}>
-        <div>
+         <div className="top">
+
           <div className="options">
             <div className="menu-div">
               <RiMenuLine
@@ -112,7 +113,9 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <div className="allChats">
             <h5>Chats</h5>
 
-            {Object.values(chats).map((chat) => (
+            <div className="chat-titles">
+
+             {Object.values(chats).map((chat) => (
               <div
                 className="flex chat-title"
                 onClick={() => openChat(chat.id)}
@@ -188,9 +191,12 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                   </div>
                 </div>
               </div>
-            ))}
+             ))}
+             </div>
+
           </div>
         </div>
+
 
         <div className="sidebar-footer">
           <div className="profileInfo">
@@ -207,6 +213,10 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             logout
           </div>
         </div>
+
+
+
+
       </div>
 
 
@@ -238,6 +248,9 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             <RiFlashlightLine size={"1.36rem"} className="icon"  />
           </Link>
         </div>
+
+
+
 
         <div className="sidebar-footer">
           <div className="profile-icon">

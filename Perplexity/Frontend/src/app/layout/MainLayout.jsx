@@ -14,8 +14,12 @@ const MainLayout = () => {
 
   return (
     <div className='mainLayout'>
+
+      <div className="left">
      <Sidebar isSidebarOpen
      ={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen}  />
+
+     </div>
 
 
    <div className='right'>
