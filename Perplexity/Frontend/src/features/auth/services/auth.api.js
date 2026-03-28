@@ -8,16 +8,13 @@ const api = axios.create({
 
 
 export async function register({username , email , password}) {
-
     const response = await api.post('/register' ,{username , email , password})
     return response.data
-   
     
 }
 
 
 export async function login({email , password}) {
-
     const response = await api.post('/login', {email , password})
     return response.data
     // msg user
@@ -32,6 +29,16 @@ export async function getMe() {
     // user
     
 }
+
+
+
+export async function logout(){
+    const response = await api.post('/logout')
+    return response.data
+}
+
+
+
 
 
 export async function resentVerificationEmail({ email }) {
@@ -59,10 +66,3 @@ export async function resetPassword({newPassword}) {
     
 }
 
-
-
-
-export async function logout(){
-    const response = await api.post('/logout')
-    return response.data
-}
