@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit"
 import authReducer from '../features/auth/auth.slice'
 import chatReducer from '../features/chat/chat.slice'
-import userPromptReducer from '../features/chat/userPrompt.slice'
+import savePromptReducer from '../features/chat/savePrompt.slice'
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     chat: chatReducer,
-    userPrompt: userPromptReducer
+    savePrompt: savePromptReducer
    
   }
 })

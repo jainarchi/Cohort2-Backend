@@ -5,10 +5,7 @@ import {
   getMessages,
   deleteChat,
   editChatTitle,
-  
-  saveOnePrompt,
-  getSavedPrompts,
-  deleteOneSavedPrompt
+
 } from "../service/chat.api";
 import {
   setChats,
@@ -20,13 +17,6 @@ import {
   addMessages,
   delete_Chat,
   updateChatTitle,
-
-  setSelectPrompt,
-  clearSelectPrompt,
-
-  setSavedPrompts,
-  deleteSavedPrompt,
- addOneSavedPrompt
 
 } from "../chat.slice";
 import { useDispatch } from "react-redux";
@@ -152,78 +142,6 @@ export const useChat = () => {
 
     }
 
-    // save one prompt to state and fill in input 
-
-    const handleSelectPrompt = (prompt , withChat) =>{
-      
-      dispatch(setSelectPrompt(prompt))
-
-      if(withChat=== 'new'){
-        dispatch(setCurrentChatId(null))
-      }
-
-
-    }
-
-    const handleClearSelectPrompt = () => {
-      dispatch(clearSelectPrompt())
-      console.log('clear ')
-    }
-
-
-
-    //  save one prompt to db
-
-    const handleSavePrompt = async (prompt) =>{
-
-      try{
-        const data = await saveOnePrompt({
-           "description" :  prompt
-          })
-
-          const newprompt = data.savedPrompt
-
-          dispatch(addOneSavedPrompt({
-            id: newprompt._id,
-            title : newprompt.title,
-            description : newprompt.description
-
-          }))
-
-      }catch(err){
-        console.log( "saved failed" , err)
-
-      } 
-    }
-
-    // get all saved prompt from db and dispatch set Saved Prompt
-
-    const handleGetSavedPrompts = async () =>{
-      const data = await getSavedPrompts()
-      dispatch(setSavedPrompts(data.savedPrompts))
-      console.log(data.message)
-      console.log(data.savedPrompts)
-    }
-
-
-
-
-  // delete one prompt from db and optimised UI instant feedback
-
-    const handleDeleteSavedPrompt = async (promptId) => {
-     try{
-      dispatch(deleteSavedPrompt({promptId}))
-      const data = await deleteOneSavedPrompt({promptId})
-      console.log(data.message)
-     }
-     catch(err){
-      console.log("delete failed" , err.message)
-      handleGetSavedPrompts()
-     }
-    }
-
-
-
 
 
 
@@ -235,10 +153,6 @@ export const useChat = () => {
     handleDeleteChat,
     handleEditTitle,
     handleNewChat,
-    handleSelectPrompt,
-    handleClearSelectPrompt,
-    handleSavePrompt,
-    handleGetSavedPrompts,
-    handleDeleteSavedPrompt
+   
   }
 }

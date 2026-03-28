@@ -113,19 +113,3 @@ export default chatSlice.reducer;
 //         lastUpdated: "2024-06-20T12:34:56Z",
 //     }
 // }
-
-
-/*
-  savedPrompt = [
-   {
-    id:
-    title:
-    description:
-   
-  }
-  
-  ]
-
-
-
-*/

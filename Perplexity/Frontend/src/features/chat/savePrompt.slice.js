@@ -1,7 +1,7 @@
 import {createSlice } from '@reduxjs/toolkit'
 
 
-const userPromptSlice = createSlice({
+const savePromptSlice = createSlice({
     name: 'userPrompt',
     initialState: {
         selectPrompt: null,
@@ -26,7 +26,7 @@ const userPromptSlice = createSlice({
 
     deleteSavedPrompt:(state , action) =>{
       const {promptId} = action.payload
-      state.savedPrompts = state.savedPrompts.filter(prompt => prompt.id != promptId)
+      state.savedPrompts = state.savedPrompts.filter(p => p.id != promptId)
     },
      
 
@@ -46,9 +46,28 @@ export const {
   deleteSavedPrompt,
   addOneSavedPrompt
   
-} = userPromptSlice.actions
+} = savePromptSlice.actions
 
 
-export default userPromptSlice.reducer
+export default savePromptSlice.reducer
 
     
+
+
+
+/*
+  savedPrompt = [
+   {
+    id:
+    title:
+    description:
+   
+  },
+  
+
+
+
+  ]
+
+
+*/
