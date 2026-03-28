@@ -4,7 +4,7 @@ import Register from '../features/auth/pages/Register'
 import Protected from '../features/auth/components/Protected'
 import MainLayout from './layout/MainLayout'
 import Dashboard from '../features/chat/pages/Dashboard'
-import Explore from '../features/chat/pages/Explore'
+import Discover from '../features/chat/pages/Discover'
 
 
 
@@ -31,8 +31,8 @@ export const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-         path: "/explore",
-         element: <Explore />
+         path: "/discover",
+         element: <Discover />
       }
    ]
    },
