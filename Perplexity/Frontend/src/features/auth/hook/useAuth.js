@@ -13,10 +13,14 @@ export const useAuth =()=>{
         try{
             dispatch(setLoading(true))
             const data = await register({email , username , password})
-            console.log(data.message)
+           
+            return  { success: true, message: data.message }
         }
         catch(err){
-            dispatch(setError(err.response?.data?.message || "Registration failed"))
+             return {
+                success: false,
+                message: err.response?.data?.message || "Registration failed"
+            }
         }
         finally{
             dispatch(setLoading(false))
@@ -30,10 +34,14 @@ export const useAuth =()=>{
             dispatch(setLoading(true))
             const data = await login({email , password})
             dispatch(setUser(data.user))
-            console.log(data.message)
+
+            return { success: true, message: data.message }
         }
         catch(err){
-            dispatch(setError(err.message?.data?.message || "login failed"))
+            return {
+                success: false,
+                message: err.response?.data?.message || "Login failed"
+            }
         }
         finally{
             dispatch(setLoading(false))
@@ -45,7 +53,6 @@ export const useAuth =()=>{
             dispatch(setLoading(true))
             const data = await getMe()
             dispatch(setUser(data.user))
-            console.log(data.user)
         }
         catch(err){
             dispatch(setError(err.response?.data?.message || "Failed to fetch user"))
@@ -59,9 +66,8 @@ export const useAuth =()=>{
     async function handleLogout() {
         try{
             dispatch(setLoading(true))
-            const data = await logout()
+            await logout()
             dispatch(setUser(null))
-            console.log(data.message)
         }
         catch(err){
             dispatch(setError(err.response?.data?.message || "Error in logout"))

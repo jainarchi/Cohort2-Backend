@@ -36,7 +36,7 @@ const Dashboard = () => {
 
 
       <div className="messages">
-        {console.log(chats[currentChatId])}
+        {/* {console.log(chats[currentChatId])} */}
 
         {currentChatId === null ? (
           <>

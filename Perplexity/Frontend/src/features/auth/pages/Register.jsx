@@ -1,110 +1,82 @@
-import React, { useState } from 'react'
-import { useNavigate, Link, Navigate } from 'react-router-dom'
+import React , { useState } from 'react'
+import { Link, Navigate } from 'react-router-dom'
 import FormInput from '../components/formInput'
 import '../style/auth.scss'
 import { useSelector } from 'react-redux'
 import { useAuth } from '../hook/useAuth'
 
-
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { registerSchema } from '../validation/auth.schema'
 
 const Register = () => {
-  const navigate = useNavigate()
-  const {handleRegister} = useAuth()
-  const {user ,loading} = useSelector(state => state.auth)
+  const { handleRegister } = useAuth()
+  const { user, loading } = useSelector(state => state.auth)
+  const [msg, setMsg] = useState(null)
 
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: ''
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: zodResolver(registerSchema)
   })
 
 
-  const handleChange = (e) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }))  
-  }
+  const onSubmit = async (data) => {
+    const res = await handleRegister(data)
+    setMsg(res.message)   
+ 
+ }
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    const payload ={
-      email : formData.email,
-      username : formData.username,
-      password : formData.password
-    }
-
-    await handleRegister(payload)
-    navigate('/')
-
-    
-    // handle err and access
-
-
-  }
-
-
-  if(!loading && user){
+  if (!loading && user) {
     return <Navigate to='/' replace />
   }
-
-
 
   return (
     <div className="auth-container">
       <div className="auth-wrapper">
         <div className="auth-card">
           <div className="auth-header">
-            <h1 className="auth-title">Create Account</h1>
-            <p className="auth-subtitle">Join us today</p>
+            <h1 className="auth-title">InfraCore AI</h1>
+            <p className="auth-subtitle">Create Account</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="auth-form">
-
+          <form onSubmit={handleSubmit(onSubmit)} className="auth-form">
 
             <FormInput
               label="Username"
               type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
               placeholder="Choose a username"
-              required
-              // error={errors.username}
+              {...register("username")}
+              error={errors.username?.message}
             />
 
             <FormInput
               label="Email Address"
               type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
               placeholder="you@example.com"
-              required
-              // error={errors.email}
+              {...register("email")}
+              error={errors.email?.message}
             />
 
             <FormInput
               label="Password"
               type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
               placeholder="••••••••"
-              required
-              // error={errors.password}
+              {...register("password")}
+              error={errors.password?.message}
             />
 
             <button 
               type="submit" 
               className="btn btn-primary"
-              // disabled={loading}
+              disabled={loading}
             >
-              {/* {loading ? 'Creating account...' : 'Create Account'} */}
-              create
+              {loading ? 'Creating account...' : 'Create'}
             </button>
+
           </form>
 
           <div className="auth-footer">
@@ -114,6 +86,10 @@ const Register = () => {
                 Sign in
               </Link>
             </p>
+
+            {msg && <p className="auth-message">{msg}</p>}
+
+
           </div>
         </div>
       </div>

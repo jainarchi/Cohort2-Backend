@@ -1,51 +1,47 @@
-import React, { useState } from 'react'
-import { useNavigate, Link, Navigate } from 'react-router-dom'
-import FormInput from '../components/formInput'
-import '../style/auth.scss'
-import { useAuth } from '../hook/useAuth'
-import { useSelector } from 'react-redux'
+import React, { useState } from "react";
+import { useNavigate, Link, Navigate } from "react-router-dom";
+import FormInput from "../components/formInput";
+import "../style/auth.scss";
+import { useAuth } from "../hook/useAuth";
+import { useSelector } from "react-redux";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "../validation/auth.schema";
 
 const Login = () => {
-  const navigate = useNavigate()
-  const {handleLogin} = useAuth()
-  const {user, loading} = useSelector(state => state.auth)
+  const navigate = useNavigate();
+  const { handleLogin } = useAuth();
+  const { user, loading } = useSelector((state) => state.auth);
+
+  const [msg, setMsg] = useState(null);
+
+  // react-hook-form + Zod
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(loginSchema),
+  });
 
 
-  
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  })
 
+  const onSubmit = async (data) => {
+    setMsg(null)
+    const res = await handleLogin(data);
 
-  const handleChange = (e) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }))
-  }
-  
-
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    const payload = {
-      email : formData.email ,
-      password : formData.password
+    if (res.success) {
+      navigate("/"); 
+    } else {
+      setMsg(res.message);
     }
+  };
 
-    await handleLogin(payload)
-    navigate('/')
-
-    // handle err and access
+  // already logged in
+  if (!loading && user) {
+    return <Navigate to="/" replace />;
   }
-
-
-  if(!loading && user){
-    return <Navigate to='/' replace />
-  }
-
 
   return (
     <div className="auth-container">
@@ -56,53 +52,47 @@ const Login = () => {
             <p className="auth-subtitle">Sign in to your account</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="auth-form">
-
-
+          {/* ✅ handleSubmit ensures validation runs first */}
+          <form onSubmit={handleSubmit(onSubmit)} className="auth-form">
             <FormInput
               label="Email Address"
               type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
               placeholder="you@example.com"
-              required
-              // error={errors.email}
+              {...register("email")}
+              error={errors.email?.message} 
             />
 
             <FormInput
               label="Password"
               type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
               placeholder="••••••••"
-              required
-              // error={errors.password}
+              {...register("password")}
+              error={errors.password?.message}
             />
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="btn btn-primary"
-              // disabled={loading}
+              disabled={loading}
             >
-              {/* {loading ? 'Signing in...' : 'Sign In'} */}
-              sign in
+              {loading ? "Signing in..." : "Sign In"}
             </button>
           </form>
 
           <div className="auth-footer">
             <p className="auth-footer-text">
-              Don't have an account?{' '}
+              Don't have an account?{" "}
               <Link to="/register" className="auth-link">
                 Create one
               </Link>
             </p>
+
+            {msg && <p className="auth-message">{msg}</p>}
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

@@ -47,11 +47,10 @@
     }
 
     &.input-error {
-      border-color: #ff7b7b;
-      box-shadow: 0 0 0 3px rgba(255, 123, 123, 0.1);
-
+         border-color: #06d6ba;
+       
       &:focus {
-        border-color: #ff7b7b;
+        border-color: #06d6a0;
         box-shadow: 0 0 0 3px rgba(255, 123, 123, 0.2);
         background-color: rgba(5, 15, 14, 0.8);
       }
@@ -60,8 +59,9 @@
 
   .error-message {
     font-size: $font-xs;
-    color: #ff7b7b;
+    color: #09ffca;
     margin-top: $spacing-xs;
     font-weight: 500;
   }
+
 }
