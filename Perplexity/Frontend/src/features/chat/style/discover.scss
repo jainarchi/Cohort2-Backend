@@ -13,115 +13,125 @@ $border-color: rgba(255, 255, 255, 0.05);
   margin: auto;
   color: $text-white;
   min-height: 100vh;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 
-   .heading{
-     letter-spacing: 2px;
-     font-weight: 400;
-     color: $neon-cyan;
-     padding-bottom: 0.5rem;
+  .heading {
+    letter-spacing: 2px;
+    font-weight: 400;
+    color: $neon-cyan;
+    padding-bottom: 0.5rem;
   }
 
-
   .explore-header {
-    padding-block:1rem 1.6rem;
-    
+    padding-block: 1rem 1.6rem;
+
     .title-group {
       display: flex;
       align-items: center;
       gap: 15px;
       margin-bottom: 8px;
-      
-      .header-icon { color: $neon-cyan; filter: drop-shadow(0 0 8px rgba($neon-cyan, 0.4)); }
-      h1 { font-size: 2.4rem; font-weight: 700; letter-spacing: -1px; }
+
+      .header-icon {
+        color: $neon-cyan;
+        filter: drop-shadow(0 0 8px rgba($neon-cyan, 0.4));
+      }
+      h1 {
+        font-size: 2.4rem;
+        font-weight: 700;
+        letter-spacing: -1px;
+      }
     }
-    
-    .subtitle { 
+
+    .subtitle {
       color: $text-dim2;
-      font-size: 0.95rem; }
-  }
-
-
- .userSaved {
-  padding-block: 2rem;
-
-  .saved-prompts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 16px;
-    margin-top: 15px;
-
-    .no-saved{
-      text-align: center;
-      color: $text-dim2;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
   }
 
-  .saved-card {
-    background: rgba($card-bg, 0.5);
-    border: 1px dashed rgba($text-dim, 0.3); 
-    padding: 16px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  .userSaved {
+    padding-block: 2rem;
 
-    &:hover {
-      background: $card-bg;
-      border-style: solid;
-      border-color: rgba($neon-cyan, 0.5);
-      transform: translateY(-1px);
-      
-      .card-title { color: $neon-cyan; }
+    .saved-prompts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 15px;
+
+      .no-saved {
+        text-align: center;
+        color: $text-dim2;
+        font-size: 0.9rem;
+      }
     }
 
-    .card-header {
+    .saved-card {
+      background: rgba($card-bg, 0.5);
+      border: 1px dashed rgba($text-dim, 0.3);
+      padding: 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 8px;
 
-      .title-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        .bookmark-icon { color: $neon-cyan; opacity: 0.8; }
+      &:hover {
+        background: $card-bg;
+        border-style: solid;
+        border-color: rgba($neon-cyan, 0.5);
+        transform: translateY(-1px);
+
         .card-title {
-          // font-weight: 600;
-          font-size: 0.80rem;
-          color: $text-dim2;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          max-width: 140px;
+          color: $neon-cyan;
         }
       }
 
-      .delete-icon {
-        color: $text-dim2;
-        transition: color 0.2s;
-        &:hover { color: #ff4d4d; }
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .title-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          .bookmark-icon {
+            color: $neon-cyan;
+            opacity: 0.8;
+          }
+          .card-title {
+            // font-weight: 600;
+            font-size: 0.8rem;
+            color: $text-dim2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 140px;
+          }
+        }
+
+        .delete-icon {
+          color: $text-dim2;
+          transition: color 0.2s;
+          &:hover {
+            color: #ff4d4d;
+          }
+        }
+      }
+
+      .card-desc {
+        font-size: 0.9rem;
+        color: $text-dim;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
     }
-
-    .card-desc {
-      font-size: 0.9rem;
-      color: $text-dim;
-      line-height: 1.5;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
   }
-}
 
-
-//   power prompts section style
-
-
+  //   power prompts section style
 
   .discovery-grid {
     display: flex;
@@ -130,8 +140,7 @@ $border-color: rgba(255, 255, 255, 0.05);
     padding-block: 1rem;
   }
 
-
-  .module-section {  
+  .module-section {
     .module-label {
       font-size: 0.7rem;
       color: $neon-cyan;
@@ -166,7 +175,10 @@ $border-color: rgba(255, 255, 255, 0.05);
       display: flex;
       align-items: center;
       gap: 12px;
-      .pill-icon { color: #333; transition: color 0.2s; }
+      .pill-icon {
+        color: #333;
+        transition: color 0.2s;
+      }
     }
 
     .plus-icon {
@@ -174,10 +186,10 @@ $border-color: rgba(255, 255, 255, 0.05);
       transform: translateX(5px);
       transition: all 0.2s ease;
       color: $text-dim;
-      
-      &:hover { 
-        color: $neon-cyan; 
-        transform: scale(1.2) translateX(0); 
+
+      &:hover {
+        color: $neon-cyan;
+        transform: scale(1.2) translateX(0);
       }
     }
 
@@ -186,8 +198,10 @@ $border-color: rgba(255, 255, 255, 0.05);
       border-color: rgba($neon-cyan, 0.3);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 
-      .pill-icon { color: $neon-cyan; }
-      
+      .pill-icon {
+        color: $neon-cyan;
+      }
+
       .plus-icon {
         opacity: 1;
         transform: translateX(0);
@@ -200,6 +214,8 @@ $border-color: rgba(255, 255, 255, 0.05);
 @media (max-width: 768px) {
   .explore-container {
     padding: 30px 20px;
-    .module-grid { grid-template-columns: 1fr; }
+    .module-grid {
+      grid-template-columns: 1fr;
+    }
   }
 }

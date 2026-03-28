@@ -7,8 +7,9 @@ import {
   RiBookmark3Fill,
   RiDeleteBin6Line,
 } from "@remixicon/react";
-import { Power_Promts_Data } from "../utils/powerPromt.js";
 import "../style/discover.scss";
+
+import { Power_Promts_Data } from "../utils/powerPromt.js";
 import { useNavigate } from "react-router-dom";
 import { useSavePrompt } from "../hook/useSavePrompt.js";
 import { useSelector } from "react-redux";

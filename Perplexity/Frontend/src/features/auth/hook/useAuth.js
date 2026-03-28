@@ -13,7 +13,7 @@ export const useAuth =()=>{
         try{
             dispatch(setLoading(true))
             const data = await register({email , username , password})
-            // msg  data.message - email sent 
+            console.log(data.message)
         }
         catch(err){
             dispatch(setError(err.response?.data?.message || "Registration failed"))
