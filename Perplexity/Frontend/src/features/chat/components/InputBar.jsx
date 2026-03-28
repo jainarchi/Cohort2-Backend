@@ -1,27 +1,30 @@
-import React , {useEffect , useRef} from 'react'
+import React , {useEffect} from 'react'
 import { RiArrowUpLine , RiAddLine } from "@remixicon/react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useChat } from "../hook/useChat";
+import { useSavePrompt } from '../hook/useSavePrompt';
 import "../style/inputBar.scss"
 
 
 
  const InputBar = () => {
 
-    const {handleClearSelectPrompt , handleSendMessage , handleSavePrompt } = useChat();
+    const { handleSendMessage } = useChat();
+    const {handleClearSelectPrompt , handleSavePrompt } = useSavePrompt()
+
     const currentChatId = useSelector((state) => state.chat.currentChatId);
-    const selectPrompt = useSelector((state) => state.chat.selectPrompt);
+    const selectPrompt = useSelector((state) => state.savePrompt.selectPrompt);
 
     
     const [chatInput, setchatInput] = useState("")
     const [showInputOptions, setShowInputOptions] = useState(false);
     
   useEffect(() => {
-    // if (selectPrompt) {
-    //   setchatInput(selectPrompt)        // Input fill
-    //   handleClearSelectPrompt()         //clear Redux state & chatInput free to modify
-    // }
+    if (selectPrompt) {
+      setchatInput(selectPrompt)        // Input fill
+      handleClearSelectPrompt()         //clear Redux state & chatInput free to modify
+    }
   }, [selectPrompt, handleClearSelectPrompt]);
 
 
@@ -54,7 +57,7 @@ import "../style/inputBar.scss"
         // btn disable 
         
         if(chatInput.trim().length > 0){
-          // handleSavePrompt(chatInput)
+          handleSavePrompt(chatInput)
         }
 
         setShowInputOptions(false)

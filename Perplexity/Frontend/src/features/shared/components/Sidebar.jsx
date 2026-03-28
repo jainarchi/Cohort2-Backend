@@ -85,7 +85,6 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   return (
     <>
 
-
       <div className={` ${isSidebarOpen ? "sidebar" : "main-sidebar-close"}`}>
         <div>
           <div className="options">
@@ -104,9 +103,9 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
               New chat
             </Link>
 
-            <Link className="flex" to='/explore'>
+            <Link className="flex" to='/discover'>
               <RiFlashlightLine size={"1.1rem"} className="icon" />
-              Explore
+              Discover
             </Link>
           </div>
 
@@ -235,7 +234,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             <RiEditBoxLine size={"1.36rem"} className="icon" />
           </Link>
 
-          <Link to="/explore" >
+          <Link to="/discover" >
             <RiFlashlightLine size={"1.36rem"} className="icon"  />
           </Link>
         </div>

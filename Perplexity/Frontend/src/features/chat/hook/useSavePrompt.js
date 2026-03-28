@@ -42,17 +42,13 @@ export const useSavePrompt = () =>{
     }
 
 
-
     //  save one prompt to db
 
     const handleSavePrompt = async (prompt) =>{
 
       try{
-        const data = await saveOnePrompt({
-           "description" :  prompt
-          })
-
-          const newprompt = data.savedPrompt
+         const data = await saveOnePrompt({ prompt})
+         const newprompt = data.savedPrompt
 
           dispatch(addOneSavedPrompt({
             id: newprompt._id,
@@ -67,6 +63,9 @@ export const useSavePrompt = () =>{
       } 
     }
 
+
+
+    
     // get all saved prompt from db and dispatch set Saved Prompt
 
     const handleGetSavedPrompts = async () =>{
@@ -90,7 +89,7 @@ export const useSavePrompt = () =>{
     const handleDeleteSavedPrompt = async (promptId) => {
      try{
       dispatch(deleteSavedPrompt({promptId}))
-      
+
       const data = await deleteOneSavedPrompt({promptId})
       console.log(data.message)
      }
@@ -106,6 +105,7 @@ export const useSavePrompt = () =>{
     return {
         handleSelectPrompt,
         handleClearSelectPrompt,
+
         handleSavePrompt,
         handleGetSavedPrompts,
         handleDeleteSavedPrompt
