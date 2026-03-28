@@ -103,7 +103,7 @@ async function register(req, res) {
 
   res.status(201).json({
     message:
-      "Register successfully. please verify your account to by clicking link send it to your email.",
+      "Register successfully. Please verify your account by clicking link send it to your emailId.",
     success: true,
   });
 }

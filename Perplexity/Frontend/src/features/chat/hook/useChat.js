@@ -81,10 +81,7 @@ export const useChat = () => {
 
             }
 
-             console.log(acc)
-            return acc
-            
-           
+            return acc            
 
           }, {})
        ))

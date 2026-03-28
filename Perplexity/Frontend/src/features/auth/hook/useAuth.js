@@ -8,7 +8,6 @@ export const useAuth =()=>{
 
     const dispatch = useDispatch()
 
-
     async function handleRegister({email , username , password}) {
         try{
             dispatch(setLoading(true))
