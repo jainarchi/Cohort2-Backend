@@ -210,3 +210,26 @@ Day: 25-27  | Moodify
 
 - RAG
 - vector DB | store emabadding
+
+
+
+## streaming flow in INFRA_AI
+
+
+
+```
+User message bheja
+      ↓
+Backend: chat + user message DB mein save
+      ↓
+SSE headers set + metadata event bheja (chatId, title)
+      ↓
+Frontend: naya chat Redux mein banaya, user message add kiya
+      ↓
+Backend: AI stream shuru — har chunk res.write() se bheja
+      ↓
+Frontend: har chunk appendToLastMessage → UI realtime update
+      ↓
+Backend: stream khatam → fullResponse DB mein save → done event
+      ↓
+Frontend: setLoading(false) → done!
